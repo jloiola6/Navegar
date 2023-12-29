@@ -1,0 +1,13 @@
+{% extends 'partials/_base.html' %}
+
+{% block content %}
+  <h2>Login</h2>
+  <form method="post" action="{% url 'user:login' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Entrar</button>
+  </form>
+
+  <br>
+  <a href="{% url 'user:signup' %}"><button>Cadastrar</button></a>
+{% endblock %}
