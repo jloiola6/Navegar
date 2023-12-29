@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Cliente(User):
+class Cliente(models.Model):
     # Adicione quaisquer campos adicionais aqui
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
-class Fornecedor(User):
+class Fornecedor(models.Model):
     # Adicione quaisquer campos adicionais aqui
     user = models.OneToOneField(User, on_delete=models.CASCADE)
