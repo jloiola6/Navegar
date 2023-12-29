@@ -5,9 +5,9 @@ from django.contrib.auth.models import User
 
 class Cliente(User):
     # Adicione quaisquer campos adicionais aqui
-    pass
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
 class Fornecedor(User):
     # Adicione quaisquer campos adicionais aqui
-    pass
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
