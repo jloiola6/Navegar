@@ -6,7 +6,7 @@ from apps.user.models import Cliente, Fornecedor
 class ClienteCreationForm(UserCreationForm):
     class Meta:
         model = Cliente
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['user__username', 'user__email', 'user__password1', 'user__password2']
 
 class ClienteAuthenticationForm(AuthenticationForm):
     class Meta:
@@ -16,7 +16,7 @@ class ClienteAuthenticationForm(AuthenticationForm):
 class FornecedorCreationForm(UserCreationForm):
     class Meta:
         model = Fornecedor
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['user__username', 'user__email', 'user__password1', 'user__password2']
 
 class FornecedorAuthenticationForm(AuthenticationForm):
     class Meta:
