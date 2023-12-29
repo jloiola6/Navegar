@@ -1,13 +1,14 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
+class CustomUser(AbstractUser):
+    # Adicione quaisquer campos adicionais aqui para Cliente e Fornecedor
+    pass
 
 class Cliente(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     # Adicione quaisquer campos adicionais aqui
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-
 
 class Fornecedor(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     # Adicione quaisquer campos adicionais aqui
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
