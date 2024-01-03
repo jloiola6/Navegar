@@ -1,10 +1,13 @@
-{% extends 'partials/_base.html' %}
+{% extends './partials/_base.html' %}
 
 {% block content %}
   <h2>Cadastre-se</h2>
+
   <form method="post" action="{% url 'user:signup' %}">
     {% csrf_token %}
+
     {{ form.as_p }}
+    
     <button type="submit">Cadastrar</button>
   </form>
 {% endblock %}
