@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n_q9k1$-qv=s1hr0=c1pmvmneh&y=_dcfw(occz7g!x3ychw=p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 if DEBUG:
     ALLOWED_HOSTS = ["*"]
@@ -142,8 +142,8 @@ if not DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# if DEBUG:
-#     # Configure Django App for Heroku.
-#     import django_heroku
-#     django_heroku.settings(locals())
+if DEBUG:
+    # Configure Django App for Heroku.
+    import django_heroku
+    django_heroku.settings(locals())
 
