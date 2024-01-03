@@ -142,8 +142,8 @@ if not DEBUG:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-if DEBUG:
-    # Configure Django App for Heroku.
-    import django_heroku
-    django_heroku.settings(locals())
+# if DEBUG:
+#     # Configure Django App for Heroku.
+#     import django_heroku
+#     django_heroku.settings(locals())
 

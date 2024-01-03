@@ -1,30 +1,24 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import CustomUser, Cliente, Fornecedor
+from apps.user.models import Cliente, Fornecedor
+from django.contrib.auth.models import User
 
-class CustomUserCreationForm(UserCreationForm):
+
+class ClienteCreationForm(UserCreationForm):
     class Meta:
-        model = CustomUser
+        model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class CustomUserAuthenticationForm(AuthenticationForm):
-    class Meta:
-        model = CustomUser
-
-class ClienteCreationForm(CustomUserCreationForm):
-    class Meta:
-        model = Cliente
-        fields = ['username', 'email', 'password1', 'password2']
-
-class ClienteAuthenticationForm(CustomUserAuthenticationForm):
+class ClienteAuthenticationForm(AuthenticationForm):
     class Meta:
         model = Cliente
 
-class FornecedorCreationForm(CustomUserCreationForm):
+
+class FornecedorCreationForm(UserCreationForm):
     class Meta:
-        model = Fornecedor
+        model = User
         fields = ['username', 'email', 'password1', 'password2']
 
-class FornecedorAuthenticationForm(CustomUserAuthenticationForm):
+class FornecedorAuthenticationForm(AuthenticationForm):
     class Meta:
         model = Fornecedor
