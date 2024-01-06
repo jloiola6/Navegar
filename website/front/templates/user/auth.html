@@ -1,0 +1,25 @@
+{% extends './partials/_base.html' %}
+
+{% load static %}
+
+{% block titulo %} 
+    {% if auth == 'login' %}
+        Login
+    {% elif auth == 'signup' %}
+        Cadastro
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+  <main class="auth-layout">
+    <div class="auth-container">
+      <img class="logo" src="{% static './imagens/logo.svg' %}" alt="">
+      
+      {% if auth == 'login' %}
+        {% include './partials/_login.html' %}
+      {% elif auth == 'signup' %}
+        {% include './partials/_cadastro.html' %}
+      {% endif %}
+    </div>
+  </main>
+{% endblock %}

@@ -1,5 +1,46 @@
 {% extends './partials/_base.html' %}
 
+{% load static %}
+
+{% block titulo %} Cadastro {% endblock %}
+
+{% block content %}
+  <main class="auth-layout">
+    <div class="auth-container">
+      <img class="logo" src="{% static './imagens/logo.svg' %}" alt="">
+
+      <h1 class="title">Cadastro</h1>
+
+      <form action="">
+        <div class="group">
+          <label for="">Nome completo</label>
+          <input type="text">
+        </div>
+
+        <div class="group">
+          <label for="">E-mail</label>
+          <input type="email">
+        </div>
+
+        <div class="group">
+          <label for="">Senha</label>
+          <input type="password">
+        </div>
+
+        <div class="group">
+          <label for="">Confirmar senha</label>
+          <input type="password">
+        </div>
+
+        <div class="button-container">
+          <button class="button">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+{% endblock %}
+
+{% comment %}
 {% block content %}
   <h2>Cadastre-se</h2>
 
@@ -11,3 +52,4 @@
     <button type="submit">Cadastrar</button>
   </form>
 {% endblock %}
+{% endcomment %}

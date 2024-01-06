@@ -1,3 +1,15 @@
-input:is(type[text], type[date]){
+
+
+input:is(
+    [type="date"], 
+    [type="email"], 
+    [type="password"], 
+    [type="text"]
+){
     border: 1px solid var(--cor-borda);
+    border-radius: .25rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    padding: .75rem;
+    width: 100%;
 }

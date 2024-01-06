@@ -7,19 +7,22 @@
 }
 
 .auth-container{
+    align-items: center;
     border: 1px solid var(--cor-borda);
+    box-sizing: border-box;
     border-radius: .5rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
     padding: 2rem;
+    width: 448px;
 
     & .logo{
-        height: 1rem;
+        height: 2rem;
         width: auto;
     }
 
     & .title{
-        
+        font-size: 1.25rem;
     }
 }

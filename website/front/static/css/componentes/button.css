@@ -1,6 +1,28 @@
+.button-container{
+    align-items: center;
+    display: flex;
+    gap: .5rem;
+}
+
 .button{
-    background-color: var(--cor-primaria);
+    --button-color: var(--cor-primaria);
+
+    background-color: var(--button-color);
     border: none;
+    border-radius: .25rem;
     color: var(--cor-branco);
-    font-size: .75rem;
+    cursor: pointer;
+    font-size: 1em;
+    padding-block: .5rem;
+    padding-inline: 2rem;
+    width: fit-content;
+
+    &.secondary{
+        background-color: transparent;
+        border: 1px solid var(--button-color);
+        color: var(--button-color);
+        font-weight: 500;
+        padding-block: calc(.5rem - 1px);
+        padding-inline: calc(2rem - 1px);
+    }
 }

@@ -1,5 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 
 body, body * {
+    color: hsl(0, 0%, 20%);
     font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+a{
+    color: var(--cor-primaria);
+    font-weight: 500;
+
+    &:hover{
+        text-decoration: underline;
+    }
 }

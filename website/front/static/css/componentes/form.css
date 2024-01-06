@@ -6,6 +6,7 @@ form .group{
 
 form{
     gap: 1rem;
+    width: 100%;
 
     & .group{
         gap: .5rem;
