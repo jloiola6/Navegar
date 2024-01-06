@@ -1,0 +1,13 @@
+form,
+form .group{
+    display: flex;
+    flex-direction: column;
+}
+
+form{
+    gap: 1rem;
+
+    & .group{
+        gap: .5rem;
+    }
+}

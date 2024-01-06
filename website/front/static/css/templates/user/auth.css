@@ -1,0 +1,25 @@
+.auth-layout{
+    align-items: center;
+    background-color: var(--cor-background);
+    display: flex;
+    height: 100svh;
+    justify-content: center;
+}
+
+.auth-container{
+    border: 1px solid var(--cor-borda);
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+
+    & .logo{
+        height: 1rem;
+        width: auto;
+    }
+
+    & .title{
+        
+    }
+}
