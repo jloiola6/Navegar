@@ -26,10 +26,7 @@ SECRET_KEY = 'django-insecure-n_q9k1$-qv=s1hr0=c1pmvmneh&y=_dcfw(occz7g!x3ychw=p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = ['dominio.com.br', 'www.dominio.com.br']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
