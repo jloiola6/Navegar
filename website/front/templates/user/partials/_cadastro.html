@@ -1,25 +1,14 @@
+{% load i18n %}
+
 <h1 class="title">Cadastro</h1>
 
 <form action="">
-  <div class="group">
-    <label for="">Nome completo</label>
-    <input type="text">
-  </div>
-
-  <div class="group">
-    <label for="">E-mail</label>
-    <input type="email">
-  </div>
-
-  <div class="group">
-    <label for="">Senha</label>
-    <input type="password">
-  </div>
-
-  <div class="group">
-    <label for="">Confirmar senha</label>
-    <input type="password">
-  </div>
+  {% for f in form %}
+      <div class="group">
+          <label for="">{% trans f.label %}</label>
+          {{ f }}
+      </div>
+  {% endfor %}
 
   <div class="button-container">
     <button class="button">Salvar</button>

@@ -8,16 +8,35 @@ class ClienteCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        labels = {
+            'username': 'Uusário',
+            'email': 'Email',
+            'password1': 'Senha',
+            'password2': 'Senha (Novamente)',
+        }
 
 class ClienteAuthenticationForm(AuthenticationForm):
     class Meta:
         model = Cliente
+        fields = ['username', 'email', 'password1', 'password2']
+        labels = {
+            'username': 'Usuário',
+            'email': 'Email',
+            'password1': 'Senha',
+            'password2': 'Senha (Novamente)',
+        }
 
 
 class FornecedorCreationForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+        labels = {
+            'username': 'Uusário',
+            'email': 'Email',
+            'password1': 'Senha',
+            'password2': 'Senha (Novamente)',
+        }
 
 class FornecedorAuthenticationForm(AuthenticationForm):
     class Meta:
