@@ -17,7 +17,7 @@ def signup(request):
             return redirect(reverse('core:index'))
     else:
         form = ClienteCreationForm()
-    return render(request, 'user/signup.html', {'form': form, 'auth': 'signup'})
+    return render(request, 'user/auth.html', {'form': form, 'auth': 'signup'})
 
 def user_login(request):
     if request.method == 'POST':
