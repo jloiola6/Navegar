@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -133,7 +133,7 @@ STATIC_URL = 'front/static/'
 
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'front/static')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'front/static')
