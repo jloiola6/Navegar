@@ -1,0 +1,25 @@
+.header{
+    align-items: center;
+    display: flex;
+    height: 4rem;
+    justify-content: space-between;
+    padding-inline: 1rem;
+
+    & .title{
+
+    }
+
+    & .navigation-menu{
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+
+        & li{
+            
+        }
+    }
+
+    & .avatar{
+        border-radius: 100vw;
+    }
+}
