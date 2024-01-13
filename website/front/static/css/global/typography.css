@@ -4,12 +4,3 @@ body, body * {
     color: hsl(0, 0%, 20%);
     font-family: 'Montserrat', system-ui, sans-serif;
 }
-
-a{
-    color: var(--cor-primaria);
-    font-weight: 500;
-
-    &:hover{
-        text-decoration: underline;
-    }
-}

@@ -1,0 +1,49 @@
+{% load static %}
+
+<header class="header">
+    <img 
+        alt="Navegar"
+        class="logo"
+        src="{% static 'images/logo.svg' %}" 
+    >
+
+    <nav class="navigation-menu">
+        <a class="link" href="#">
+            <img 
+                alt="Rotas"
+                src="{% static 'icons/rotas.svg' %}"
+             >
+            
+            <span>Rotas</span>
+        </a>
+
+        <a class="link" href="#">
+            <img 
+                alt="Tickets"
+                src="{% static 'icons/tickets.svg' %}" 
+            >
+            
+            <span>Tickets</span>
+        </a>
+
+        <a class="link" href="#">
+            <img 
+                alt="Financeiro"
+                src="{% static 'icons/financeiro.svg' %}" 
+            >
+            
+            <span>Fincaneiro</span>
+        </a>
+
+        <a class="link" href="#">
+            <img 
+                alt="Administrativo"
+                src="{% static 'icons/administrativo.svg' %}" 
+            >
+            
+            <span>Administrativo</span>
+        </a>
+    </nav>
+
+    <img class="avatar" src="https://github.com/jloiola6.png" alt="Avatar do usuário">
+</header>

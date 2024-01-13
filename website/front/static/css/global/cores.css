@@ -1,9 +1,0 @@
-:root{
-    --cor-azul: hsl(214, 82%, 51%);
-    --cor-branco: #FFF;
-    --cor-cinza: hsl(0, 0%, 75%);
-
-    --cor-primaria: var(--cor-azul);
-    --cor-background: var(--cor-branco);
-    --cor-borda: var(--cor-cinza);
-}

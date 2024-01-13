@@ -1,6 +1,6 @@
 .auth-layout{
     align-items: center;
-    background-color: var(--cor-background);
+    background-color: var(--clr-background);
     display: flex;
     height: 100svh;
     justify-content: center;
@@ -8,7 +8,7 @@
 
 .auth-container{
     align-items: center;
-    border: 1px solid var(--cor-borda);
+    border: 1px solid var(--clr-border);
     box-sizing: border-box;
     border-radius: .5rem;
     display: flex;

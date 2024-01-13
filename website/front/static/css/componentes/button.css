@@ -5,12 +5,12 @@
 }
 
 .button{
-    --button-color: var(--cor-primaria);
+    --button-color: var(--clr-primary);
 
     background-color: var(--button-color);
     border: none;
     border-radius: .25rem;
-    color: var(--cor-branco);
+    color: #FFF;
     cursor: pointer;
     font-size: 1em;
     padding-block: .5rem;

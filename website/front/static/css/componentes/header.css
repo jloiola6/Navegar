@@ -1,25 +1,51 @@
 .header{
     align-items: center;
+    border-bottom: 1px solid var(--clr-border);
     display: flex;
     height: 4rem;
     justify-content: space-between;
-    padding-inline: 1rem;
+    padding-inline: 2rem;
 
-    & .title{
-
+    & .logo{
+        height: 1.5rem;
+        width: auto;
     }
 
     & .navigation-menu{
         align-items: center;
         display: flex;
-        gap: 1rem;
+        gap: .5rem;
 
-        & li{
-            
+        & .link{
+            align-items: center;
+            border: 1px solid var(--clr-border);
+            border-radius: 100vw;
+            display: flex;
+            font-size: 14px;
+            font-weight: 500;
+            gap: .5rem;
+            padding-block: .5rem;
+            padding-inline: 1rem;
+
+            &:hover{
+                background-color: var(--clr-primary-light);
+                color: var(--clr-primary);
+            }
+
+            & img{
+                height: 1rem;
+                width: auto;
+            }
+
+            & span{
+                color: inherit;
+            }
         }
     }
 
     & .avatar{
+        aspect-ratio: 1;
         border-radius: 100vw;
+        height: 2rem;
     }
 }
