@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="icon" conten>
 
-        <title>Navegar • {% block titulo %}{% endblock %}</title>
+        <title>Navegar • {% block title %}{% endblock %}</title>
 
         <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" type="image/x-icon">
 
@@ -22,6 +22,9 @@
         <link rel="stylesheet" href="{% static 'css/componentes/form.css' %}">
         <link rel="stylesheet" href="{% static 'css/componentes/header.css' %}">
         <link rel="stylesheet" href="{% static 'css/componentes/input.css' %}">
+        <link rel="stylesheet" href="{% static 'css/componentes/table.css' %}">
+
+        {% block css_template %}{% endblock %}
     </head>
 
     <body>

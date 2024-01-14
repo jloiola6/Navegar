@@ -1,0 +1,55 @@
+{% extends "../partials/_base.html" %}
+
+{% block title %}Usuários{% endblock %}
+
+{% block content %}
+    
+    <div>
+        <h1>Usuários</h1>
+        <button class="button">Adicionar</button>
+    </div>
+
+    <table class="table">
+        <thead>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Perfil</th>
+            <th>Ações</th>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Érick Fernandes</td>
+                <td>erickfernadness2@gmail.com</td>
+                <td>Administrador</td>
+                
+                <td>
+                    <span>Editar</span>
+                    <span>Excluir</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>João Loiola</td>
+                <td>jloila6@gmail.com</td>
+                <td>Cliente</td>
+                
+                <td>
+                    <span>Editar</span>
+                    <span>Excluir</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>John Vitor</td>
+                <td>johnvitor@bol.com</td>
+                <td>Fornecedor</td>
+                
+                <td>
+                    <span>Editar</span>
+                    <span>Excluir</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

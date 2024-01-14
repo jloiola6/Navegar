@@ -4,6 +4,8 @@ from django.urls import reverse
 
 from apps.user.forms import *
 
+def index(request):
+    return render(request, 'user/index.html')
 
 def signup(request):
     if request.method == 'POST':

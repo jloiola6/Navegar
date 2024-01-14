@@ -1,0 +1,15 @@
+.table{
+    text-align: left;
+
+    & tr{
+        border: 1px solid var(--clr-border);
+    }
+
+    & th{
+        font-weight: 500;
+    }
+
+    & td, th{
+        padding: 1rem;
+    }
+}
