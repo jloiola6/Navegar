@@ -5,7 +5,8 @@ input:is(
     [type="email"], 
     [type="password"], 
     [type="text"]
-){
+), 
+select{
     border: 1px solid var(--clr-border);
     border-radius: .25rem;
     box-sizing: border-box;

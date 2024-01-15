@@ -25,4 +25,19 @@
         padding-block: calc(.5rem - 1px);
         padding-inline: calc(2rem - 1px);
     }
+
+    &.search{
+        align-items: center;
+        display: flex;
+        gap: .5rem;
+
+        &::before{
+            aspect-ratio: 1;
+            content: '';
+            background-image: url('../../icons/search.svg');
+            background-size: cover;
+            display: block;
+            width: 1.25rem;
+        }
+    }
 }

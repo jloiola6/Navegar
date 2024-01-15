@@ -1,7 +1,54 @@
 {% extends "./partials/_base.html" %}
 
+{% load static %}
+
 {% block title %}Home{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
+{% endblock %}
 
 {% block content %}
     <h1>Rotas</h1>
+
+    <form class="form-routes">
+        <select 
+            id=""
+            name="" 
+            required
+        >
+            <option value="" disabled selected>Origem</option>
+            <option>Manaus</option>
+            <option>Tabatinga</option>
+        </select>
+
+        <select 
+            id=""
+            name="" 
+            required
+        >
+            <option value="" disabled selected>Destino</option>
+            <option>Manaus</option>
+            <option>Tabatinga</option>
+        </select>
+
+        <input 
+            id="" 
+            name="" 
+            type="date" 
+        />
+
+        <button class="button search" type="submit">Pesquisar</button>
+    </form>
+
+    <h2>Ultimas rotas</h2>
+
+    <table class="table">
+        <thead>
+            <th>Data</th>
+            <th>Origem</th>
+            <th>Destino</th>
+            <th>Embarcação</th>
+        </thead>
+    </table>
 {% endblock %}
