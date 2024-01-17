@@ -21,7 +21,7 @@
             border: 1px solid var(--clr-border);
             border-radius: 100vw;
             display: flex;
-            font-size: 14px;
+            font-size: .875rem;
             font-weight: 500;
             gap: .5rem;
             padding-block: .5rem;

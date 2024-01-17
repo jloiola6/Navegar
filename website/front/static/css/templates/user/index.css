@@ -1,0 +1,46 @@
+.status{
+    background: #333;
+    border-radius: .5rem;
+    font-size: .875rem;
+    padding-block: .5rem;
+    padding-inline: 1rem;
+
+    &.ativo{
+        background-color: hsl(140, 82%, 40%);
+    }
+    
+    &.inativo{
+        background-color: hsl(0, 0%, 80%);
+    }
+    
+    &.pendente{
+        background-color: hsl(60, 82%, 50%);
+    }
+}
+
+.header-acao{
+    text-align: center;
+}
+
+.col-acao{
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+
+    & .acao{
+        aspect-ratio: 1;
+        background-size: cover;
+        cursor: pointer;
+        display: block;
+        width: 1.25rem;
+    
+        &.editar{
+            background-image: url('../../../icons/edit.svg');
+        }
+
+        &.excluir{
+            background-image: url('../../../icons/delete.svg');
+        }
+    }
+}

@@ -1,20 +1,24 @@
 {% extends "../partials/_base.html" %}
 
+{% load static %}
+
 {% block title %}Usuários{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/user/index.css' %}">
+{% endblock %}
 
 {% block content %}
     
-    <div>
-        <h1>Usuários</h1>
-        <button class="button">Adicionar</button>
-    </div>
+    <h1>Usuários</h1>
 
     <table class="table">
         <thead>
             <th>Nome</th>
             <th>E-mail</th>
             <th>Perfil</th>
-            <th>Ações</th>
+            <th>Status</th>
+            <th class="header-acao">Ações</th>
         </thead>
 
         <tbody>
@@ -24,8 +28,18 @@
                 <td>Administrador</td>
                 
                 <td>
-                    <span>Editar</span>
-                    <span>Excluir</span>
+                    <span class="status ativo">Ativo</span>
+                </td>
+                
+                <td class="col-acao">
+                    <span 
+                        class="acao editar" 
+                        title="Editar"
+                    ></span>
+                    <!-- <span 
+                        class="acao excluir"
+                        title="Excluir"
+                    ></span> -->
                 </td>
             </tr>
 
@@ -35,8 +49,18 @@
                 <td>Cliente</td>
                 
                 <td>
-                    <span>Editar</span>
-                    <span>Excluir</span>
+                    <span class="status inativo">Inativo</span>
+                </td>
+                
+                <td class="col-acao">
+                    <span 
+                        class="acao editar" 
+                        title="Editar"
+                    ></span>
+                    <!-- <span 
+                        class="acao excluir"
+                        title="Excluir"
+                    ></span> -->
                 </td>
             </tr>
 
@@ -46,8 +70,18 @@
                 <td>Fornecedor</td>
                 
                 <td>
-                    <span>Editar</span>
-                    <span>Excluir</span>
+                    <span class="status pendente">Pendente</span>
+                </td>
+                
+                <td class="col-acao">
+                    <span 
+                        class="acao editar" 
+                        title="Editar"
+                    ></span>
+                    <!-- <span 
+                        class="acao excluir"
+                        title="Excluir"
+                    ></span> -->
                 </td>
             </tr>
         </tbody>
