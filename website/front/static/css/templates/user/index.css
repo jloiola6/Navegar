@@ -2,11 +2,12 @@
     background: #333;
     border-radius: .5rem;
     font-size: .875rem;
+    font-weight: 500;
     padding-block: .5rem;
     padding-inline: 1rem;
 
     &.ativo{
-        background-color: hsl(140, 82%, 40%);
+        background-color: hsl(140, 100%, 80%);
     }
     
     &.inativo{
@@ -14,7 +15,7 @@
     }
     
     &.pendente{
-        background-color: hsl(60, 82%, 50%);
+        background-color: hsl(60, 100%, 80%);
     }
 }
 
