@@ -1,0 +1,13 @@
+.modal[open]{
+    border: none;
+    border-radius: .25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 480px;
+    padding: 2rem;
+
+    &::backdrop{
+        background-color: rgba(0, 0, 0, .2);
+    }
+}
