@@ -5,15 +5,15 @@
     padding-block: .5rem;
     padding-inline: 1rem;
 
-    &.ativo{
+    &.Ativo{
         background-color: hsl(140, 82%, 40%);
     }
     
-    &.inativo{
+    &.Inativo{
         background-color: hsl(0, 0%, 80%);
     }
     
-    &.pendente{
+    &.Pendente{
         background-color: hsl(60, 82%, 50%);
     }
 }

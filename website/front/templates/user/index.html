@@ -22,68 +22,28 @@
         </thead>
 
         <tbody>
-            <tr>
-                <td>Érick Fernandes</td>
-                <td>erickfernadness2@gmail.com</td>
-                <td>Administrador</td>
-                
-                <td>
-                    <span class="status ativo">Ativo</span>
-                </td>
-                
-                <td class="col-acao">
-                    <span 
-                        class="acao editar" 
-                        title="Editar"
-                    ></span>
-                    <!-- <span 
-                        class="acao excluir"
-                        title="Excluir"
-                    ></span> -->
-                </td>
-            </tr>
-
-            <tr>
-                <td>João Loiola</td>
-                <td>jloila6@gmail.com</td>
-                <td>Cliente</td>
-                
-                <td>
-                    <span class="status inativo">Inativo</span>
-                </td>
-                
-                <td class="col-acao">
-                    <span 
-                        class="acao editar" 
-                        title="Editar"
-                    ></span>
-                    <!-- <span 
-                        class="acao excluir"
-                        title="Excluir"
-                    ></span> -->
-                </td>
-            </tr>
-
-            <tr>
-                <td>John Vitor</td>
-                <td>johnvitor@bol.com</td>
-                <td>Fornecedor</td>
-                
-                <td>
-                    <span class="status pendente">Pendente</span>
-                </td>
-                
-                <td class="col-acao">
-                    <span 
-                        class="acao editar" 
-                        title="Editar"
-                    ></span>
-                    <!-- <span 
-                        class="acao excluir"
-                        title="Excluir"
-                    ></span> -->
-                </td>
-            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.full_name|default:"" }}</td>
+                    <td>{{ user.email|default:"" }}</td>
+                    <td>{{ user.profile }}</td>
+                    
+                    <td>
+                        <span class="status {{ user.status }}">{{ user.status }}</span>
+                    </td>
+                    
+                    <td class="col-acao">
+                        <span 
+                            class="acao editar" 
+                            title="Editar"
+                        ></span>
+                        <!-- <span 
+                            class="acao excluir"
+                            title="Excluir"
+                        ></span> -->
+                    </td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}

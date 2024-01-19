@@ -40,7 +40,9 @@ INSTALLED_APPS = [
 
     # Apps
     'apps.core',
-    'apps.user'
+    'apps.user',
+    "apps.route",
+    "apps.ticket",
 ]
 
 MIDDLEWARE = [
@@ -84,7 +86,7 @@ if DEBUG:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        },
     }
 else:
     DATABASES = {
@@ -150,3 +152,4 @@ if not DEBUG:
     import django_heroku
     django_heroku.settings(locals())
 
+AUTH_USER_MODEL = 'user.CustomUser'

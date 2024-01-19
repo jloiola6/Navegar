@@ -11,31 +11,35 @@
 {% block content %}
     <h1>Rotas</h1>
 
-    <form class="form-routes">
+    <form method="POST" class="form-routes">
+        {% csrf_token %}
         <select 
-            id=""
-            name="" 
+            id="origin"
+            name="origin" 
             required
-        >
+        >   
             <option value="" disabled selected>Origem</option>
-            <option>Manaus</option>
-            <option>Tabatinga</option>
+            {% for origin in origins %}
+                <option>{{ origin }}</option>
+            {% endfor %}
         </select>
 
         <select 
-            id=""
-            name="" 
+            id="destination"
+            name="destination" 
             required
         >
             <option value="" disabled selected>Destino</option>
-            <option>Manaus</option>
-            <option>Tabatinga</option>
+            {% for destination in destinations %}
+                <option>{{ destination }}</option>
+            {% endfor %}
         </select>
 
         <input 
-            id="" 
-            name="" 
+            id="date" 
+            name="date" 
             type="date" 
+            required
         />
 
         <button class="button search" type="submit">Pesquisar</button>
@@ -50,5 +54,23 @@
             <th>Destino</th>
             <th>Embarcação</th>
         </thead>
+        <tbody>
+            {% for routes in routes_list %}
+                <tr>
+                    <td colspan="2">Rota</td>
+                    <td colspan="2">
+                        <a href="" target="_blank" rel="noopener noreferrer">Selecionar Rota</a>
+                    </td>
+                </tr>
+                {% for route in routes %}
+                    <tr>
+                        <td>{{ date }}</td>
+                        <td>{{ route.origin }}</td>
+                        <td>{{ route.destination }}</td>
+                        <td>{{ route.boat }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock %}

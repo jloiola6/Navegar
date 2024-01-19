@@ -1,6 +1,7 @@
 <h1 class="title">Login</h1>
 
-<form action="">
+<form method="POST">
+    {% csrf_token %}
     {% for f in form %}
         <div class="group">
             <label for="">{{ f.label }}</label>
@@ -11,10 +12,10 @@
     <a href="#">Esqueci minha senha</a>
 
     <div class="button-container">
-        <button class="button">Entrar</button>
+        <button type="submit" class="button">Entrar</button>
 
         <a href="{% url 'user:signup' %}">
-        <button class="button secondary" type="button">Criar conta</button>
+            <button class="button secondary" type="button">Criar conta</button>
         </a>
     </div>
 </form>
