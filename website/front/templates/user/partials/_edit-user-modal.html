@@ -1,44 +1,46 @@
 {% load static %}
 
 <dialog class="modal" data-modal="{{ id }}">
-    <h2>Some text</h2>
+    <div class="content">
+        <h2>Some text</h2>
 
-    <form action="">
-        <div class="group">
-            <label for="">Nome</label>
-            <input type="text" name="" id="">
-        </div>
-
-        <div class="group">
-            <label for="">Perfil</label>
-            
-            <div>
-                <input type="radio">
-                <label for="">Cliente</label>
-
-                <input type="radio">
-                <label for="">Fornecedor</label>
-
-                <input type="radio">
-                <label for="">Administrador</label>
+        <form action="">
+            <div class="group">
+                <label for="">Nome</label>
+                <input type="text" name="" id="">
             </div>
-        </div>
 
-        <div class="group">
-            <label for="">Status</label>
-            
-            <div>
-                <input type="radio">
-                <label for="">Ativo</label>
+            <div class="group">
+                <label for="">Perfil</label>
+                
+                <div>
+                    <input type="radio">
+                    <label for="">Cliente</label>
 
-                <input type="radio">
-                <label for="">Inativo</label>
+                    <input type="radio">
+                    <label for="">Fornecedor</label>
 
-                <input type="radio">
-                <label for="">Pendente</label>
+                    <input type="radio">
+                    <label for="">Administrador</label>
+                </div>
             </div>
-        </div>
 
-        <button class="button">Salvar</button>
-    </form>
+            <div class="group">
+                <label for="">Status</label>
+                
+                <div>
+                    <input type="radio">
+                    <label for="">Ativo</label>
+
+                    <input type="radio">
+                    <label for="">Inativo</label>
+
+                    <input type="radio">
+                    <label for="">Pendente</label>
+                </div>
+            </div>
+
+            <button class="button">Salvar</button>
+        </form>
+    </div>
 </dialog>

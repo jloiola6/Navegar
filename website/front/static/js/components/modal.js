@@ -15,7 +15,8 @@ if(modalList.length){
         }
 
         modal.addEventListener('click', (event) => {
-            console.log(event.target)
+            if(event.target.tagName === 'DIALOG')
+                event.target.close()
         })
     })
 }
