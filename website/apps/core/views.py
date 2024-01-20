@@ -12,7 +12,7 @@ from apps.route.utils import find_routes_with_weekday
 # Create your views here.
 
 def index(request):      
-    template_name = 'index.html'
+    template_name = 'route/index.html'
 
     origins = Route.objects.values_list('origin', flat=True).order_by('destination').distinct()
     destinations = Route.objects.values_list('destination', flat=True).order_by('destination').distinct()

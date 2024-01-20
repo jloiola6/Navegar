@@ -1,14 +1,16 @@
 {% load static %}
 
 <header class="header">
-    <img 
-        alt="Navegar"
-        class="logo"
-        src="{% static 'images/logo.svg' %}" 
-    >
+    <a href="{% url 'core:index' %}">
+        <img 
+            alt="Navegar"
+            class="logo"
+            src="{% static 'images/logo.svg' %}" 
+        >
+    </a>
 
     <nav class="navigation-menu">
-        <a class="link" href="#">
+        <a class="link" href="{% url 'core:index' %}">
             <img 
                 alt="Rotas"
                 src="{% static 'icons/rotas.svg' %}"
@@ -35,7 +37,7 @@
             <span>Fincaneiro</span>
         </a>
 
-        <a class="link" href="#">
+        <a class="link" href="#" data-modal-open="admin">
             <img 
                 alt="Administrativo"
                 src="{% static 'icons/administrativo.svg' %}" 
@@ -47,3 +49,5 @@
 
     <img class="avatar" src="{% static 'icons/avatar.svg' %}" alt="Avatar do usuário">
 </header>
+
+{% include './_admin-modal.html' with id="admin" %}

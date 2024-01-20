@@ -26,9 +26,11 @@
             gap: .5rem;
             padding-block: .5rem;
             padding-inline: 1rem;
+            transition: background-color .5s;
 
             &:hover{
                 background-color: var(--clr-primary-light);
+                border-color: var(--clr-primary-light);
                 color: var(--clr-primary);
             }
 
