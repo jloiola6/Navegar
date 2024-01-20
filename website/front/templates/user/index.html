@@ -9,43 +9,117 @@
 {% endblock %}
 
 {% block content %}
-    
     <h1>Usuários</h1>
 
     <table class="table">
         <thead>
-            <th>Nome</th>
-            <th>E-mail</th>
-            <th>Perfil</th>
-            <th>Status</th>
-            <th class="header-acao">Ações</th>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Perfil</th>
+                <th class="header-status">Status</th>
+                <th class="header-acao">Ações</th>
+            </tr>
         </thead>
 
         <tbody>
-            {% for user in users %}
-                <tr>
-                    <td>{{ user.full_name|default:"" }}</td>
-                    <td>{{ user.email|default:"" }}</td>
-                    <td>{{ user.profile }}</td>
-                    
-                    <td>
-                        <span class="status {{ user.status }}">{{ user.status }}</span>
-                    </td>
-                    
-                    <td class="col-acao">
-                        <span 
-                            class="acao editar" 
-                            title="Editar"
-                        ></span>
-                        <!-- <span 
-                            class="acao excluir"
-                            title="Excluir"
-                        ></span> -->
-                    </td>
-                </tr>
-            {% endfor %}
+            <tr>
+                <td>Érick Fernandes</td>
+                <td>erickfernandess2@gmail.com</td>
+                <td>Cliente</td>
+
+                <td>
+                    <span class="status Pendente" title="Pendente"></span>
+                </td>
+
+                <td class="col-acao">
+                    <!-- ESTE SPAN ABRE O MODAL DE EDIÇÃO, PARA CADA USUÁRIO DEVE HAVER UM  -->
+                    <span 
+                        class="acao editar"
+                        data-modal-open="1" 
+                        title="editar"
+                    ></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Érick Fernandes</td>
+                <td>erickfernandess2@gmail.com</td>
+                <td>Cliente</td>
+
+                <td>
+                    <span class="status Ativo" title="Ativo"></span>
+                </td>
+
+                <td class="col-acao">
+                    <!-- ESTE SPAN ABRE O MODAL DE EDIÇÃO, PARA CADA USUÁRIO DEVE HAVER UM  -->
+                    <span 
+                        class="acao editar"
+                        data-modal-open="2" 
+                        title="editar"
+                    ></span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Érick Fernandes</td>
+                <td>erickfernandess2@gmail.com</td>
+                <td>Cliente</td>
+
+                <td>
+                    <span class="status Inativo" title="Inativo"></span>
+                </td>
+
+                <td class="col-acao">
+                    <!-- ESTE SPAN ABRE O MODAL DE EDIÇÃO, PARA CADA USUÁRIO DEVE HAVER UM  -->
+                    <!-- PASSAR O IDENTIICADOR DO USUÁRIO NO ATRIBUTO DATA-MODAL-OPEN  -->
+                    <span 
+                        class="acao editar"
+                        data-modal-open="3" 
+                        title="editar"
+                    ></span>
+                </td>
+            </tr>
         </tbody>
     </table>
 
-    {% include './partials/_edit-user-modal.html' with id="edit-user" %}
+    {% include './partials/_edit-user-modals.html' %}
+
+    <!-- CASO NÃO VÁ UTILIZAR NADA NOS ARQUIVOS ABAIXO, REMOVER O COMENTÁRIO -->
+    {% comment %}
+        <table class="table">
+            <thead>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Perfil</th>
+                <th>Status</th>
+                <th class="header-acao">Ações</th>
+            </thead>
+
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.full_name|default:"" }}</td>
+                        <td>{{ user.email|default:"" }}</td>
+                        <td>{{ user.profile }}</td>
+                        
+                        <td>
+                            <span class="status {{ user.status }}">{{ user.status }}</span>
+                        </td>
+                        
+                        <td class="col-acao">
+                            <span 
+                                class="acao editar" 
+                                title="Editar"
+                            ></span>
+                            <!-- <span 
+                                class="acao excluir"
+                                title="Excluir"
+                            ></span> -->
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endcomment %}
 {% endblock %}

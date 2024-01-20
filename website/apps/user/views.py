@@ -8,8 +8,8 @@ from .decorators import user_type_required, redirect_authenticated_user
 from apps.user.forms import *
 from apps.user.models import CustomUser
 
-@login_required
-@user_type_required('A')
+# @login_required
+# @user_type_required('A')
 def index(request):
     users = CustomUser.objects.all()
     return render(request, 'user/index.html', {'users': users})

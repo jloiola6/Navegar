@@ -1,10 +1,10 @@
 .status{
+    aspect-ratio: 1;
     background: #333;
-    border-radius: .5rem;
-    font-size: .875rem;
-    font-weight: 500;
-    padding-block: .5rem;
-    padding-inline: 1rem;
+    border-radius: 100vw;
+    display: block;
+    margin: auto;
+    width: 1rem;
 
     &.Ativo{
         background-color: hsl(140, 82%, 40%);
@@ -19,6 +19,7 @@
     }
 }
 
+.header-status,
 .header-acao{
     text-align: center;
 }

@@ -1,13 +1,12 @@
 {% load static %}
 
-<dialog class="modal" data-modal="{{ id }}">
+<!-- PASSAR O IDENTIICADOR DO USUÁRIO NO ATRIBUTO DATA-MODAL -->
+<dialog class="modal" data-modal="1">
     <div class="content">
-        <h2>Some text</h2>
-
         <form action="">
             <div class="group">
                 <label for="">Nome</label>
-                <input type="text" name="" id="">
+                <input type="text" name="" id="" value="Érick Fernandes">
             </div>
 
             <div class="group">
@@ -44,3 +43,5 @@
         </form>
     </div>
 </dialog>
+
+<!-- FAZER UM FOR PARA RENDERIZAR OS MODAIS -->
