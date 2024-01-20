@@ -51,3 +51,36 @@
         height: 2rem;
     }
 }
+
+.user-container{
+    position: relative;
+
+    & .user-menu{
+        background-color: #fff;
+        border: 1px solid var(--clr-border);
+        border-radius: .25rem;
+        display: none;
+        /* min-width: 4rem; */
+        position: absolute;
+        right: 0;
+        width: max-content;
+
+        &.visible{
+            display: block;
+        }
+
+        & li{
+            cursor: pointer;
+            font-size: 14px;
+            padding: .5rem;
+            
+            &:hover{
+                background-color: hsl(0, 0%, 90%);
+            }
+
+            &:not(:last-child){
+                border-bottom: 1px solid var(--clr-border);
+            }
+        }
+    }
+}

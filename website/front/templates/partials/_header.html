@@ -47,7 +47,16 @@
         </a>
     </nav>
 
-    <img class="avatar" src="{% static 'icons/avatar.svg' %}" alt="Avatar do usuário">
+    <div class="user-container">
+        <img 
+            alt="Avatar do usuário"
+            data-user-avatar
+            class="avatar" 
+            src="{% static 'icons/avatar.svg' %}" 
+        >
+        
+        {% include './_user-menu.html' %}
+    </div>
 </header>
 
 {% include './_admin-modal.html' with id="admin" %}
