@@ -4,7 +4,8 @@ input:is(
     [type="date"], 
     [type="email"], 
     [type="password"], 
-    [type="text"]
+    [type="text"],
+    [type="time"]
 ), 
 select{
     border: 1px solid var(--clr-border);

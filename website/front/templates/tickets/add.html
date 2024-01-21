@@ -4,22 +4,102 @@
 
 {% block title %}Solicitação de ticket{% endblock %}
 
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/add.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1>Solicitação de ticket</h1>
 
-    <form action="">
+    <div class="flex">
+        <p class="boat-label">Cidade Manaquiri</p>
+        <p class="price-label">RS 370,00</p>
+    </div>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Origem</th>
+                <th>Chegada</th>
+            </tr>
+
+            <tr>
+                <td>Manaus</td>
+                <td>Tabatinga</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Data</th>
+                <th>Saída</th>
+                <th>Chegada</th>
+            </tr>
+
+            <tr>
+                <td>30/03/2023</td>
+                <td>10:00</td>
+                <td>17:00</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Dados do passageiro</h2>
+
+    <form action="" class="ticket-form">
         <!-- DETALHES DA ROTA READONLY -->
+        <!-- <div class="group">
+            <label>Embarcação</label>
+            <input type="text" value="Cidade Manaquiri" disabled>
+        </div> -->
 
-        <!-- DADOS DO PASSAGEIRO -->
-
-        <div class="group">
-            <label for="">Nome</label>
-            <input type="text">
+        <!-- <div class="group">
+            <label>Origem</label>
+            <input type="text" value="Manaus" disabled>
         </div>
 
         <div class="group">
-            <label for="">CPF</label>
-            <input type="text">
+            <label>Destino</label>
+            <input type="text" value="Tabatinga" disabled>
+        </div>
+
+        <div class="group">
+            <label>Data</label>
+            <input type="date" value="2024-03-30" disabled>
+        </div>
+
+        <div class="group">
+            <label>Saída</label>
+            <input type="time" value="10:35" disabled>
+        </div>
+        </div>
+
+        <div class="group">
+            <label>Chegada</label>
+            <input type="time" value="17:10" disabled>
+        </div>
+
+        <div class="group">
+            <label>Total</label>
+            <input type="text" value="R$ 310,00" disabled>
+        </div> -->
+
+
+        <!-- DADOS DO PASSAGEIRO -->
+
+        
+        <div class="grid col-2">
+            <div class="group">
+                <label>Nome</label>
+                <input type="text">
+            </div>
+            
+            <div class="group">
+                <label>CPF</label>
+                <input type="text">
+            </div>
         </div>
 
         <button class="button">Enviar Solicitação</button>

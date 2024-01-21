@@ -13,17 +13,28 @@
     color: #FFF;
     cursor: pointer;
     font-size: 1em;
-    padding-block: .5rem;
+    padding-block: 1rem;
     padding-inline: 2rem;
+    transition: background-color .5s;
     width: fit-content;
 
+    &:hover{
+        --button-color: var(--clr-primary-dark);
+    }
+
     &.secondary{
-        background-color: transparent;
-        border: 1px solid var(--button-color);
-        color: var(--button-color);
+        --button-color: transparent;
+
+        border: 1px solid var(--clr-primary);
+        color: var(--clr-primary);
         font-weight: 500;
-        padding-block: calc(.5rem - 1px);
+        padding-block: calc(1rem - 1px);
         padding-inline: calc(2rem - 1px);
+
+        &:hover{
+            --button-color: var(--clr-primary);
+            color: #FFF;
+        }
     }
 
     &.search{

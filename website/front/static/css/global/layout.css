@@ -6,3 +6,17 @@
     max-width: 1024px;
     padding-top: 2rem;
 }
+
+.flex{
+    display: flex;
+    gap: 1rem;
+}
+
+.grid{
+    display: grid;
+    gap: 1rem;
+
+    &.col-2{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

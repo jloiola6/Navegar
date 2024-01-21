@@ -62,6 +62,6 @@
     }
 
     & .col-price{
-        color: #12B048;
+        color: hsl(141, 81%, 30%);
     }
 }
