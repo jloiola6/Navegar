@@ -47,6 +47,31 @@
         <button class="button search" type="submit">Pesquisar</button>
     </form>
     
+    <h2>Resultado</h2>
+
+    <table class="table routes-table">
+        <tbody>
+            <tr>
+                <td class="col-day">
+                    <span>10</span>
+                    <span>Janeiro</span>
+                </td>
+
+                <td class="col-boat">
+                    <span>Cidade Manaquiri</span>
+                </td>
+
+                <td class="col-time">
+                    <span>10:35 - 17:10</span>
+                    <span>7 horas</span>
+                </td>
+
+                <td>Manaus - Tabatinga</td>
+
+                <td class="col-price">RS 370,00</td>
+            </tr>
+        </tbody>
+    </table>
 
     {% comment %}
         <h2>Ultimas rotas</h2>
@@ -58,6 +83,7 @@
                 <th>Destino</th>
                 <th>Embarcação</th>
             </thead>
+
             <tbody>
                 {% for routes in routes_list %}
                     <tr>

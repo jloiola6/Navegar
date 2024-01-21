@@ -5,3 +5,57 @@
     flex-direction: row;
     padding: 1.5rem;
 }
+
+.routes-table{
+    & tr{
+        cursor: pointer;
+    }
+    
+    & .col-day,
+    .col-boat,
+    .col-time,
+    .col-price{
+        font-weight: 500;
+    }
+
+    & .col-day,
+    .col-time{
+        display: flex;
+        flex-direction: column;
+        gap: .25rem;
+
+        & :last-child{
+            color: hsl(0, 0%, 40%);
+            font-size: .75rem;
+            font-weight: 400;
+        }
+    }
+
+    & .col-day{
+        text-align: center;
+
+        & :first-child{
+            font-size: 1.25rem;
+            
+        }
+    }
+    
+    .col-boat span{
+        color: var(--clr-primary);
+        display: flex;
+        gap: .5rem;
+
+        &::before{
+            aspect-ratio: 1;
+            background-image: url('../../../icons/rotas.svg');
+            background-size: cover;
+            content: '';
+            display: block;
+            width: 1rem;
+        }
+    }
+
+    & .col-price{
+        color: #12B048;
+    }
+}

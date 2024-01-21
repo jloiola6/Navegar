@@ -1,6 +1,6 @@
 :root{
     --clr-background: #FFF;
-    --clr-border: hsl(0, 0%, 90%);
+    --clr-border: hsl(0, 0%, 80%);
 
     --clr-primary: hsl(214, 82%, 51%);
     --clr-primary-dark: hsl(214, 82%, 31%);
