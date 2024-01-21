@@ -9,6 +9,12 @@
 .routes-table{
     & tr{
         cursor: pointer;
+        transition: background-color .5s;
+
+        &:hover{
+            background-color: hsl(214, 82%, 97%);
+            border-color: hsl(214, 82%, 97%);
+        }
     }
     
     & .col-day,

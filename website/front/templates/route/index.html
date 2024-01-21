@@ -51,7 +51,7 @@
 
     <table class="table routes-table">
         <tbody>
-            <tr>
+            <tr data-link="{% url 'ticket:add' %}">
                 <td class="col-day">
                     <span>10</span>
                     <span>Janeiro</span>
@@ -68,7 +68,9 @@
 
                 <td>Manaus - Tabatinga</td>
 
-                <td class="col-price">RS 370,00</td>
+                <td class="col-price">
+                    <span>RS 370,00</span>        
+                </td>
             </tr>
         </tbody>
     </table>

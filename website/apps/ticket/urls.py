@@ -6,4 +6,6 @@ app_name = 'ticket'
 
 urlpatterns = [
     path('create-ticket', create_ticket, name='create_ticket'),
+    path('index', index, name='index'),
+    path('add', add, name='add'),
 ]

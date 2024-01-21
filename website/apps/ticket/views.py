@@ -4,7 +4,11 @@ from django.urls import reverse
 from apps.ticket.models import *
 from apps.user.models import CustomUser
 
+def index(request):
+    return render(request, 'tickets/index.html')
 
+def add(request):
+    return render(request, 'tickets/add.html')
 
 def create_ticket(request):
     if request.method == 'POST':
