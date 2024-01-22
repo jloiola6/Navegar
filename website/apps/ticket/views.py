@@ -21,4 +21,5 @@ def create_ticket(request):
             value = request.POST['value'],
             status = request.POST['status']
         )
+        
         return redirect(reverse('core:index'))

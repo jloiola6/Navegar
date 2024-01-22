@@ -153,3 +153,5 @@ if not DEBUG:
     django_heroku.settings(locals())
 
 AUTH_USER_MODEL = 'user.CustomUser'
+
+LOGIN_URL = 'usuario/login/'

@@ -32,8 +32,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     type = models.CharField(max_length=1, choices=TYPE_CHOICES, default='C')
 
     # Campos necessários para o AbstractBaseUser
-    is_active = models.BooleanField(blank=True, null=True)
-    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True, blank=True, null=True)
+    is_staff = models.BooleanField(default=True)
 
     objects = CustomUserManager()
 
