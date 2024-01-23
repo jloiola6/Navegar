@@ -6,13 +6,19 @@ from .decorators import user_type_required, redirect_authenticated_user
 
 
 from apps.user.forms import *
-from apps.user.models import CustomUser
+from apps.user.models import CustomUser, TYPE_CHOICES
 
-# @login_required
-# @user_type_required('A')
+@login_required
+@user_type_required('A')
 def index(request):
     users = CustomUser.objects.all()
-    return render(request, 'user/index.html', {'users': users})
+    all_types = TYPE_CHOICES
+    all_status = ('Ativo', 'Inativo', 'Pendente')
+
+    if request.method == 'POST':
+        pass
+    
+    return render(request, 'user/index.html', {'users': users, 'all_types': all_types, 'all_status': all_status})
 
 
 @redirect_authenticated_user

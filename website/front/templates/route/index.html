@@ -20,8 +20,8 @@
         >   
             <option value="" disabled selected>Origem</option>
 
-            {% for origin in origins %}
-                <option>{{ origin }}</option>
+            {% for origin in locations %}
+                <option value="{{ origin.id }}">{{ origin }}</option>
             {% endfor %}
         </select>
 
@@ -32,8 +32,8 @@
         >
             <option value="" disabled selected>Destino</option>
             
-            {% for destination in destinations %}
-                <option>{{ destination }}</option>
+            {% for destination in locations %}
+                <option value="{{ destination.id }}">{{ destination }}</option>
             {% endfor %}
         </select>
 
@@ -47,31 +47,36 @@
         <button class="button search" type="submit">Pesquisar</button>
     </form>
     
-    <h2>Resultado</h2>
+    {% if routes_list %}
+        <h2>Resultado</h2>
 
-    <table class="table routes-table">
-        <tbody>
-            <tr data-link="{% url 'ticket:add' %}">
-                <td class="col-day">
-                    <span>10</span>
-                    <span>Janeiro</span>
-                </td>
+        <table class="table routes-table">
+            <tbody>
+                {% for route in routes_list %}
+                    <tr data-link="{% url 'ticket:add' route.id date %}">
+                        <td class="col-day">
+                            <span>{{ date|date:"d" }}</span>
+                            <span>{{ date|date:"F" }}</span>
+                        </td>
 
-                <td class="col-boat">
-                    <span>Cidade Manaquiri</span>
-                </td>
+                        <td class="col-boat">
+                            <span>{{ route.boat }}</span>
+                        </td>
 
-                <td class="col-time">
-                    <span>10:35 - 17:10</span>
-                    <span>7 horas</span>
-                </td>
+                        <td class="col-time">
+                            <span>{{ route.get_departure_time }} - {{ route.get_arrival_time }} {% if route.after_midnight %}+1{% endif %}</span>
+                            <span>{{ route.total_trip_time }} horas</span>
+                        </td>
 
-                <td>Manaus - Tabatinga</td>
+                        <td>{{ route.route }}</td>
 
-                <td class="col-price">RS 370,00</td>
-            </tr>
-        </tbody>
-    </table>
+                        <td class="col-price">R$ {{ route.route.value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    
 
     {% comment %}
         <h2>Ultimas rotas</h2>

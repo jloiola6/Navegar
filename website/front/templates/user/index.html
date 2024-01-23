@@ -23,103 +23,26 @@
         </thead>
 
         <tbody>
-            <tr>
-                <td>Érick Fernandes</td>
-                <td>erickfernandess2@gmail.com</td>
-                <td>Cliente</td>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.full_name|default:"N/A" }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.profile }}</td>
 
-                <td>
-                    <span class="status Pendente" title="Pendente"></span>
-                </td>
+                    <td>
+                        <span class="status {{ user.status }}" title="{{ user.status }}"></span>
+                    </td>
 
-                <td class="col-acao">
-                    <!-- ESTE SPAN ABRE O MODAL DE EDIÇÃO, PARA CADA USUÁRIO DEVE HAVER UM  -->
-                    <span 
-                        class="acao editar"
-                        data-modal-open="1" 
-                        title="editar"
-                    ></span>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Érick Fernandes</td>
-                <td>erickfernandess2@gmail.com</td>
-                <td>Cliente</td>
-
-                <td>
-                    <span class="status Ativo" title="Ativo"></span>
-                </td>
-
-                <td class="col-acao">
-                    <!-- ESTE SPAN ABRE O MODAL DE EDIÇÃO, PARA CADA USUÁRIO DEVE HAVER UM  -->
-                    <span 
-                        class="acao editar"
-                        data-modal-open="2" 
-                        title="editar"
-                    ></span>
-                </td>
-            </tr>
-
-            <tr>
-                <td>Érick Fernandes</td>
-                <td>erickfernandess2@gmail.com</td>
-                <td>Cliente</td>
-
-                <td>
-                    <span class="status Inativo" title="Inativo"></span>
-                </td>
-
-                <td class="col-acao">
-                    <!-- ESTE SPAN ABRE O MODAL DE EDIÇÃO, PARA CADA USUÁRIO DEVE HAVER UM  -->
-                    <!-- PASSAR O IDENTIICADOR DO USUÁRIO NO ATRIBUTO DATA-MODAL-OPEN  -->
-                    <span 
-                        class="acao editar"
-                        data-modal-open="3" 
-                        title="editar"
-                    ></span>
-                </td>
-            </tr>
+                    <td class="col-acao">
+                        <span 
+                            class="acao editar"
+                            data-modal-open="{{ user.id }}" 
+                            title="editar"
+                        ></span>
+                    </td>
+                </tr>
+                {% include './partials/_edit-user-modals.html' %}
+            {% endfor %}
         </tbody>
     </table>
-
-    {% include './partials/_edit-user-modals.html' %}
-
-    <!-- CASO NÃO VÁ UTILIZAR NADA NOS ARQUIVOS ABAIXO, REMOVER O COMENTÁRIO -->
-    {% comment %}
-        <table class="table">
-            <thead>
-                <th>Nome</th>
-                <th>E-mail</th>
-                <th>Perfil</th>
-                <th>Status</th>
-                <th class="header-acao">Ações</th>
-            </thead>
-
-            <tbody>
-                {% for user in users %}
-                    <tr>
-                        <td>{{ user.full_name|default:"" }}</td>
-                        <td>{{ user.email|default:"" }}</td>
-                        <td>{{ user.profile }}</td>
-                        
-                        <td>
-                            <span class="status {{ user.status }}">{{ user.status }}</span>
-                        </td>
-                        
-                        <td class="col-acao">
-                            <span 
-                                class="acao editar" 
-                                title="Editar"
-                            ></span>
-                            <!-- <span 
-                                class="acao excluir"
-                                title="Excluir"
-                            ></span> -->
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endcomment %}
 {% endblock %}

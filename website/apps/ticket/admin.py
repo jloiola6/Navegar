@@ -5,13 +5,13 @@ from apps.ticket.models import Ticket
 
 
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ('user', 'origin', 'destination', 'date', 'boat', 'value', 'status')
-    list_filter = ('user', 'origin', 'destination', 'date', 'boat', 'value', 'status')
-    search_fields = ('user', 'origin', 'destination', 'date', 'boat', 'value', 'status')
-    readonly_fields = ('user', 'origin', 'destination', 'date', 'boat', 'value', 'status')
+    list_display = ('user_create', 'origin', 'destination', 'date', 'boat', 'value', 'status')
+    list_filter = ('user_create', 'origin', 'destination', 'date', 'boat', 'value', 'status')
+    search_fields = ('user_create', 'origin', 'destination', 'date', 'boat', 'value', 'status')
+    readonly_fields = ('user_create', 'origin', 'destination', 'date', 'boat', 'value', 'status')
     fieldsets = (
         ('Informações do usuário', {
-            'fields': ('user', 'origin', 'destination', 'date', 'boat', 'value', 'status')
+            'fields': ('user_create', 'origin', 'destination', 'date', 'boat', 'value', 'status')
         }),
     )
 

@@ -5,13 +5,13 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'full_name', 'email', 'password1', 'password2']
 
 class CustomUserChangeForm(UserChangeForm):
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
     class Meta:
         model = CustomUser
-        fields = ['username', 'email', 'cpf', 'phone']
+        fields = ['username', 'full_name', 'email', 'cpf', 'phone']
 
 class UserAuthenticationForm(AuthenticationForm):
     class Meta:

@@ -12,8 +12,8 @@
     <h1>Solicitação de ticket</h1>
 
     <div class="flex">
-        <p class="boat-label">Cidade Manaquiri</p>
-        <p class="price-label">RS 370,00</p>
+        <p class="boat-label">{{ routeweek.boat }}</p>
+        <p class="price-label">R$ {{ routeweek.route.value }}</p>
     </div>
 
     <table class="table">
@@ -24,8 +24,8 @@
             </tr>
 
             <tr>
-                <td>Manaus</td>
-                <td>Tabatinga</td>
+                <td>{{ routeweek.route.origin }}</td>
+                <td>{{ routeweek.route.destination }}</td>
             </tr>
         </tbody>
     </table>
@@ -39,16 +39,17 @@
             </tr>
 
             <tr>
-                <td>30/03/2023</td>
-                <td>10:00</td>
-                <td>17:00</td>
+                <td>{{ date }}</td>
+                <td>{{ routeweek.get_departure_time }}</td>
+                <td>{{ routeweek.get_arrival_time }} {% if routeweek.after_midnight %}+1{% endif %}</td>
             </tr>
         </tbody>
     </table>
 
     <h2>Dados do passageiro</h2>
 
-    <form action="" class="ticket-form">
+    <form method="POST" action="{% url 'ticket:create_ticket' routeweek.id date %}" class="ticket-form">
+        {% csrf_token %}
         <!-- DETALHES DA ROTA READONLY -->
         <!-- <div class="group">
             <label>Embarcação</label>
@@ -93,15 +94,15 @@
         <div class="grid col-2">
             <div class="group">
                 <label>Nome</label>
-                <input type="text">
+                <input type="text" name="client">
             </div>
             
             <div class="group">
                 <label>CPF</label>
-                <input type="text">
+                <input type="text" name="document">
             </div>
         </div>
 
-        <button class="button">Enviar Solicitação</button>
+        <button class="button" type="submit">Enviar Solicitação</button>
     </form>
 {% endblock %}
