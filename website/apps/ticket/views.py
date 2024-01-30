@@ -6,12 +6,12 @@ from apps.user.models import CustomUser
 from apps.route.models import RouteWeekday
 
 def index(request):
-    return render(request, 'tickets/index.html')
+    return render(request, 'ticket/index.html')
 
 def add(request, id, date):
     routeweek = RouteWeekday.objects.get(id=id)
 
-    return render(request, 'tickets/add.html', {'routeweek': routeweek, 'date': date})
+    return render(request, 'ticket/add.html', {'routeweek': routeweek, 'date': date})
 
 def create_ticket(request, id, date):
     if request.method == 'POST':
@@ -30,3 +30,6 @@ def create_ticket(request, id, date):
         ticket.save()
         
         return redirect(reverse('core:index'))
+    
+def edit(request):
+    return render(request, 'ticket/edit.html')
