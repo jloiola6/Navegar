@@ -16,7 +16,21 @@ def index(request):
     all_status = ('Ativo', 'Inativo', 'Pendente')
 
     if request.method == 'POST':
-        pass
+        user_id = request.POST.get('user_id')
+        name = request.POST.get('name')
+        password = request.POST.get('password') if request.POST.get('password') else None
+        type = request.POST.get('type')
+        status = request.POST.get('status')
+
+        user = CustomUser.objects.get(id=user_id)
+        user.full_name = name
+        user.type = type
+        user.status = status
+        if password:
+            user.set_password(password)
+        user.save()
+
+        return redirect(reverse('user:index'))
     
     return render(request, 'user/index.html', {'users': users, 'all_types': all_types, 'all_status': all_status})
 

@@ -8,7 +8,7 @@ WEEKDAYS = (
     ('Sunday', 'Domingo'),
     ('Monday', 'Segunda-Feira'),
     ('Tuesday', 'Terça-Feira'),
-    ('wednesday', 'Quarta-Feira'),
+    ('Wednesday', 'Quarta-Feira'),
     ('Thursday', 'Quinta-Feira'),
     ('Friday', 'Sexta-Feira'),
     ('Saturday', 'Sábado'),

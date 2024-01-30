@@ -3,10 +3,18 @@
 <!-- PASSAR O IDENTIICADOR DO USUÁRIO NO ATRIBUTO DATA-MODAL -->
 <dialog class="modal" data-modal="{{ user.id }}">
     <div class="content">
-        <form action="">
+        <form method="POST">
+            {% csrf_token %}
+            <input style="display:none;" type="text" name="user_id" id="input_user" value="{{ user.id }}">
+            
             <div class="group">
-                <label for="">Nome</label>
-                <input type="text" name="" id="" value="{{ user.full_name|default:"" }}">
+                <label for="input_name">Nome</label>
+                <input type="text" name="name" id="input_name" value="{{ user.full_name|default:"" }}">
+            </div>
+            
+            <div class="group">
+                <label for="input_password">Senha</label>
+                <input type="text" name="password" id="input_password">
             </div>
 
             <div class="group">
