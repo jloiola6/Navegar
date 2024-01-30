@@ -11,4 +11,8 @@ form{
     & .group{
         gap: .5rem;
     }
+
+    & > .button{
+        align-self: flex-end;
+    }
 }

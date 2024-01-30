@@ -11,7 +11,9 @@
 {% block content %}
     <h1>Solicitação de ticket</h1>
 
-    <div class="flex">
+    {% include './partials/_ticket-form.html' %}
+
+    <!-- <div class="flex">
         <p class="boat-label">{{ routeweek.boat }}</p>
         <p class="price-label">R$ {{ routeweek.route.value }}</p>
     </div>
@@ -50,47 +52,7 @@
 
     <form method="POST" action="{% url 'ticket:create_ticket' routeweek.id date %}" class="ticket-form">
         {% csrf_token %}
-        <!-- DETALHES DA ROTA READONLY -->
-        <!-- <div class="group">
-            <label>Embarcação</label>
-            <input type="text" value="Cidade Manaquiri" disabled>
-        </div> -->
 
-        <!-- <div class="group">
-            <label>Origem</label>
-            <input type="text" value="Manaus" disabled>
-        </div>
-
-        <div class="group">
-            <label>Destino</label>
-            <input type="text" value="Tabatinga" disabled>
-        </div>
-
-        <div class="group">
-            <label>Data</label>
-            <input type="date" value="2024-03-30" disabled>
-        </div>
-
-        <div class="group">
-            <label>Saída</label>
-            <input type="time" value="10:35" disabled>
-        </div>
-        </div>
-
-        <div class="group">
-            <label>Chegada</label>
-            <input type="time" value="17:10" disabled>
-        </div>
-
-        <div class="group">
-            <label>Total</label>
-            <input type="text" value="R$ 310,00" disabled>
-        </div> -->
-
-
-        <!-- DADOS DO PASSAGEIRO -->
-
-        
         <div class="grid col-2">
             <div class="group">
                 <label>Nome</label>
@@ -104,5 +66,5 @@
         </div>
 
         <button class="button" type="submit">Enviar Solicitação</button>
-    </form>
+    </form> -->
 {% endblock %}

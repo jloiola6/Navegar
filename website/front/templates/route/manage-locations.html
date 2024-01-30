@@ -1,0 +1,39 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}Controle de locais{% endblock %}
+
+{% block content %}
+    <h1>Controle de locais</h1>
+
+    <form method="POST" action="">
+        {% csrf_token %}
+
+        <div class="group">
+            <label>Nome</label>
+            <input type="text" list="list" required>
+
+            <datalist id="list">
+                <option value="Manaus"></option>
+                <option value="Rio Branco"></option>
+            </datalist>
+        </div>
+
+        <button class="button">Salvar</button>
+    </form>
+
+    <!-- EXIBIR AS LOCALIZAÇÕES NESTA TABELA -->
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        </tbody>
+    </table>
+{% endblock %}
