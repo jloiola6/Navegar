@@ -1,18 +1,24 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from apps.ticket.models import *
 from apps.user.models import CustomUser
 from apps.route.models import RouteWeekday
 
-def index(request):
-    return render(request, 'ticket/index.html')
 
+@login_required
+def index(request):
+    tickets = Ticket.objects.all()
+    return render(request, 'ticket/index.html', {'tickets': tickets})
+
+@login_required
 def add(request, id, date):
     routeweek = RouteWeekday.objects.get(id=id)
 
     return render(request, 'ticket/add.html', {'routeweek': routeweek, 'date': date})
 
+@login_required
 def create_ticket(request, id, date):
     if request.method == 'POST':
         routeweek = RouteWeekday.objects.get(id=id)
@@ -30,6 +36,7 @@ def create_ticket(request, id, date):
         ticket.save()
         
         return redirect(reverse('core:index'))
-    
+
+@login_required
 def edit(request):
     return render(request, 'ticket/edit.html')

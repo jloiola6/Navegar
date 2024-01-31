@@ -35,7 +35,7 @@
 
 <h2>Dados do passageiro</h2>
 
-<form method="POST" action="" class="ticket-form">
+<form method="POST" action="{% url 'ticket:create_ticket' routeweek.id date %}" class="ticket-form">
     {% csrf_token %}
 
     <div class="grid col-2">

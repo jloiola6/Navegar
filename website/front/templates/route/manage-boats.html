@@ -12,13 +12,17 @@
 
         <div class="group">
             <label>Nome</label>
-            <input type="text" required>
+            <input type="text" name="name" required>
         </div>
 
         <div class="group">
             <label>Fornecedor</label>
 
-            <select name="" id="" required>
+            <select name="supplier" required>
+                <option value="">Selecione</option>
+                {% for supplier in suppliers %}
+                    <option value="{{ supplier.id }}">{{ supplier }}</option>
+                {% endfor %}
             </select>
         </div>
 

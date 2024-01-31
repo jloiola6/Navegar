@@ -7,23 +7,17 @@
 {% block content %}
     <h1>Controle de locais</h1>
 
-    <form method="POST" action="">
+    <form method="POST">
         {% csrf_token %}
 
         <div class="group">
+            {{ form.nome.errors }}
             <label>Nome</label>
-            <input type="text" list="list" required>
-
-            <datalist id="list">
-                <option value="Manaus"></option>
-                <option value="Rio Branco"></option>
-            </datalist>
+            {{ form.name }}
         </div>
 
-        <button class="button">Salvar</button>
+        <button type="submit" class="button">Salvar</button>
     </form>
-
-    <!-- EXIBIR AS LOCALIZAÇÕES NESTA TABELA -->
 
     <table class="table">
         <thead>
@@ -33,7 +27,11 @@
         </thead>
 
         <tbody>
-
+            {% for local in locations %}
+                <tr>
+                    <td>{{ local }}</td>
+                </tr>
+            {% endfor %}
         </tbody>
     </table>
 {% endblock %}
