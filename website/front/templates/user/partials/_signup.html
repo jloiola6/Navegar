@@ -12,6 +12,10 @@
   {% endfor %}
 
   <div class="button-container">
+    <a href="{% url 'user:login' %}">
+      <button class="button secondary" type="button">Voltar</button>
+    </a>
+
     <button type="submit" class="button">Salvar</button>
   </div>
 </form>
