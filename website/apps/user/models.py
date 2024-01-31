@@ -25,7 +25,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
     username = models.CharField(max_length=30, unique=True)
-    full_name = models.CharField(max_length=100, null=True, blank=True)
+    full_name = models.CharField(verbose_name='Nome completo', max_length=100, null=True, blank=True)
     cpf = models.CharField(max_length=11, unique=True, null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
@@ -37,8 +37,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     objects = CustomUserManager()
 
-    USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = ['email']
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['password']
 
     # Adicione o related_name aqui para evitar o conflito
     groups = models.ManyToManyField(
@@ -57,7 +57,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     )
 
     def __str__(self):
-        return self.full_name or self.username
+        return self.full_name or self.email
     
     @property
     def profile(self):

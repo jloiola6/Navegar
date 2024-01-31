@@ -15,9 +15,21 @@
                 <th>Rota</th>
                 <th>Embarcação</th>
                 <th>Valor</th>
+                <th>Status</th>
             </tr>
         </thead>
 
-        <tbody></tbody>
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.date }}</td>
+                    <td>{{ ticket.name_client }}</td>
+                    <td>{{ ticket.origin }} - {{ ticket.destination }}</td>
+                    <td>{{ ticket.boat }}</td>
+                    <td>{{ ticket.value }}</td>
+                    <td>{{ ticket.status }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock %}

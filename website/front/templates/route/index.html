@@ -40,12 +40,19 @@
         <input 
             id="date" 
             name="date" 
-            type="date" 
+            type="date"
+            min="{{ today|date:'Y-m-d' }}"
             required
         />
 
         <button class="button search" type="submit">Pesquisar</button>
     </form>
+
+    {% if pagina_erro %}
+        <div class="alert alert-danger" role="alert">
+            <h1>Não foi encontrado nenhum voo</h1>
+        </div>
+    {% endif %}
     
     {% if routes_list %}
         <h2>Resultado</h2>
@@ -75,6 +82,13 @@
                 {% endfor %}
             </tbody>
         </table>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            <h1>Rotas para hoje</h1>
+            {% for route in routes_today %}
+                <p>{{ route }}</p>
+            {% endfor %}
+        </div>
     {% endif %}
     
 
