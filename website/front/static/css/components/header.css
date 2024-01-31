@@ -2,12 +2,13 @@
     align-items: center;
     border-bottom: 1px solid var(--clr-border);
     display: flex;
-    height: 4rem;
+    height: 3rem;
     justify-content: space-between;
     padding-inline: 2rem;
 
     & .logo{
-        height: 1.5rem;
+        height: 1.25rem;
+        padding-top: .25rem;
         width: auto;
     }
 
@@ -19,10 +20,10 @@
         & .link{
             align-items: center;
             border: 1px solid var(--clr-border);
-            border-radius: 100vw;
+            border-radius: .5rem;
             display: flex;
             font-size: .875rem;
-            font-weight: 500;
+            /* font-weight: 500; */
             gap: .5rem;
             padding-block: .5rem;
             padding-inline: 1rem;
@@ -82,5 +83,21 @@
                 border-bottom: 1px solid var(--clr-border);
             }
         }
+    }
+}
+
+/* RESPONSIVE */
+
+@media screen and (width < 756px) {
+    .header{
+        .navigation-menu{
+            display: none;
+        }
+    }
+}
+
+@media screen and (width < 500px) {
+    .header{
+        padding-inline: 1rem;
     }
 }

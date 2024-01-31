@@ -1,9 +1,10 @@
 .form-routes{
     border-radius: .5rem;
     box-sizing: border-box;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, .2);
+    /* box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, .2); */
     flex-direction: row;
-    padding: 1.5rem;
+    gap: .5rem;
+    /* padding: 1.5rem; */
 }
 
 .routes-table{
@@ -63,5 +64,14 @@
 
     & .col-price{
         color: hsl(141, 81%, 30%);
+    }
+}
+
+/* RESPONSIVE */
+
+@media screen and (width < 756px) {
+    .form-routes{
+        flex-direction: column;
+        gap: 1rem;
     }
 }

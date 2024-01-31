@@ -52,3 +52,12 @@
         }
     }
 }
+
+/* RESPONSIVE */
+
+@media screen and (width < 756px) {
+    .button{
+        justify-content: center;
+        width: 100%;
+    }
+}
