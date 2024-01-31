@@ -4,7 +4,7 @@
     gap: 1rem;
     margin: auto;
     max-width: 1024px;
-    padding-top: 2rem;
+    padding-block: 2rem;
 }
 
 .flex{
@@ -39,5 +39,12 @@ hr{
 @media screen and (width < 500px) {
     .container{
         padding-inline: 1rem;
+    }
+
+    .grid{
+
+        &.col-2{
+            grid-template-columns: 1fr;
+        }
     }
 }
