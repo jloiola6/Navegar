@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import inlineformset_factory
 from django.forms.widgets import TextInput
+from django.forms.models import BaseInlineFormSet
 
 from .models import Location, RouteWeekday, Route
 
@@ -18,7 +19,14 @@ class RouteWeekdayForm(forms.ModelForm):
         model = RouteWeekday
         fields = ['weekday', 'boat']
 
-RouteWeekdayFormSet = inlineformset_factory(Route, RouteWeekday, form=RouteWeekdayForm, extra=1)
+class CustomRouteWeekdayFormSet(BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for form in self.forms:
+            form.fields.pop('id')
+            form.fields.pop('route')
+
+RouteWeekdayFormSet = inlineformset_factory(Route, RouteWeekday, form=RouteWeekdayForm, extra=1, formset=CustomRouteWeekdayFormSet)
 
 class RouteForm(forms.ModelForm):
     departure_time = forms.TimeField(widget=TextInput(attrs={'type': 'time'}))
