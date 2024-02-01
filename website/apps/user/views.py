@@ -22,10 +22,17 @@ def index(request):
         type = request.POST.get('type')
         status = request.POST.get('status')
 
+        if status == 'Ativo':
+            status = True
+        elif status == 'Inativo':
+            status = False
+        else:
+            status = None
+
         user = CustomUser.objects.get(id=user_id)
         user.full_name = name
         user.type = type
-        user.status = status
+        user.is_active = status
         if password:
             user.set_password(password)
         user.save()

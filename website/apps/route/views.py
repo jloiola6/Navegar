@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
-from .forms import LocationForm
+from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
 from .models import Location, Boat
 from apps.user.models import CustomUser
 
@@ -30,5 +30,23 @@ def manage_boats(request):
         
     return render(request, 'route/manage-boats.html', {'suppliers': suppliers})
 
+# def manage_routes(request):
+#     return render(request, 'route/manage-routes.html')
+
 def manage_routes(request):
-    return render(request, 'route/manage-routes.html')
+    if request.method == 'POST':
+        route_form = RouteForm(request.POST)
+        formset = RouteWeekdayFormSet(request.POST)
+
+        if route_form.is_valid() and formset.is_valid():
+            route = route_form.save()
+            instances = formset.save(commit=False)
+            for instance in instances:
+                instance.route = route
+                instance.save()
+            # return redirect('rota-lista')  # Redireciona para a página de listagem de rotas
+    else:
+        route_form = RouteForm()
+        formset = RouteWeekdayFormSet()
+
+    return render(request, 'route/manage-routes.html', {'route_form': route_form, 'formset': formset})

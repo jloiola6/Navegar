@@ -8,6 +8,9 @@
       <div class="group">
           <label for="">{% trans f.label %}</label>
           {{ f }}
+          <div class="error">
+            {{ f.errors }}
+          </div>
       </div>
   {% endfor %}
 

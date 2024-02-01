@@ -24,7 +24,7 @@ class CustomUserManager(BaseUserManager):
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True)
-    username = models.CharField(max_length=30, unique=True)
+    username = models.CharField(max_length=30, blank=True, null=True)
     full_name = models.CharField(verbose_name='Nome completo', max_length=100, null=True, blank=True)
     cpf = models.CharField(max_length=11, unique=True, null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
@@ -32,7 +32,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     type = models.CharField(max_length=1, choices=TYPE_CHOICES, default='C')
 
     # Campos necessários para o AbstractBaseUser
-    is_active = models.BooleanField(default=True, blank=True, null=True)
+    is_active = models.BooleanField(blank=True, null=True)
     is_staff = models.BooleanField(default=True)
 
     objects = CustomUserManager()
@@ -69,7 +69,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         status = {
             True: "Ativo",
             False: "Inativo",
-            None: "Pendetente"
+            None: "Pendente"
         }
 
         return status[self.is_active]

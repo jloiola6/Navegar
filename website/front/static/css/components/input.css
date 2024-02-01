@@ -3,7 +3,8 @@ input:is(
     [type="email"], 
     [type="password"], 
     [type="text"],
-    [type="time"]
+    [type="time"],
+    [type="number"]
 ), 
 select{
     border: 1px solid var(--clr-border);

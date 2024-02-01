@@ -82,7 +82,7 @@
                 {% endfor %}
             </tbody>
         </table>
-    {% else %}
+    {% elif routes_today %}
         <div class="alert alert-info" role="alert">
             <h1>Rotas para hoje</h1>
             {% for route in routes_today %}
