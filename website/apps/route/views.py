@@ -19,7 +19,8 @@ def manage_locations(request):
     return render(request, 'route/manage-locations.html', {'form': form, 'locations': locations})
 
 def manage_boats(request):
-    suppliers = CustomUser.objects.filter(is_superuser= False)
+    suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F')
+    boats = Boat.objects.all()
 
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -28,7 +29,7 @@ def manage_boats(request):
         boat = Boat(name=name, user_id=supplier)
         boat.save()
         
-    return render(request, 'route/manage-boats.html', {'suppliers': suppliers})
+    return render(request, 'route/manage-boats.html', {'suppliers': suppliers, "boats": boats})
 
 def manage_routes(request):
     return render(request, 'route/manage-routes.html')
