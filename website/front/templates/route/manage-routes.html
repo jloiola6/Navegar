@@ -9,70 +9,32 @@
 {% endblock %}
 
 {% block content %}
-    <style>
-        .route-weekday-form {
-            display: flex;
-            gap: .5rem;
-            /* width: 100%; */
-            /* justify-content: space-between; */
-        }
-    </style>
-    <h1>Controle de rotas</h1>
+    <h1>Rotas</h1>
 
-    <form method="post" id="route_form">
-        {% csrf_token %}
-        {% for r in route_form %}
-            <div class="group">
-                {{ r.label_tag }}
-                {{ r }}
-            </div>
-        {% endfor %}
-
-        <hr>
+    <a href="{% url 'route:add-route' %}">
+        <button class="button">Adicionar rota</button>
+    </a>
     
-        <div id="formset-container">
-            {{ formset.management_form }}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
 
-            {% for form in formset.forms %}
-                <div class="route-weekday-form">
-                    {% for f in form %}
-                        <div class="group">
-                            {{ f.label_tag }}
-                            {{ f }}
-                        </div>
-                    {% endfor %}
-                </div>
+        <tbody>
+            {% for route in routes %}
+                <tr>
+                    <td>{{ route }}</td>
+                    
+                    <td>
+                        <a href="{% url 'route:add-route' route.id %}">
+                            <button class="button">Editar</button>
+                        </a>
+                    </td>
+                </tr>
             {% endfor %}
-        </div>
-
-        <div class="button-container">
-            <button class="button secondary" type="button" id="add-route-weekday">Adicionar dia da semana</button>
-            <button class="button" type="submit">Salvar</button>
-        </div>
-    </form>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#add-route-weekday').click(function() {
-                var formsetContainer = $('#formset-container');
-                var totalForms = $('#id_routeweekday_set-TOTAL_FORMS').val();
-                var newFormIndex = parseInt(totalForms); // Obter o índice do próximo formulário
-
-                // Clonar o último formulário e atualizar seus campos
-                var lastForm = formsetContainer.find('.route-weekday-form:last');
-                var newForm = lastForm.clone(true);
-                newForm.find(':input').each(function() {
-                    var name = $(this).attr('name').replace('-' + (newFormIndex - 1) + '-', '-' + newFormIndex + '-');
-                    var id = 'id_' + name;
-                    $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
-                });
-                newForm.insertAfter(lastForm).removeClass('has_original');
-
-                // Atualizar o TOTAL_FORMS
-                $('#id_routeweekday_set-TOTAL_FORMS').val(newFormIndex + 1);
-            });
-        });
-    </script>
+        </tbody>
+    </table>
 {% endblock %}

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 
 from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
-from .models import Location, Boat
+from .models import Location, Boat, Route
 from apps.user.models import CustomUser
 
 # Create your views here.
@@ -34,10 +34,21 @@ def manage_boats(request):
         
     return render(request, 'route/manage-boats.html', {'suppliers': suppliers, "boats": boats})
 
-# def manage_routes(request):
-#     return render(request, 'route/manage-routes.html')
-
 def manage_routes(request):
+    routes = Route.objects.all()
+
+    return render(request, 'route/manage-routes.html', {'routes': routes})
+
+def add_route(request, route_id=None):
+    if route_id:
+        route = Route.objects.get(id=route_id)
+        route_form = RouteForm(instance=route)
+        formset = RouteWeekdayFormSet(instance=route)
+    else:
+        route_form = RouteForm()
+        formset = RouteWeekdayFormSet()
+
+
     if request.method == 'POST':
         route_form = RouteForm(request.POST)
         formset = RouteWeekdayFormSet(request.POST)
@@ -49,8 +60,5 @@ def manage_routes(request):
                 instance.route = route
                 instance.save()
             # return redirect('rota-lista')  # Redireciona para a página de listagem de rotas
-    else:
-        route_form = RouteForm()
-        formset = RouteWeekdayFormSet()
 
-    return render(request, 'route/manage-routes.html', {'route_form': route_form, 'formset': formset})
+    return render(request, 'route/add-routes.html', {'route_form': route_form, 'formset': formset})
