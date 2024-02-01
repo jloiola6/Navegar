@@ -59,6 +59,8 @@ def add_route(request, route_id=None):
             for instance in instances:
                 instance.route = route
                 instance.save()
+
+            return redirect(reverse('route:manage-routes'))
             # return redirect('rota-lista')  # Redireciona para a página de listagem de rotas
 
     return render(request, 'route/add-routes.html', {'route_form': route_form, 'formset': formset})

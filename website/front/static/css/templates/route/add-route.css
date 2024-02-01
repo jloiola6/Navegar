@@ -1,9 +1,0 @@
-#formset-container{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    & .group{
-        flex-grow: 1;
-    }
-}

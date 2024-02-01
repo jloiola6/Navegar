@@ -22,3 +22,13 @@ form{
         align-self: flex-end;
     }
 }
+
+/* RESPONSIVE */
+@media screen and (width < 756px) {
+    form{
+        &.row{
+            flex-direction: column;
+            gap: 1rem;
+        }
+    }
+}

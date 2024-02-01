@@ -49,9 +49,7 @@
     </form>
 
     {% if pagina_erro %}
-        <div class="alert alert-danger" role="alert">
-            <h1>Não foi encontrado nenhum voo</h1>
-        </div>
+        <span>Nenhuma embarcação disponível para esta rota</span>
     {% endif %}
     
     {% if routes_list %}
@@ -83,12 +81,14 @@
             </tbody>
         </table>
     {% elif routes_today %}
-        <div class="alert alert-info" role="alert">
-            <h1>Rotas para hoje</h1>
-            {% for route in routes_today %}
-                <p>{{ route }}</p>
-            {% endfor %}
-        </div>
+        {% comment %}
+            <div class="alert alert-info" role="alert">
+                <h1>Rotas para hoje</h1>
+                {% for route in routes_today %}
+                    <p>{{ route }}</p>
+                {% endfor %}
+            </div>
+        {% endcomment %}
     {% endif %}
     
 

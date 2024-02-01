@@ -13,7 +13,8 @@
         <input type="text" name="name" placeholder="Nome" required>
 
         <select name="supplier" required>
-            <option value="">Fornecedor</option>
+            <option value="" selected disabled>Fornecedor</option>
+
             {% for supplier in suppliers %}
                 <option value="{{ supplier.id }}">{{ supplier }}</option>
             {% endfor %}
