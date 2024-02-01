@@ -15,6 +15,8 @@ def index(request):
     all_types = TYPE_CHOICES
     all_status = ('Ativo', 'Inativo', 'Pendente')
 
+    print(request.user)
+
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         name = request.POST.get('name')

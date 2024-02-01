@@ -8,6 +8,11 @@ form{
     gap: 1rem;
     width: 100%;
 
+    &.row{
+        flex-direction: row;
+        gap: .5rem;
+    }
+
     & .group{
         gap: .5rem;
         align-items: flex-start;
