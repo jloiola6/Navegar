@@ -9,6 +9,7 @@ from apps.user.models import CustomUser
 # Create your views here.
 @login_required
 def manage_locations(request):
+    print(request)
     locations = Location.objects.all().values_list('name', flat=True)
 
     form = LocationForm()
