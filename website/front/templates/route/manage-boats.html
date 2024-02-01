@@ -4,14 +4,10 @@
 
 {% block title %}Controle de embarcações{% endblock %}
 
-{% block css_template %}
-    <link rel="stylesheet" href="{% static 'css/templates/route/manage-boats.css' %}">
-{% endblock %}
-
 {% block content %}
     <h1>Controle de embarcações</h1>
 
-    <form method="POST" action="" class="form-boats">
+    <form method="POST" action="" class="row">
         {% csrf_token %}
 
         <input type="text" name="name" placeholder="Nome" required>

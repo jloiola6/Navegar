@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
 
 from .forms import LocationForm
 from .models import Location, Boat
@@ -15,6 +16,7 @@ def manage_locations(request):
         form = LocationForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect(reverse('route:manage-locations'))
 
     return render(request, 'route/manage-locations.html', {'form': form, 'locations': locations})
 

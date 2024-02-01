@@ -7,14 +7,10 @@
 {% block content %}
     <h1>Controle de locais</h1>
 
-    <form method="POST">
+    <form method="POST" class="row">
         {% csrf_token %}
 
-        <div class="group">
-            {{ form.nome.errors }}
-            <label>Nome</label>
-            {{ form.name }}
-        </div>
+        {{ form.name }}
 
         <button type="submit" class="button">Salvar</button>
     </form>
