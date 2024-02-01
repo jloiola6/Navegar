@@ -55,6 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'apps.core.middleware.AddTrailingSlashMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'

@@ -1,0 +1,141 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}Controle de rotas{% endblock %}
+
+{% block content %}
+    <style>
+        .route-weekday-form {
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+            justify-content: space-between;
+        }
+    </style>
+    <h1>Controle de rotas</h1>
+
+    <form method="post" id="route_form">
+        {% csrf_token %}
+        {% for r in route_form %}
+            <div class="group">
+                {{ r.label_tag }}
+                {{ r }}
+            </div>
+        {% endfor %}
+    
+        <div id="formset-container">
+            {{ formset.management_form }}
+            {% for form in formset.forms %}
+                <div class="route-weekday-form">
+                    {% for f in form %}
+                        <div class="group">
+                            {{ f.label_tag }}
+                            {{ f }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="button-container">
+            <button class="button" type="button" id="add-route-weekday">Adicionar</button>
+            <button class="button" type="submit">Salvar</button>
+        </div>
+    </form>
+
+    <h1>Controle de rotas</h1>
+
+    <!-- <form method="post" id="route_form">
+        {% csrf_token %}
+        {% for r in route_form %}
+            <div class="group">
+                {{ r.label_tag }}
+                {{ r }}
+            </div>
+        {% endfor %}
+    
+        {{ formset.management_form }}
+        {% for form in formset.forms %}
+            {% for f in form %}
+                <div class="group">
+                    {{ f.label_tag }}
+                    {{ f }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    
+        <button type="button" id="add-route-weekday">Adicionar</button>
+        <button class="button" type="submit">Salvar</button>
+    </form> -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#add-route-weekday').click(function() {
+                var formsetContainer = $('#formset-container');
+                var totalForms = $('#id_routeweekday_set-TOTAL_FORMS').val();
+                var newFormIndex = parseInt(totalForms); // Obter o índice do próximo formulário
+
+                // Clonar o último formulário e atualizar seus campos
+                var lastForm = formsetContainer.find('.route-weekday-form:last');
+                var newForm = lastForm.clone(true);
+                newForm.find(':input').each(function() {
+                    var name = $(this).attr('name').replace('-' + (newFormIndex - 1) + '-', '-' + newFormIndex + '-');
+                    var id = 'id_' + name;
+                    $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
+                });
+                newForm.insertAfter(lastForm).removeClass('has_original');
+
+                // Atualizar o TOTAL_FORMS
+                $('#id_routeweekday_set-TOTAL_FORMS').val(newFormIndex + 1);
+            });
+        });
+    </script>
+
+
+    <!-- <form action="">
+        <div class="group">
+            <label for="">Origem</label>
+            <select name="" id=""></select>
+        </div>
+
+        <div class="group">
+            <label for="">Destino</label>
+            <select name="" id=""></select>
+        </div>
+
+        <div class="group">
+            <label for="">Valor</label>
+            <input type="text">
+        </div>
+
+        <hr>
+
+        <div class="grupo">
+            <label for="">Dia da semana</label>
+            <select name="" id=""></select>
+        </div>
+
+        <div class="group">
+            <label for="">Embarcação</label>
+            <select name="" id=""></select>
+        </div>
+        
+        <div class="group">
+            <label for="">Hora inicio</label>
+            <input type="time" name="" id="">
+        </div>
+        
+        <div class="group">
+            <label for="">Hora Fim</label>
+            <input type="time" name="" id="">
+        </div>
+        
+        <div class="group">
+            <label for="">Dia seguinte</label>
+            <input type="checkbox" name="" id="">
+        </div>
+
+        <button class="button" type="submit">Salvar</button>
+    </form> -->
+{% endblock %}
