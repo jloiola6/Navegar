@@ -20,6 +20,6 @@ select{
     }
 
     &:invalid.touched{
-        border-color: red;
+        border-color: var(--clr-error);
     }
 }
