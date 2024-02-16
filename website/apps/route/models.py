@@ -85,4 +85,8 @@ class RouteWeekday(models.Model):
     @property
     def get_arrival_time(self):
         return self.route.arrival_time.strftime('%H:%M')
+    
+    @property
+    def get_total_trip_time(self):
+        return self.route.total_trip_time
 

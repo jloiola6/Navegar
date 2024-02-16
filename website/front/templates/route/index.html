@@ -72,7 +72,7 @@
 
                         <td class="col-time">
                             <span>{{ route.get_departure_time }} - {{ route.get_arrival_time }} {% if route.after_midnight %}+1{% endif %}</span>
-                            <span>{{ route.total_trip_time }} horas</span>
+                            <span>{{ route.get_total_trip_time }} horas</span>
                         </td>
 
                         <td>{{ route.route }}</td>
