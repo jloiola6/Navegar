@@ -25,6 +25,7 @@ def create_ticket(request, id, date):
 
         client = request.POST['client']
         document = request.POST['document']
+        birth_date = request.POST['birth_date']
 
         ticket = Ticket.objects.create(
             user_create = request.user,
@@ -32,6 +33,7 @@ def create_ticket(request, id, date):
             date = date,
             name_client = client,
             docuemnt_client = document,
+            birth_date_client = birth_date
         )
         ticket.save()
         
