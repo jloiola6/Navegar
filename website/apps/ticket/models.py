@@ -22,6 +22,7 @@ class Ticket(models.Model):
     file = models.FileField(upload_to='documents/', null=True, blank=True)
     name_client = models.CharField(max_length=100, null=True, blank=True)
     docuemnt_client = models.CharField(max_length=11, null=True, blank=True)
+    birth_date_client = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f'{self.name_client} | ({self.origin} - {self.destination})'
