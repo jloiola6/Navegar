@@ -1,62 +1,74 @@
 {% load static %}
 
 <header class="header">
-    <a href="{% url 'core:index' %}">
-        <img 
-            alt="Navegar"
-            class="logo"
-            src="{% static 'images/logo.svg' %}" 
-        >
-    </a>
-
-    <nav class="navigation-menu">
-        <a class="link" href="{% url 'core:index' %}">
+    <div class="header__container">
+        <a href="{% url 'core:index' %}">
             <img 
-                alt="Rotas"
-                src="{% static 'icons/rotas.svg' %}"
-             >
-            
-            <span>Rotas</span>
+                alt="Navegar"
+                class="logo"
+                src="{% static 'images/logo.svg' %}" 
+            >
         </a>
 
-        <a class="link" href="{% url 'ticket:index' %}">
+        <nav class="navigation-menu">
+            <a class="link" href="{% url 'core:index' %}">
+                <img 
+                    alt="Rotas"
+                    src="{% static 'icons/rotas.svg' %}"
+                >
+                
+                <span>Rotas</span>
+            </a>
+
+            <a class="link" href="{% url 'ticket:index' %}">
+                <img 
+                    alt="Tickets"
+                    src="{% static 'icons/tickets.svg' %}" 
+                >
+                
+                <span>Tickets</span>
+            </a>
+
+            <a class="link" href="#">
+                <img 
+                    alt="Financeiro"
+                    src="{% static 'icons/financeiro.svg' %}" 
+                >
+                
+                <span>Fincaneiro</span>
+            </a>
+
+            <span class="link" data-modal-open="admin">
+                <img 
+                    alt="Administrativo"
+                    src="{% static 'icons/administrativo.svg' %}" 
+                >
+                
+                <span>Administrativo</span>
+            </span>
+        </nav>
+
+        <div class="user-container">
             <img 
-                alt="Tickets"
-                src="{% static 'icons/tickets.svg' %}" 
+                alt="Avatar do usuário"
+                data-user-avatar
+                class="avatar" 
+                src="{% static 'icons/avatar.svg' %}" 
             >
             
-            <span>Tickets</span>
-        </a>
-
-        <a class="link" href="#">
-            <img 
-                alt="Financeiro"
-                src="{% static 'icons/financeiro.svg' %}" 
-            >
-            
-            <span>Fincaneiro</span>
-        </a>
-
-        <a class="link" href="#" data-modal-open="admin">
-            <img 
-                alt="Administrativo"
-                src="{% static 'icons/administrativo.svg' %}" 
-            >
-            
-            <span>Administrativo</span>
-        </a>
-    </nav>
-
-    <div class="user-container">
-        <img 
-            alt="Avatar do usuário"
-            data-user-avatar
-            class="avatar" 
-            src="{% static 'icons/avatar.svg' %}" 
-        >
-        
-        {% include './_user-menu.html' %}
+            {% include './_user-menu.html' %}
+        </div>
     </div>
+
+    <nav class="navigation-menu--mobile">
+        <a class="link" href="{% url 'core:index' %}">Rotas</a>
+
+        <a class="link" href="{% url 'ticket:index' %}">Tickets</a>
+
+        <a class="link" href="#">Fincaneiro</a>
+
+        <a class="link" href="#" data-modal-open="admin">Administrativo</a>
+    </nav>
 </header>
 
 {% include './_admin-modal.html' with id="admin" %}

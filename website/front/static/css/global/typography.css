@@ -16,7 +16,7 @@ h2{
 
 /* RESPONSIVE */
 
-@media screen and (width < 500px) {
+@media screen and (width <= 500px) {
     h1, h2{
         font-weight: 500;
         text-align: left;
