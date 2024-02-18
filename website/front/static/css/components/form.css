@@ -24,7 +24,7 @@ form{
 }
 
 /* RESPONSIVE */
-@media screen and (width < 756px) {
+@media screen and (width <= 768px) {
     form{
         &.row{
             flex-direction: column;

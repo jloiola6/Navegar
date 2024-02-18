@@ -30,13 +30,13 @@ hr{
 
 /* RESPONSIVE */
 
-@media screen and (width < calc(1024px + 4rem)) {
+@media screen and (width <= calc(1024px + 4rem)) {
     .container{
         padding-inline: 2rem;
     }    
 }
 
-@media screen and (width < 500px) {
+@media screen and (width <= 500px) {
     .container{
         padding-inline: 1rem;
     }
