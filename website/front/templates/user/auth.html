@@ -12,16 +12,19 @@
 
 {% block content %}
   <main class="auth-layout">
+    <img class="logo" src="{% static '/images/logo.svg' %}" alt="Navegar">
+    <img class="mobile-logo" src="{% static '/images/mobile-logo.svg' %}" alt="Navegar">
+
     <div class="auth-container">
-      <img class="logo" src="{% static '/images/logo.svg' %}" alt="">
-      
       {% if auth == 'login' %}
         {% include './partials/_login.html' %}
       {% elif auth == 'signup' %}
         {% include './partials/_signup.html' %}
-      {% elif auth == 'edit' %}
-        {% include './partials/_edit.html' %}
       {% endif %}
     </div>
+
+    {% if auth == 'login' %}
+      <a class="forgot-password-link" href="#">Esqueci minha senha</a>
+    {% endif %}
   </main>
 {% endblock %}

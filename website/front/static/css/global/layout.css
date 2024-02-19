@@ -1,3 +1,7 @@
+:root{
+    --shadow: 0px 0px 8px 0px hsla(214, 82%, 51%, 15%);
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -42,7 +46,6 @@ hr{
     }
 
     .grid{
-
         &.col-2{
             grid-template-columns: 1fr;
         }

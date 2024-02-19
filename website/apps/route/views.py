@@ -15,8 +15,10 @@ def manage_locations(request):
     form = LocationForm()
     if request.method == 'POST':
         form = LocationForm(request.POST)
+
         if form.is_valid():
             form.save()
+            
             return redirect(reverse('route:manage-locations'))
 
     return render(request, 'route/manage-locations.html', {'form': form, 'locations': locations})
