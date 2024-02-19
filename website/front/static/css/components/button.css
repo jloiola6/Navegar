@@ -56,8 +56,15 @@
 /* RESPONSIVE */
 
 @media screen and (width <= 768px) {
-    .button{
+    .button,
+    .button-container > *{
         justify-content: center;
         width: 100%;
+    }
+}
+
+@media screen and (width <= 500px) {
+    .button-container{
+        flex-direction: column;
     }
 }
