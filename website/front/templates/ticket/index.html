@@ -16,6 +16,7 @@
                 <th>Embarcação</th>
                 <th>Valor</th>
                 <th>Status</th>
+                <th>Ação</th>
             </tr>
         </thead>
 
@@ -28,6 +29,11 @@
                     <td>{{ ticket.boat }}</td>
                     <td>{{ ticket.value }}</td>
                     <td>{{ ticket.status }}</td>
+                    <td>
+                        <a href="{{ url 'ticket:view' ticket.id }}">
+                            <button class="button" type="submit">Ver</button>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
