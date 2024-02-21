@@ -58,7 +58,6 @@
 @media screen and (width <= 768px) {
     .button,
     .button-container > *{
-        justify-content: center;
         width: 100%;
     }
 }

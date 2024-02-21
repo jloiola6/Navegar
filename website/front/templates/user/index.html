@@ -41,8 +41,11 @@
                         ></span>
                     </td>
                 </tr>
-                {% include './partials/_edit-user-modals.html' %}
             {% endfor %}
         </tbody>
     </table>
+
+    {% for user in users %}
+        {% include './partials/_edit-user-modals.html' %}
+    {% endfor %}
 {% endblock %}
