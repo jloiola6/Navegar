@@ -4,6 +4,24 @@
 
 {% block title %}Visualizar Ticket{% endblock %}
 
+{% block css_template %}
+    <style>
+        @media print {
+            .header {
+                display: none;
+            }
+
+            .button {
+                display: none;
+            }
+
+            h1 {
+                display: none;
+            }
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     <h1>Visualizar Ticket</h1>
 
