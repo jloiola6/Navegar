@@ -31,14 +31,19 @@ RouteWeekdayFormSet = inlineformset_factory(Route, RouteWeekday, form=RouteWeekd
 class RouteForm(forms.ModelForm):
     departure_time = forms.TimeField(widget=TextInput(attrs={'type': 'time'}))
     arrival_time = forms.TimeField(widget=TextInput(attrs={'type': 'time'}))
-    
-    #Adicionar campos readonly aqui!
-    # value_3 = forms.TimeField(widget=TextInput(attrs={'readonly': True}))
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.pop('user', None)
         super(RouteForm, self).__init__(*args, **kwargs)
-        
+
+        if user and user.discount:
+            # Fazer verificação de desconto
+            pass
+
+        self.fields['discounted_value'].widget.attrs['readonly'] = True
+        self.fields['discounted_cost'].widget.attrs['readonly'] = True
+
 
     class Meta:
         model = Route
-        fields = ['origin', 'destination', 'value', 'value_2', 'value_3', 'value_4', 'departure_time', 'arrival_time', 'after_midnight']
+        fields = ['origin', 'destination', 'value', 'discounted_value', 'cost_value', 'discounted_cost', 'departure_time', 'arrival_time', 'after_midnight']

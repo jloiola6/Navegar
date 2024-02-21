@@ -31,16 +31,16 @@ class Location(models.Model):
 
 
 class Route(models.Model):
-    origin = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='origin')
-    destination = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='destination')
-    value = models.DecimalField(max_digits=10, decimal_places=2)
-    value_2 = models.DecimalField(max_digits=10, decimal_places=2)
-    value_3 = models.DecimalField(max_digits=10, decimal_places=2)
-    value_4 = models.DecimalField(max_digits=10, decimal_places=2)
-    departure_time = models.TimeField(blank=True, null=True)
-    arrival_time = models.TimeField(blank=True, null=True)
-    total_trip_time = models.CharField(max_length=10, blank=True, null=True, editable=False)
-    after_midnight = models.BooleanField('Dia seguinte', default=False)
+    origin = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='origin', verbose_name='Local de origem')
+    destination = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='destination', verbose_name='Local de destino')
+    value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor total')
+    discounted_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor com desconto', blank=True, null=True)
+    cost_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor de custo')
+    discounted_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='custo com desconto', blank=True, null=True)
+    departure_time = models.TimeField(blank=True, null=True, verbose_name='Horário de partida')
+    arrival_time = models.TimeField(blank=True, null=True, verbose_name='Horário de Horário')
+    total_trip_time = models.CharField(max_length=10, blank=True, null=True, editable=False, verbose_name='Tempo total da viagem')
+    after_midnight = models.BooleanField(default=False, verbose_name='Dia seguinte')
 
     def __str__(self):
         return f'{self.origin} - {self.destination}'
