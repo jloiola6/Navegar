@@ -38,8 +38,14 @@ def manage_boats(request):
 
 def manage_routes(request):
     routes = Route.objects.all()
+    discount = request.user.discount
 
-    return render(request, 'route/manage-routes.html', {'routes': routes})
+    if request.method == 'POST':
+        if request.POST.get('descount'):
+            request.user.discount = True
+            request.user.save()
+
+    return render(request, 'route/manage-routes.html', {'routes': routes, 'discount': discount})
 
 def add_route(request, route_id=None):
     if route_id:
@@ -52,8 +58,12 @@ def add_route(request, route_id=None):
 
 
     if request.method == 'POST':
-        route_form = RouteForm(request.POST)
-        formset = RouteWeekdayFormSet(request.POST)
+        if route_id:
+            route_form = RouteForm(request.POST, instance=route, user=request.user)
+            formset = RouteWeekdayFormSet(request.POST, instance=route, user=request.user)
+        else:
+            route_form = RouteForm(request.POST, user=request.user)
+            formset = RouteWeekdayFormSet(request.POST, user=request.user)
 
         if route_form.is_valid() and formset.is_valid():
             route = route_form.save()
@@ -61,8 +71,6 @@ def add_route(request, route_id=None):
             for instance in instances:
                 instance.route = route
                 instance.save()
-
             return redirect(reverse('route:manage-routes'))
-            # return redirect('rota-lista')  # Redireciona para a página de listagem de rotas
-
+          
     return render(request, 'route/add-routes.html', {'route_form': route_form, 'formset': formset})

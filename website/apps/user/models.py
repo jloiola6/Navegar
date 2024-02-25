@@ -31,6 +31,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     phone = models.CharField(max_length=11, null=True, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     type = models.CharField(max_length=1, choices=TYPE_CHOICES, default='C')
+    discount = models.BooleanField(default=False)
 
     # Campos necessários para o AbstractBaseUser
     is_active = models.BooleanField(blank=True, null=True)

@@ -11,6 +11,12 @@
     <a href="{% url 'route:add-route' %}">
         <button class="button">Adicionar rota</button>
     </a>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="checkbox" name="descount" id="descount"> <!-- Inserir o valor caso ja tenha desconto ativado -->
+        <button class="button" type="submit">Salvar</button>
+    </form>
     
     <table class="table">
         <thead>
