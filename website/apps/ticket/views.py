@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from apps.ticket.models import *
-from apps.user.models import CustomUser
 from apps.route.models import RouteWeekday
 
 
@@ -42,3 +41,9 @@ def create_ticket(request, id, date):
 @login_required
 def edit(request):
     return render(request, 'ticket/edit.html')
+
+def view(request, pk):
+    ticket = Ticket.objects.get(id=pk)
+    routeweek = ticket.route_weekday
+
+    return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek})
