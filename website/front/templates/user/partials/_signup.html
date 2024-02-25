@@ -1,17 +1,17 @@
 {% load i18n %}
 
-<h1 class="title">Cadastro</h1>
+<div class="title-group">
+  <h1 class="title">Cadastro</h1>
+  <p>Insira seus dados para solicitar acesso</p>
+</div>
 
 <form method="POST">
   {% csrf_token %}
+
   {% for f in form %}
-      <div class="group">
-          <label for="">{% trans f.label %}</label>
-          {{ f }}
-          <div class="error">
-            {{ f.errors }}
-          </div>
-      </div>
+      {{ f }}
+
+      {{ f.errors }}
   {% endfor %}
 
   <div class="button-container">

@@ -1,3 +1,7 @@
+:root{
+    --shadow: 0px 0px 8px 0px hsla(214, 82%, 51%, 15%);
+}
+
 .container{
     display: flex;
     flex-direction: column;
@@ -30,19 +34,18 @@ hr{
 
 /* RESPONSIVE */
 
-@media screen and (width < calc(1024px + 4rem)) {
+@media screen and (width <= calc(1024px + 4rem)) {
     .container{
         padding-inline: 2rem;
     }    
 }
 
-@media screen and (width < 500px) {
+@media screen and (width <= 500px) {
     .container{
         padding-inline: 1rem;
     }
 
     .grid{
-
         &.col-2{
             grid-template-columns: 1fr;
         }

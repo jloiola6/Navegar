@@ -1,0 +1,61 @@
+<div class="flex">
+    <p class="boat-label">{{ routeweek.boat }}</p>
+    <p class="price-label">R$ {{ routeweek.route.value }}</p>
+</div>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Origem</th>
+            <th>Chegada</th>
+        </tr>
+
+        <tr>
+            <td>{{ routeweek.route.origin }}</td>
+            <td>{{ routeweek.route.destination }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Data</th>
+            <th>Saída</th>
+            <th>Chegada</th>
+        </tr>
+
+        <tr>
+            <td>{{ ticket.date }}</td>
+            <td>{{ routeweek.get_departure_time }}</td>
+            <td>{{ routeweek.get_arrival_time }} {% if routeweek.after_midnight %}+1{% endif %}</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Dados do passageiro</h2>
+
+<div class="grid col-2">
+    <div class="group">
+        <label>Nome</label>
+        <input type="text" name="client" value="{{ ticket.name_client }}" readonly>
+    </div>
+    
+    <div class="group">
+        <label>CPF</label>
+        <input type="text" name="document" value="{{ ticket.docuemnt_client }}" readonly>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+{% comment %} <button class="button" onclick="window.print()">Gerar ticket</button> {% endcomment %}
+<button class="button" onclick="generatePDF()">Gerar ticket em PDF</button>
+
+<script>
+    function generatePDF() {
+        const content = document.body.innerHTML;
+        const pdf = new jsPDF();
+        pdf.fromHTML(content, 10, 10);
+        pdf.save('ticket.pdf');
+    }
+</script>

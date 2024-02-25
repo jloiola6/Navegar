@@ -9,13 +9,16 @@ from apps.user.models import CustomUser
 # Create your views here.
 @login_required
 def manage_locations(request):
+    print(request)
     locations = Location.objects.all().values_list('name', flat=True)
 
     form = LocationForm()
     if request.method == 'POST':
         form = LocationForm(request.POST)
+
         if form.is_valid():
             form.save()
+            
             return redirect(reverse('route:manage-locations'))
 
     return render(request, 'route/manage-locations.html', {'form': form, 'locations': locations})
@@ -69,5 +72,5 @@ def add_route(request, route_id=None):
                 instance.route = route
                 instance.save()
             return redirect(reverse('route:manage-routes'))
-
+          
     return render(request, 'route/add-routes.html', {'route_form': route_form, 'formset': formset})

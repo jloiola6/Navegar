@@ -15,8 +15,6 @@ def index(request):
     all_types = TYPE_CHOICES
     all_status = ('Ativo', 'Inativo', 'Pendente')
 
-    print(request.user)
-
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         name = request.POST.get('name')
@@ -48,11 +46,13 @@ def index(request):
 def signup(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
+
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
+            
             return redirect(reverse('user:login'))
     else:
         form = CustomUserCreationForm()
@@ -62,8 +62,10 @@ def signup(request):
 @redirect_authenticated_user
 def user_login(request):
     form = UserAuthenticationForm()
+
     if request.method == 'POST':
         form = UserAuthenticationForm(data=request.POST)
+
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -74,6 +76,7 @@ def user_login(request):
             if user is not None:
                 # Use login para autenticar o usuário na sessão
                 login(request, user)
+
                 return redirect(reverse('core:index'))
             else:
                 # Adicione uma mensagem de erro para indicar credenciais inválidas
@@ -101,6 +104,7 @@ def user_edit(request):
 
             return redirect(reverse('core:index'))
     return render(request, 'user/auth.html', {'form': form, 'auth': 'edit'})
+
 
 def user_logout(request):
     logout(request)

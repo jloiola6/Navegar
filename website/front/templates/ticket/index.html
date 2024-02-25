@@ -16,18 +16,24 @@
                 <th>Embarcação</th>
                 <th>Valor</th>
                 <th>Status</th>
+                <th>Ação</th>
             </tr>
         </thead>
 
         <tbody>
-            {% for ticket in tickets %}
+            {% for ticket_item in tickets %}
                 <tr>
-                    <td>{{ ticket.date }}</td>
-                    <td>{{ ticket.name_client }}</td>
-                    <td>{{ ticket.origin }} - {{ ticket.destination }}</td>
-                    <td>{{ ticket.boat }}</td>
-                    <td>{{ ticket.value }}</td>
-                    <td>{{ ticket.status }}</td>
+                    <td>{{ ticket_item.date }}</td>
+                    <td>{{ ticket_item.name_client }}</td>
+                    <td>{{ ticket_item.origin }} - {{ ticket_item.destination }}</td>
+                    <td>{{ ticket_item.boat }}</td>
+                    <td>{{ ticket_item.value }}</td>
+                    <td>{{ ticket_item.status }}</td>
+                    <td>
+                        <a href="{% url 'ticket:view' ticket_item.id %}">
+                            <button class="button" type="submit">Ver</button>
+                        </a>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

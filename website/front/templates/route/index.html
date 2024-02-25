@@ -49,9 +49,7 @@
     </form>
 
     {% if pagina_erro %}
-        <div class="alert alert-danger" role="alert">
-            <h1>Não foi encontrado nenhum voo</h1>
-        </div>
+        <span>Nenhuma embarcação disponível para esta rota</span>
     {% endif %}
     
     {% if routes_list %}
@@ -72,7 +70,7 @@
 
                         <td class="col-time">
                             <span>{{ route.get_departure_time }} - {{ route.get_arrival_time }} {% if route.after_midnight %}+1{% endif %}</span>
-                            <span>{{ route.total_trip_time }} horas</span>
+                            <span>{{ route.get_total_trip_time }} horas</span>
                         </td>
 
                         <td>{{ route.route }}</td>
@@ -83,44 +81,13 @@
             </tbody>
         </table>
     {% elif routes_today %}
-        <div class="alert alert-info" role="alert">
-            <h1>Rotas para hoje</h1>
-            {% for route in routes_today %}
-                <p>{{ route }}</p>
-            {% endfor %}
-        </div>
-    {% endif %}
-    
-
-    {% comment %}
-        <h2>Ultimas rotas</h2>
-
-        <table class="table">
-            <thead>
-                <th>Data</th>
-                <th>Origem</th>
-                <th>Destino</th>
-                <th>Embarcação</th>
-            </thead>
-
-            <tbody>
-                {% for routes in routes_list %}
-                    <tr>
-                        <td colspan="2">Rota</td>
-                        <td colspan="2">
-                            <a href="" target="_blank" rel="noopener noreferrer">Selecionar Rota</a>
-                        </td>
-                    </tr>
-                    {% for route in routes %}
-                        <tr>
-                            <td>{{ date }}</td>
-                            <td>{{ route.origin }}</td>
-                            <td>{{ route.destination }}</td>
-                            <td>{{ route.boat }}</td>
-                        </tr>
-                    {% endfor %}
+        {% comment %}
+            <div class="alert alert-info" role="alert">
+                <h1>Rotas para hoje</h1>
+                {% for route in routes_today %}
+                    <p>{{ route }}</p>
                 {% endfor %}
-            </tbody>
-        </table>
-    {% endcomment %}
+            </div>
+        {% endcomment %}
+    {% endif %}
 {% endblock %}

@@ -9,4 +9,5 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('add/<int:id>/<slug:date>/', add, name='add'),
     path('edit/', edit, name='edit'),
+    path('view/<int:pk>/', view, name='view'),
 ]
