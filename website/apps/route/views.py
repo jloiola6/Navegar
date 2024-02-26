@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.contrib import messages
 
 from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
 from .models import Location, Boat, Route
@@ -18,7 +19,8 @@ def manage_locations(request):
 
         if form.is_valid():
             form.save()
-            
+            messages.success(request, 'Local cadastrado com sucesso')
+
             return redirect(reverse('route:manage-locations'))
 
     return render(request, 'route/manage-locations.html', {'form': form, 'locations': locations})
@@ -33,6 +35,8 @@ def manage_boats(request):
 
         boat = Boat(name=name, user_id=supplier)
         boat.save()
+
+        messages.success(request, 'Embarcação cadastrada com sucesso')
         
     return render(request, 'route/manage-boats.html', {'suppliers': suppliers, "boats": boats})
 
