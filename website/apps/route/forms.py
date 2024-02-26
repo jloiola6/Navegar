@@ -22,6 +22,7 @@ class RouteWeekdayForm(forms.ModelForm):
 class CustomRouteWeekdayFormSet(BaseInlineFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        
         for form in self.forms:
             form.fields.pop('id')
             form.fields.pop('route')
