@@ -54,12 +54,11 @@ def manage_routes(request):
 def add_route(request, route_id=None):
     if route_id:
         route = Route.objects.get(id=route_id)
-        route_form = RouteForm(instance=route)
+        route_form = RouteForm(instance=route, label_suffix="")
         formset = RouteWeekdayFormSet(instance=route)
     else:
-        route_form = RouteForm()
+        route_form = RouteForm(label_suffix="")
         formset = RouteWeekdayFormSet()
-
 
     if request.method == 'POST':
         if route_id:
