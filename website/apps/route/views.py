@@ -7,11 +7,11 @@ from django.db.models.functions import Lower
 from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
 from .models import Location, Boat, Route
 from apps.user.models import CustomUser
+from apps.core.models import Utils
 
 # Create your views here.
 @login_required
 def manage_locations(request):
-    print(request)
     locations = Location.objects.all().values_list('name', flat=True).order_by(Lower('name'))
 
     form = LocationForm()
@@ -43,12 +43,18 @@ def manage_boats(request):
 
 def manage_routes(request):
     routes = Route.objects.all()
-    discount = request.user.discount
+    
+    if not Utils.objects.all().exists():
+        utils = Utils.objects.get(id=1)
+    else:
+        utils = Utils.objects.create()
+    discount = utils.discount
 
     if request.method == 'POST':
-        if request.POST.get('descount'):
-            request.user.discount = True
-            request.user.save()
+        if request.POST.get('discount'):
+            value = discount
+            utils.discount = not value
+            utils.save()
 
     return render(request, 'route/manage-routes.html', {'routes': routes, 'discount': discount})
 
