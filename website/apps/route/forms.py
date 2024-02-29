@@ -37,12 +37,11 @@ class RouteForm(forms.ModelForm):
     arrival_time.label = 'Horário de chegada'
 
     def __init__(self, *args, **kwargs):
-        user = kwargs.pop('user', None)
         super(RouteForm, self).__init__(*args, **kwargs)
 
-        if user and user.discount:
-            # Fazer verificação de desconto
-            pass
+        # if user and user.discount:
+        #     # Fazer verificação de desconto
+        #     pass
 
         self.fields['discounted_value'].widget.attrs['readonly'] = True
         self.fields['discounted_cost'].widget.attrs['readonly'] = True

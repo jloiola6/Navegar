@@ -71,8 +71,8 @@ class Route(models.Model):
 
     @property
     def get_value(self):
-        if not Utils.objects.all().exists():
-            utils = Utils.objects.get(id=1)
+        if Utils.objects.all().exists():
+            utils = Utils.objects.first()
         else:
             utils = Utils.objects.create()
 

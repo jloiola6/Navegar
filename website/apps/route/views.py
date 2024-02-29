@@ -44,8 +44,8 @@ def manage_boats(request):
 def manage_routes(request):
     routes = Route.objects.all()
     
-    if not Utils.objects.all().exists():
-        utils = Utils.objects.get(id=1)
+    if Utils.objects.all().exists():
+        utils = Utils.objects.first()
     else:
         utils = Utils.objects.create()
     discount = utils.discount
@@ -69,11 +69,11 @@ def add_route(request, route_id=None):
 
     if request.method == 'POST':
         if route_id:
-            route_form = RouteForm(request.POST, instance=route, user=request.user)
-            formset = RouteWeekdayFormSet(request.POST, instance=route, user=request.user)
+            route_form = RouteForm(request.POST, instance=route)
+            formset = RouteWeekdayFormSet(request.POST, instance=route)
         else:
-            route_form = RouteForm(request.POST, user=request.user)
-            formset = RouteWeekdayFormSet(request.POST, user=request.user)
+            route_form = RouteForm(request.POST)
+            formset = RouteWeekdayFormSet(request.POST)
 
         if route_form.is_valid() and formset.is_valid():
             route = route_form.save()
