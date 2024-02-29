@@ -22,6 +22,7 @@ class RouteWeekdayForm(forms.ModelForm):
 class CustomRouteWeekdayFormSet(BaseInlineFormSet):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        
         for form in self.forms:
             form.fields.pop('id')
             form.fields.pop('route')
@@ -30,7 +31,10 @@ RouteWeekdayFormSet = inlineformset_factory(Route, RouteWeekday, form=RouteWeekd
 
 class RouteForm(forms.ModelForm):
     departure_time = forms.TimeField(widget=TextInput(attrs={'type': 'time'}))
+    departure_time.label = 'Horário de partida'
+
     arrival_time = forms.TimeField(widget=TextInput(attrs={'type': 'time'}))
+    arrival_time.label = 'Horário de chegada'
 
     def __init__(self, *args, **kwargs):
         user = kwargs.pop('user', None)
@@ -43,6 +47,7 @@ class RouteForm(forms.ModelForm):
         self.fields['discounted_value'].widget.attrs['readonly'] = True
         self.fields['discounted_cost'].widget.attrs['readonly'] = True
 
+        self.fields['after_midnight'].widget.attrs['class'] = 'next-day-check'
 
     class Meta:
         model = Route

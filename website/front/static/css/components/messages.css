@@ -1,0 +1,68 @@
+@keyframes slide-in {
+    0%, 100%{
+        right: -50%;
+    }
+
+    30%, 90%{
+        right: 3rem;
+    }
+}
+
+.messages{
+    animation: slide-in 3s;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: fixed;
+    right: -50%;
+    top: 4rem;
+
+    li{
+        align-items: center;
+        border-radius: .25rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        gap: .5rem;
+        padding: 1rem;
+
+        &::before{
+            aspect-ratio: 1;
+            background-size: cover;
+            display: block;
+            content: '';
+            height: 1.25rem;
+        }
+
+        &.error{
+            background-color: var(--clr-error-light);
+
+            &::before{
+                background-image: url('../../icons/messages/error.svg');
+            }
+        }
+
+        &.info{
+            background-color: var(--clr-primary-light);
+
+            &::before{
+                background-image: url('../../icons/messages/info.svg');
+            }
+        }
+
+        &.success{
+            background-color: var(--clr-success-light);
+
+            &::before{
+                background-image: url('../../icons/messages/success.svg');
+            }
+        }
+
+        &.warning{
+            background-color: var(--clr-warning-light);
+
+            &::before{
+                background-image: url('../../icons/messages/warning.svg');
+            }
+        }
+    }
+}
