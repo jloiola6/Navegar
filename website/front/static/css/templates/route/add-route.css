@@ -1,0 +1,42 @@
+/* .group:has(.next-day-check){
+    label{
+        border: 1px solid var(--clr-border);padding: 1rem;
+        border-radius: 100vw;
+        cursor: pointer;
+        transition: .5s;
+
+        &:hover{
+            background-color: var(--clr-primary);
+            border-color: var(--clr-primary);
+            color: white;
+        }
+    }
+
+    input{
+        display: none;
+    }
+
+    &:has(input:checked){
+        background-color: var(--clr-primary);
+        border-color: var(--clr-primary);
+        color: white;
+    }
+} */
+
+label:has(+ .next-day-check){
+    border: 1px solid var(--clr-border);padding: 1rem;
+    border-radius: 100vw;
+    cursor: pointer;
+    transition: .5s;
+
+    &:hover,
+    &:has(+ input:checked){
+        background-color: var(--clr-primary);
+        border-color: var(--clr-primary);
+        color: white;
+    }
+}
+
+.next-day-check{
+    display: none;
+}

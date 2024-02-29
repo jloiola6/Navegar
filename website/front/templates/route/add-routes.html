@@ -35,15 +35,20 @@
 
     <form method="post" id="route_form">
         {% csrf_token %}
-        {% for r in route_form %}
-            <div class="group">
-                {{ r.label_tag }}
-                {{ r }}
-            </div>
-        {% endfor %}
+
+        <div class="grid col-2">
+
+            {% for r in route_form %}
+                <div class="group">
+                    {{ r.label_tag }}
+                    {{ r }}
+                </div>
+            {% endfor %}
+        </div>
     
         <div id="formset-container">
             {{ formset.management_form }}
+
             {% for form in formset.forms %}
                 <div class="route-weekday-form">
                     {% for f in form %}
@@ -55,6 +60,7 @@
                 </div>
             {% endfor %}
         </div>
+
         <div class="button-container">
             <button class="button secondary" type="button" id="add-route-weekday">Adicionar dia da semana</button>
             <button class="button" type="submit">Salvar</button>
@@ -62,6 +68,7 @@
     </form>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         $(document).ready(function() {
             $('#add-route-weekday').click(function() {
