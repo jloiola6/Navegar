@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.contrib import messages
+from django.db.models.functions import Lower
 
 from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
 from .models import Location, Boat, Route
@@ -11,7 +12,7 @@ from apps.user.models import CustomUser
 @login_required
 def manage_locations(request):
     print(request)
-    locations = Location.objects.all().values_list('name', flat=True)
+    locations = Location.objects.all().values_list('name', flat=True).order_by(Lower('name'))
 
     form = LocationForm()
     if request.method == 'POST':
@@ -27,7 +28,7 @@ def manage_locations(request):
 
 def manage_boats(request):
     suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F')
-    boats = Boat.objects.all()
+    boats = Boat.objects.all().order_by(Lower('name'))
 
     if request.method == 'POST':
         name = request.POST.get('name')
