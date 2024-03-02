@@ -59,35 +59,43 @@
             <tbody>
                 {% for route in routes_list %}
                     <tr data-link="{% url 'ticket:add' route.id date %}">
-                        <td class="col-day">
-                            <span>{{ date|date:"d" }}</span>
-                            <span>{{ date|date:"F" }}</span>
-                        </td>
-
                         <td class="col-boat">
                             <span>{{ route.boat }}</span>
                         </td>
 
                         <td class="col-time">
-                            <span>{{ route.get_departure_time }} - {{ route.get_arrival_time }} {% if route.after_midnight %}+1{% endif %}</span>
-                            <span>{{ route.get_total_trip_time }} horas</span>
+                            <span>{{ route.get_departure_time }} - {{ route.get_arrival_time }}</span>
                         </td>
 
-                        <td>{{ route.route }}</td>
+                        <td class="col-route">
+                            <span>{{ route.get_total_trip_time }} horas</span>
+                            <span>{{ route.route }}</span>
+                        </td>
 
                         <td class="col-price">R$ {{ route.route.get_value }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    {% elif routes_today %}
-        {% comment %}
-            <div class="alert alert-info" role="alert">
-                <h1>Rotas para hoje</h1>
-                {% for route in routes_today %}
-                    <p>{{ route }}</p>
-                {% endfor %}
-            </div>
-        {% endcomment %}
+
+        <ul class="mobile-routes-list">
+            {% for route in routes_list %}
+                <li>
+                    <a class="card" href="{% url 'ticket:add' route.id date %}">
+                        <div class="card-header">
+                            <span class="card-boat">{{ route.boat }}</span>
+                            
+                            <span class="card-price">R$ {{ route.route.get_value }}</span>
+                        </div>
+                        
+                        <div class="card-body">
+                            <span class="card-time">{{ route.get_departure_time }} - {{ route.get_arrival_time }}</span>
+                            <span class="card-route">{{ route.route }}</span>
+                            <span class="card-total-trip">{{ route.get_total_trip_time }} horas</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endblock %}

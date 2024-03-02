@@ -41,6 +41,7 @@
         align-items: center;
         display: flex;
         gap: .5rem;
+        justify-content: center;
 
         &::before{
             aspect-ratio: 1;
