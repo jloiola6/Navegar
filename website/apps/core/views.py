@@ -23,8 +23,9 @@ def index(request):
     routes_today = RouteWeekday.objects.filter(weekday=today.strftime('%A')).order_by('route__origin__name', 'route__destination__name')[:10]
 
     if request.method == 'POST':
-        origin = request.POST.get('origin')
-        destination = request.POST.get('destination')
+        origin = int(request.POST.get('origin'))
+        destination = int(request.POST.get('destination'))
+        searched_date = request.POST.get('date')
 
         if origin == destination:
             pagina_erro = True

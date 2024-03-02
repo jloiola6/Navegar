@@ -20,8 +20,12 @@
         >   
             <option value="" disabled selected>Origem</option>
 
-            {% for origin in locations %}
-                <option value="{{ origin.id }}">{{ origin }}</option>
+            {% for location in locations %}
+                {% if location.id == origin %}
+                    <option value="{{ location.id }}" selected>{{ location }}</option>
+                {% else %}
+                    <option value="{{ location.id }}">{{ location }}</option>
+                {% endif %}
             {% endfor %}
         </select>
 
@@ -32,8 +36,12 @@
         >
             <option value="" disabled selected>Destino</option>
             
-            {% for destination in locations %}
-                <option value="{{ destination.id }}">{{ destination }}</option>
+            {% for location in locations %}
+                {% if location.id == destination %}
+                    <option value="{{ location.id }}" selected>{{ location }}</option>
+                {% else %}
+                    <option value="{{ location.id }}">{{ location }}</option>
+                {% endif %}
             {% endfor %}
         </select>
 
@@ -43,6 +51,12 @@
             type="date"
             min="{{ today|date:'Y-m-d' }}"
             required
+
+            {% if date %}
+                value="{{ searched_date }}"
+            {% else %}
+                value="{{ today|date:'Y-m-d' }}"
+            {% endif %}
         />
 
         <button class="button search" type="submit">Pesquisar</button>
