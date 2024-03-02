@@ -4,38 +4,64 @@
 
 {% block title %}Tickets{% endblock %}
 
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/index.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1>Tickets</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Data</th>
-                <th>Passageiro</th>
-                <th>Rota</th>
-                <th>Embarcação</th>
-                <th>Valor</th>
-                <th>Status</th>
-                <th>Ação</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            {% for ticket_item in tickets %}
+    {% comment %}
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>{{ ticket_item.date }}</td>
-                    <td>{{ ticket_item.name_client }}</td>
-                    <td>{{ ticket_item.origin }} - {{ ticket_item.destination }}</td>
-                    <td>{{ ticket_item.boat }}</td>
-                    <td>{{ ticket_item.value }}</td>
-                    <td>{{ ticket_item.status }}</td>
-                    <td>
-                        <a href="{% url 'ticket:view' ticket_item.id %}">
-                            <button class="button" type="submit">Ver</button>
-                        </a>
-                    </td>
+                    <th>Data</th>
+                    <th>Passageiro</th>
+                    <th>Rota</th>
+                    <th>Embarcação</th>
+                    <th>Valor</th>
+                    <th>Status</th>
+                    <th>Ação</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+
+            <tbody>
+                {% for ticket_item in tickets %}
+                    <tr>
+                        <td>{{ ticket_item.date }}</td>
+                        <td>{{ ticket_item.name_client }}</td>
+                        <td>{{ ticket_item.origin }} - {{ ticket_item.destination }}</td>
+                        <td>{{ ticket_item.boat }}</td>
+                        <td>{{ ticket_item.value }}</td>
+                        <td>{{ ticket_item.status }}</td>
+                        <td>
+                            <a href="{% url 'ticket:view' ticket_item.id %}">
+                                <button class="button" type="submit">Ver</button>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endcomment %}
+
+    <ul class="ticket-list">
+        {% for ticket in tickets %}
+            <li>
+                <a class="card" href="{% url 'ticket:view' ticket.id %}">
+                    <div>
+                        <span class="status-badge pendente">Pendente</span>
+                        <span class="boat-label">{{ ticket.boat }}</span>
+                        <span class="card-route">{{ ticket.origin }} - {{ ticket.destination }}</span>
+                        <span class="card-date">{{ ticket.date }}</span>
+                    </div>
+                    
+                    <div>
+                        <span class="card-client">{{ ticket.name_client }}</span>
+                        <span class="card-value price-label">R$  {{ ticket.value }}</span>
+                    </div>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

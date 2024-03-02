@@ -2,7 +2,7 @@
     tr{
         border-radius: .5rem;
         cursor: pointer;
-        transition: background-color .5s;
+        transition: .5s;
 
         &:hover{
             background-color: var(--clr-primary-light);
@@ -42,6 +42,7 @@
         justify-content: space-between;
         padding-block: 1.5rem;
         padding-inline: 1.25rem;
+        transition: .5s;
 
         &:is(:hover, :focus){
             background-color: var(--clr-primary-light);
