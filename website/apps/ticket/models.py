@@ -18,7 +18,6 @@ class Ticket(models.Model):
     boat = models.CharField(max_length=100)
     value = models.DecimalField(max_digits=10, decimal_places=2)
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
-    file = models.FileField(upload_to='documents/', null=True, blank=True)
     name_client = models.CharField(max_length=100, null=True, blank=True)
     docuemnt_client = models.CharField(max_length=11, null=True, blank=True)
     birth_date_client = models.DateField(null=True, blank=True)
@@ -38,6 +37,10 @@ class Ticket(models.Model):
         for choise in STATUS_CHOICES:
             if self.status == choise[0]:
                 return choise[1]
+            
+    @property
+    def is_upload(self):
+        return self.route_weekday.boat.user.upload_ticket
 
     def update_status(self, status):
         self.status = status
