@@ -35,7 +35,11 @@
         <div class="ticket-validation">
             <h2>Validar ticket</h2>
             
-            {% include './partials/_ticket-file-form.html' %}
+            {% if ticket.is_upload %}
+                {% include './partials/_ticket-file-form.html' %}
+            {% else %}
+                {% include './partials/_ticket-status-form.html' %}
+            {% endif %}
         </div>
     {% endif %}
 

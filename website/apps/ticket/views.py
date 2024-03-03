@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from apps.ticket.models import *
 from apps.ticket.forms import TicketForm
@@ -11,9 +12,6 @@ from apps.core.models import Utils
 @login_required
 def index(request):
     tickets = Ticket.objects.all()
-
-    for t in tickets:
-        print(t.status, t.get_status)
 
     return render(request, 'ticket/index.html', {'tickets': tickets})
 
@@ -61,11 +59,18 @@ def view(request, pk):
     form = TicketForm(instance=ticket)
 
     if request.method == 'POST':
+        if request.POST.get('voucher'):
+            ticket.update_status(2)
+            messages.success(request, 'Voucher emitido com sucesso')
+        
+            return redirect(reverse('ticket:view', args=[ticket.id]))
+
         form = TicketForm(request.POST, request.FILES, instance=ticket)
         
         if form.is_valid():
             form.save()
             ticket.update_status(2)
+            messages.success(request, 'Bilhete enviado com sucesso')
             
             return redirect(reverse('ticket:view', args=[ticket.id]))
 
