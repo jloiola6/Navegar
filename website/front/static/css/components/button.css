@@ -10,11 +10,13 @@
     background-color: var(--button-color);
     border: none;
     border-radius: .25rem;
+    box-sizing: border-box;
     color: #FFF;
     cursor: pointer;
     font-size: 1em;
     padding-block: 1rem;
     padding-inline: 2rem;
+    text-align: center;
     transition: background-color .5s;
     width: fit-content;
 
