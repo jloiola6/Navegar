@@ -11,8 +11,7 @@ STATUS_CHOICES = (
 
 class Ticket(models.Model):
     user_create = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
-    route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT) # Tabela intermediaria rota / barco
-
+    route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT)
     origin = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     date = models.DateField()
@@ -23,9 +22,16 @@ class Ticket(models.Model):
     name_client = models.CharField(max_length=100, null=True, blank=True)
     docuemnt_client = models.CharField(max_length=11, null=True, blank=True)
     birth_date_client = models.DateField(null=True, blank=True)
+    document = models.FileField("Arquivo", upload_to='documents/', max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name_client} | ({self.origin} - {self.destination})'
+
+    @property
+    def get_document_url(self):
+        if self.document:
+            return f"/{self.document.url}"
+        return None
     
     def update_status(self, status):
         self.status = status
@@ -37,6 +43,11 @@ class Ticket(models.Model):
             self.destination = self.route_weekday.route.destination.name
             self.boat = self.route_weekday.boat.name
             self.value = self.route_weekday.route.value
+        
+        if not self.pk and self.document:
+            if Ticket.objects.filter(document__isnull=False).count() > 1000:
+                Ticket.objects.filter(document__isnull=False).first().delete()
+                
         super(Ticket, self).save(*args, **kwargs)
 
     class Meta:

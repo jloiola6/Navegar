@@ -19,7 +19,6 @@ def index(request):
     today = datetime.now().date()
 
     locations = Location.objects.all().distinct().order_by('name')
-
     routes_today = RouteWeekday.objects.filter(weekday=today.strftime('%A')).order_by('route__origin__name', 'route__destination__name')[:10]
 
     if request.method == 'POST':
