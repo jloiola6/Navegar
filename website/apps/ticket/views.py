@@ -3,6 +3,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
 from apps.ticket.models import *
+from apps.ticket.forms import TicketForm
 from apps.route.models import RouteWeekday
 from apps.core.models import Utils
 
@@ -53,4 +54,11 @@ def view(request, pk):
     ticket = Ticket.objects.get(id=pk)
     routeweek = ticket.route_weekday
 
-    return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek})
+    form = TicketForm(instance=ticket)
+    if request.method == 'POST':
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('ticket:view', args=[ticket.id]))
+
+    return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek, 'form': form})
