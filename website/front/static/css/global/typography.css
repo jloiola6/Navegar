@@ -51,14 +51,14 @@ h2{
     border-radius: 100vw;
     border-width: 1px;
     display: flex;
-    font-size: .5rem;
+    font-size: .75rem;
     font-weight: 600;
     gap: .5rem;
     padding-block: .25rem;
     padding-inline: .5rem;
     width: fit-content;
 
-    &.pendente{
+    &.Pendente{
         background-color: hsl(50, 82%, 90%);
         border-color: hsl(50, 82%, 85%);
 
