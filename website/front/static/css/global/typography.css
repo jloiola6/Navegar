@@ -58,17 +58,30 @@ h2{
     padding-inline: .5rem;
     width: fit-content;
 
-    &.Pendente{
-        background-color: hsl(50, 82%, 90%);
-        border-color: hsl(50, 82%, 85%);
+    &::before{
+        aspect-ratio: 1;
+        border-radius: 100vw;
+        content: '';
+        display: block;
+        background-color: hsl(50, 82%, 50%);
+        width: .5rem;
+    }
+
+    &.Disponível{
+        background-color: var(--clr-success-light);
+        border-color: var(--clr-success);
 
         &::before{
-            aspect-ratio: 1;
-            border-radius: 100vw;
-            content: '';
-            display: block;
-            background-color: hsl(50, 82%, 50%);
-            width: .5rem;
+            background-color: var(--clr-success);
+        }
+    }
+
+    &.Pendente{
+        background-color: var(--clr-warning-light);
+        border-color: var(--clr-warning);
+
+        &::before{
+            background-color: var(--clr-warning);
         }
     }
 }
