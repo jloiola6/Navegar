@@ -5,24 +5,41 @@
 {% block title %}Visualizar Ticket{% endblock %}
 
 {% block css_template %}
-    <link rel="stylesheet" href="{% static 'css/templates/ticket/add.css' %}">
-    <style>
-        @media print {
-            .header {
-                display: none;
-            }
-
-            .button {
-                display: none;
-            }
-
-            h1 {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/view.css' %}">
 {% endblock %}
 
 {% block content %}
-    {% include './partials/_ticket-view.html' %}
+    {% include './partials/_ticket-info.html' %}
+
+    <div class="group">
+        <label>Nome do passageiro</label>
+        <input type="text" value="{{ ticket.name_client }}" disabled>
+    </div>
+
+
+    <div class="grid col-2">
+        <div class="group">
+            <label>CPF</label>
+
+            <input type="text" value="{{ ticket.docuemnt_client }}" disabled>
+        </div>
+        
+        <div class="group">
+            <label>Data de Nascimento</label>
+            <input type="date" value="{{ ticket.birth_date_client|date:'Y-m-d' }}" disabled>
+        </div>
+        
+    </div>
+
+    {% if ticket.status == 1 %}
+        <div class="ticket-validation">
+            <h2>Validar ticket</h2>
+            
+            {% include './partials/_ticket-file-form.html' %}
+        </div>
+    {% endif %}
+
+    {% if ticket.get_document_url %}
+        <a href="{{ticket.get_document_url}}" target="_blank" class="button">Abrir ticket</a>
+    {% endif %}
 {% endblock %}

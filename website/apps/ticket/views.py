@@ -11,6 +11,10 @@ from apps.core.models import Utils
 @login_required
 def index(request):
     tickets = Ticket.objects.all()
+
+    for t in tickets:
+        print(t.status, t.get_status)
+
     return render(request, 'ticket/index.html', {'tickets': tickets})
 
 @login_required
@@ -55,10 +59,14 @@ def view(request, pk):
     routeweek = ticket.route_weekday
 
     form = TicketForm(instance=ticket)
+
     if request.method == 'POST':
         form = TicketForm(request.POST, request.FILES, instance=ticket)
+        
         if form.is_valid():
             form.save()
+            ticket.update_status(2)
+            
             return redirect(reverse('ticket:view', args=[ticket.id]))
 
     return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek, 'form': form})

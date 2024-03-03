@@ -16,7 +16,7 @@
             <li>
                 <a class="card" href="{% url 'ticket:view' ticket.id %}">
                     <div>
-                        <span class="status-badge pendente">Pendente</span>
+                        <span class="status-badge {{ ticket.get_status }}">{{ ticket.get_status }}</span>
                         <span class="boat-label">{{ ticket.boat }}</span>
                         <span class="card-route">{{ ticket.origin }} - {{ ticket.destination }}</span>
                         <span class="card-date">{{ ticket.date }}</span>

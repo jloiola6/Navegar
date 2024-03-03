@@ -5,8 +5,9 @@
 <div class="ticket-info">
     <div>
         {% if ticket.status %}
-            <span class="status-badge pendente">{{ ticket.status }}</span>
+            <span class="status-badge {{ ticket.get_status }}">{{ ticket.get_status }}</span>
         {% endif %}
+        
         <div class="route">
             <span>{{ routeweek.route.origin }}</span>
 

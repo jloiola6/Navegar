@@ -22,7 +22,7 @@ class Ticket(models.Model):
     name_client = models.CharField(max_length=100, null=True, blank=True)
     docuemnt_client = models.CharField(max_length=11, null=True, blank=True)
     birth_date_client = models.DateField(null=True, blank=True)
-    document = models.FileField("Arquivo", upload_to='documents/', max_length=100, blank=True, null=True)
+    document = models.FileField("Anexar bilhete",upload_to='documents/', max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f'{self.name_client} | ({self.origin} - {self.destination})'
@@ -30,9 +30,15 @@ class Ticket(models.Model):
     @property
     def get_document_url(self):
         if self.document:
-            return f"/{self.document.url}"
+            return f"{self.document.url}"
         return None
     
+    @property
+    def get_status(self):
+        for choise in STATUS_CHOICES:
+            if self.status == choise[0]:
+                return choise[1]
+
     def update_status(self, status):
         self.status = status
         self.save()
