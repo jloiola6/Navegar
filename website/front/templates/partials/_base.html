@@ -31,7 +31,7 @@
 
     <body>
         {% if messages %}
-            <ul class="messages">
+            <ul class="messages" data-messages>
                 {% for message in messages %}
                     <li class="{{ message.tags }}">{{ message }}</li>
                 {% endfor %}
@@ -45,6 +45,7 @@
         </main>
 
         <script src="{% static 'js/components/input.js' %}"></script>
+        <script src="{% static 'js/components/messages.js' %}"></script>
         <script src="{% static 'js/components/modal.js' %}"></script>
         <script src="{% static 'js/components/tableLink.js' %}"></script>
         <script src="{% static 'js/components/userMenu.js' %}"></script>
