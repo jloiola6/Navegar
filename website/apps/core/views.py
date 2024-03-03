@@ -20,12 +20,15 @@ def index(request):
 
     locations = Location.objects.all().distinct().order_by('name')
     routes_today = RouteWeekday.objects.filter(weekday=today.strftime('%A')).order_by('route__origin__name', 'route__destination__name')[:10]
+
     if request.method == 'POST':
-        origin = request.POST.get('origin')
-        destination = request.POST.get('destination')
+        origin = int(request.POST.get('origin'))
+        destination = int(request.POST.get('destination'))
+        searched_date = request.POST.get('date')
 
         if origin == destination:
             pagina_erro = True
+
             return TemplateResponse(request, template_name, locals())
 
         date = datetime.strptime(request.POST.get('date'), "%Y-%m-%d").date()

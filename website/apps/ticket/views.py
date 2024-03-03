@@ -24,14 +24,14 @@ def create_ticket(request, id, date):
     if request.method == 'POST':
         routeweek = RouteWeekday.objects.get(id=id)
 
-        if not Utils.objects.all().exists():
-            utils = Utils.objects.get(id=1)
+        if Utils.objects.all().exists():
+            utils = Utils.objects.first()
         else:
             utils = Utils.objects.create()
 
         client = request.POST['client']
         document = request.POST['document']
-        birth_date = request.POST['birth_date']
+        birth_date = request.POST['birth-date']
 
         ticket = Ticket.objects.create(
             user_create = request.user,
@@ -40,7 +40,7 @@ def create_ticket(request, id, date):
             name_client = client,
             docuemnt_client = document,
             birth_date_client = birth_date,
-            value = routeweek.route.value if utils.discount else routeweek.route.discount_value
+            value = routeweek.route.value if utils.discount else routeweek.route.discounted_cost
         )
         ticket.save()
         

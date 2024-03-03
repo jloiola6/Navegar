@@ -14,6 +14,57 @@ h2{
     font-size: 1rem;
 }
 
+.boat-label{
+    color: var(--clr-primary);
+    display: flex;
+    font-weight: 600;
+    gap: .5rem;
+
+    &::before{
+        aspect-ratio: 1;
+        background-image: url('../../icons/rotas.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: '';
+        display: block;
+        width: 1rem;
+    }
+}
+
+.price-label{
+    color: hsl(141, 81%, 30%);
+    font-weight: 600;
+}
+
+.status-badge{
+    align-items: center;
+    border-style: solid;
+    border-radius: 100vw;
+    border-width: 1px;
+    display: flex;
+    font-size: .5rem;
+    font-weight: 600;
+    gap: .5rem;
+    padding-block: .25rem;
+    padding-inline: .5rem;
+    width: fit-content;
+
+    &.pendente{
+        background-color: hsl(50, 82%, 90%);
+        border-color: hsl(50, 82%, 85%);
+
+        &::before{
+            aspect-ratio: 1;
+            border-radius: 100vw;
+            content: '';
+            display: block;
+            background-color: hsl(50, 82%, 50%);
+            width: .5rem;
+        }
+    }
+}
+
 /* RESPONSIVE */
 
 @media screen and (width <= 500px) {

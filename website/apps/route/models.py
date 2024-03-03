@@ -60,7 +60,7 @@ class Route(models.Model):
         total_seconds = total_time.total_seconds()
         hours, remainder = divmod(total_seconds, 3600)
         minutes, seconds = divmod(remainder, 60)
-        total_time = f"{int(hours):02}:{int(minutes):02}"
+        total_time = f"{int(hours):02}"
 
         return total_time
     
@@ -71,8 +71,8 @@ class Route(models.Model):
 
     @property
     def get_value(self):
-        if not Utils.objects.all().exists():
-            utils = Utils.objects.get(id=1)
+        if Utils.objects.all().exists():
+            utils = Utils.objects.first()
         else:
             utils = Utils.objects.create()
 
