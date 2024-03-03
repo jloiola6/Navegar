@@ -11,8 +11,7 @@ STATUS_CHOICES = (
 
 class Ticket(models.Model):
     user_create = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
-    route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT) # Tabela intermediaria rota / barco
-
+    route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT)
     origin = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     date = models.DateField()
