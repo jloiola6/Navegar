@@ -37,6 +37,14 @@ h2{
     font-weight: 600;
 }
 
+.price-badge{
+    background-color: var(--clr-success-light);
+    border-radius: .5rem;
+    color: hsl(141, 81%, 30%);
+    font-weight: 600;
+    padding: 1rem;
+}
+
 .status-badge{
     align-items: center;
     border-style: solid;

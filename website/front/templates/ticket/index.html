@@ -11,40 +11,6 @@
 {% block content %}
     <h1>Tickets</h1>
 
-    {% comment %}
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Passageiro</th>
-                    <th>Rota</th>
-                    <th>Embarcação</th>
-                    <th>Valor</th>
-                    <th>Status</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for ticket_item in tickets %}
-                    <tr>
-                        <td>{{ ticket_item.date }}</td>
-                        <td>{{ ticket_item.name_client }}</td>
-                        <td>{{ ticket_item.origin }} - {{ ticket_item.destination }}</td>
-                        <td>{{ ticket_item.boat }}</td>
-                        <td>{{ ticket_item.value }}</td>
-                        <td>{{ ticket_item.status }}</td>
-                        <td>
-                            <a href="{% url 'ticket:view' ticket_item.id %}">
-                                <button class="button" type="submit">Ver</button>
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    {% endcomment %}
-
     <ul class="ticket-list">
         {% for ticket in tickets %}
             <li>
