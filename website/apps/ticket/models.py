@@ -5,7 +5,7 @@ from apps.route.models import RouteWeekday
 
 STATUS_CHOICES = (
     (1, 'Pendente'),
-    (2, 'Aprovado'),
+    (2, 'Disponível'),
     (3, 'Cancelado'),
 )
 
