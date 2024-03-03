@@ -1,0 +1,27 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/templates/ticket/partials/_ticket-info.css' %}">
+
+<div class="ticket-info">
+    <div>
+        {% if ticket.status %}
+            <span class="status-badge pendente">{{ ticket.status }}</span>
+        {% endif %}
+        <div class="route">
+            <span>{{ routeweek.route.origin }}</span>
+
+            <img src="{% static 'icons/arrow_right_alt.svg' %}" alt="Origem para destino">
+
+            <span>{{ routeweek.route.destination }}</span>
+        </div>
+
+        <div class="date">
+            <span>{{ ticket.date }}{{ date }}</span>
+            <span>{{ routeweek.get_departure_time }} - {{ routeweek.get_arrival_time }}</span>
+        </div>
+
+        <span class="boat-label">{{ routeweek.boat }}</span>
+    </div>
+
+    <span class="price-badge">R$ {{ routeweek.route.value }}</span>
+</div>

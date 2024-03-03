@@ -1,57 +1,24 @@
-<div class="flex">
-    <p class="boat-label">{{ routeweek.boat }}</p>
-    <p class="price-label">R$ {{ routeweek.route.value }}</p>
-</div>
+{% load static %}
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Origem</th>
-            <th>Chegada</th>
-        </tr>
-
-        <tr>
-            <td>{{ routeweek.route.origin }}</td>
-            <td>{{ routeweek.route.destination }}</td>
-        </tr>
-    </tbody>
-</table>
-
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Data</th>
-            <th>Saída</th>
-            <th>Chegada</th>
-        </tr>
-
-        <tr>
-            <td>{{ date }}</td>
-            <td>{{ routeweek.get_departure_time }}</td>
-            <td>{{ routeweek.get_arrival_time }} {% if routeweek.after_midnight %}+1{% endif %}</td>
-        </tr>
-    </tbody>
-</table>
-
-<h2>Dados do passageiro</h2>
+{% include './_ticket-info.html' %}
 
 <form method="POST" action="{% url 'ticket:create_ticket' routeweek.id date %}" class="ticket-form">
     {% csrf_token %}
 
     <div class="group">
-        <label>Nome</label>
-        <input type="text" name="client">
+        <label>Nome do passageiro</label>
+        <input type="text" name="client" required>
     </div>
 
     <div class="grid col-2">
         <div class="group">
             <label>CPF</label>
-            <input type="text" name="document">
+            <input type="text" name="document" required>
         </div>
         
         <div class="group">
             <label>Data de nascimento</label>
-            <input type="date" name="birth-date">
+            <input type="date" name="birth-date" required>
         </div>
     </div>
 

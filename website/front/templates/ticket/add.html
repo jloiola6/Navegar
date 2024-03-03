@@ -4,13 +4,8 @@
 
 {% block title %}Solicitação de ticket{% endblock %}
 
-{% block css_template %}
-    <link rel="stylesheet" href="{% static 'css/templates/ticket/add.css' %}">
-{% endblock %}
-
 {% block content %}
     <h1>Solicitação de ticket</h1>
 
     {% include './partials/_ticket-form.html' %}
-
 {% endblock %}

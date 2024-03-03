@@ -25,6 +25,13 @@
     }
 }
 
+.group{
+    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
 hr{
     background-color: var(--clr-border);
     border: none;

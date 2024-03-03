@@ -1,0 +1,47 @@
+.ticket-info{
+    align-items: flex-start;
+    display: flex;
+    font-weight: 600;
+    justify-content: space-between;
+    
+    > div{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        div{
+            align-items: center;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .route{
+            span{
+                font-size: 1.5rem;
+                
+            }
+
+            img{
+                height: 1rem;
+                width: auto;
+            }
+        }
+
+        .date{
+            span{
+                color: hsl(0, 0%, 40%);
+                font-size: .75rem;
+            }
+        }
+    }
+}
+
+/* RESPONSIVE */
+
+@media screen and (width <= 500px) {
+    .ticket-info{
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: flex-start;
+    }
+}

@@ -44,7 +44,7 @@ def create_ticket(request, id, date):
         )
         ticket.save()
         
-        return redirect(reverse('core:index'))
+        return redirect(reverse('ticket:index'))
 
 @login_required
 def edit(request):
