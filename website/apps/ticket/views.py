@@ -11,7 +11,7 @@ from apps.core.models import Utils
 
 @login_required
 def index(request):
-    tickets = Ticket.objects.all()
+    tickets = Ticket.objects.all().order_by('status', '-date')
 
     return render(request, 'ticket/index.html', {'tickets': tickets})
 
@@ -77,11 +77,10 @@ def view(request, pk):
 
     return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek, 'form': form})
 
+@login_required
 def print(request, id):
     ticket = Ticket.objects.get(id= id)
     routeweek = ticket.route_weekday
-
-
 
     return render(request, 'ticket/print.html', {
         'ticket': ticket,
