@@ -14,6 +14,10 @@ h2{
     font-size: 1rem;
 }
 
+b{
+    font-weight: 600;
+}
+
 .boat-label{
     color: var(--clr-primary);
     display: flex;

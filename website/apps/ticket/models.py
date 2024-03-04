@@ -41,6 +41,10 @@ class Ticket(models.Model):
     @property
     def is_upload(self):
         return self.route_weekday.boat.user.upload_ticket
+    
+    @property
+    def supplier(self):
+        return self.route_weekday.boat.user
 
     def update_status(self, status):
         self.status = status

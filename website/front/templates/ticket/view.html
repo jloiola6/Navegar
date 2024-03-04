@@ -44,6 +44,8 @@
     {% endif %}
 
     {% if ticket.get_document_url %}
-        <a href="{{ticket.get_document_url}}" target="_blank" class="button">Abrir ticket</a>
+        <a href="{{ ticket.get_document_url }}" target="_blank" class="button">Abrir ticket</a>
+    {% else %}
+        <a href="{% url 'ticket:print' ticket.id %}" target="_blank" class="button">Abrir ticket</a>
     {% endif %}
 {% endblock %}
