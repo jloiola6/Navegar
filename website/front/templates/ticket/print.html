@@ -12,7 +12,7 @@
     <table class="table print-ticket-table">
         <thead>
             <tr>
-                <td colspan="4">Confirmação de passagem</td>
+                <td colspan="4">Confirmação de passagem #{{ ticket.id }}</td>
             </tr>
         </thead>
 
@@ -89,6 +89,8 @@
             </tr>
         </tfoot>
     </table>
+
+    <button class="button" onclick="window.print()">Baixar voucher</button>
 
     <script>
         window.print()
