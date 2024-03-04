@@ -1,0 +1,96 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}Ticket{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/print.css' %}">
+{% endblock %}
+
+{% block content %}
+    <table class="table print-ticket-table">
+        <thead>
+            <tr>
+                <td colspan="4">Confirmação de passagem</td>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Nascimento</th>
+            </tr>
+
+            <tr>
+                <td>{{ ticket.name_client }}</td>
+                <td>{{ ticket.docuemnt_client }}</td>
+                <td>{{ ticket.birth_date_client|date:'Y-m-d' }}</td>
+
+                <td rowspan="2">
+                    <img src="{% static 'images/aggreko.png' %}" alt="Aggreko">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Viação</b> {{ routeweek.boat }}</td>
+            </tr>
+
+            <tr>
+                <td><b>De:</b> {{ routeweek.route.origin }}</td>
+                <td><b>Para:</b> {{ routeweek.route.destination }}</td>
+            </tr>
+
+            <tr>
+                <td><b>Saída:</b> {{ ticket.date }} {{ routeweek.get_departure_time }}</td>
+                <td><b>Tipo de Veículo:</b> Lancha</td>
+            </tr>
+
+            <tr><td></td></tr>
+
+            <tr>
+                <td><b>Forma de Pagamento:</b> Pix</td>
+            </tr>
+
+            <tr>
+                <td><b>Responsável pela confirmação:</b></td>
+            </tr>
+
+            <tr>
+                <td class="ticket-supplier"><b>{{ ticket.supplier }}</b></td>
+            </tr>
+
+            <tr><td></td></tr>
+
+            <tr>
+                <td colspan="4"><b>Obs: PROCURAR O RESPONSÁVEL NA HORA DO EMBARQUE</b></td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td><b>Nome:</b> CP Turismo e viagens</td>
+                <td></td>
+
+                <td rowspan="3" colspan="2">
+                    <img src="{% static 'images/CP.png' %}" alt="Aggreko">
+                </td>
+            </tr>
+
+            <tr>
+                <td><b>Telefone:</b> +55 21 34797979</td>
+                <td>cpturismo@cpturismo.com.br</td>
+            </tr>
+
+            <tr>
+                <td><b>Consultor:</b> RAPHAEL COSTA</td>
+                <td>RAPHAEL@CPTURISMO.COM.BR</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <script>
+        window.print()
+    </script>
+{% endblock %}

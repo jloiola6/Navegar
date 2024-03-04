@@ -52,6 +52,7 @@ def create_ticket(request, id, date):
 def edit(request):
     return render(request, 'ticket/edit.html')
 
+@login_required
 def view(request, pk):
     ticket = Ticket.objects.get(id=pk)
     routeweek = ticket.route_weekday
@@ -75,3 +76,14 @@ def view(request, pk):
             return redirect(reverse('ticket:view', args=[ticket.id]))
 
     return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek, 'form': form})
+
+def print(request, id):
+    ticket = Ticket.objects.get(id= id)
+    routeweek = ticket.route_weekday
+
+
+
+    return render(request, 'ticket/print.html', {
+        'ticket': ticket,
+        'routeweek': routeweek
+    })
