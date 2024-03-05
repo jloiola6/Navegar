@@ -24,5 +24,11 @@
         <span class="boat-label">{{ routeweek.boat }}</span>
     </div>
 
-    <span class="price-badge">R$ {{ routeweek.route.value }}</span>
+    <span class="price-badge">
+        {% if ticket %}
+            R$ {{ ticket.value }}
+        {% else %}
+            R$ {{ routeweek.route.value }}
+        {% endif %}
+    </span>
 </div>

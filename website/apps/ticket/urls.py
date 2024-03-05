@@ -9,6 +9,6 @@ urlpatterns = [
     path('index/', index, name='index'),
     path('add/<int:id>/<slug:date>/', add, name='add'),
     path('edit/', edit, name='edit'),
-    path('view/<int:pk>/', view, name='view'),
-    path('print/<int:id>/', print, name='print'),
+    path('view/<pk>[0-9]/', view, name='view'),
+    path('print/<id>[0-9]/', print, name='print'),
 ]
