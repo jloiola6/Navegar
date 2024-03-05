@@ -55,7 +55,7 @@ def manage_routes(request):
             value = discount
             utils.discount = not value
             utils.save()
-
+            return redirect(reverse('route:manage-routes'))
     return render(request, 'route/manage-routes.html', {'routes': routes, 'discount': discount})
 
 def add_route(request, route_id=None):

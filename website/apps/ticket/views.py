@@ -42,7 +42,10 @@ def create_ticket(request, id, date):
             name_client = client,
             docuemnt_client = document,
             birth_date_client = birth_date,
-            value = routeweek.route.value if utils.discount else routeweek.route.discounted_cost
+            value = routeweek.route.discounted_value if utils.discount else routeweek.route.value,
+            origin = routeweek.route.origin.name,
+            destination = routeweek.route.destination.name,
+            boat = routeweek.boat.name
         )
         ticket.save()
         
