@@ -42,10 +42,12 @@
             {% endif %}
         </div>
     {% endif %}
+    
+    {% if ticket.is_upload and ticket.get_document_url %}
+            <a href="{{ ticket.get_document_url }}" target="_blank" class="button">Abrir bilhete</a>
+    {% endif %}
 
-    {% if ticket.get_document_url %}
-        <a href="{{ ticket.get_document_url }}" target="_blank" class="button">Abrir ticket</a>
-    {% else %}
-        <a href="{% url 'ticket:print' ticket.id %}" target="_blank" class="button">Abrir ticket</a>
+    {% if not ticket.is_upload and ticket.status == 2 %}
+        <a href="{% url 'ticket:print' ticket.id %}" target="_blank" class="button">Abrir voucher</a>
     {% endif %}
 {% endblock %}
