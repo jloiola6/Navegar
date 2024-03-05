@@ -1,0 +1,15 @@
+.acao{
+    aspect-ratio: 1;
+    background-size: cover;
+    cursor: pointer;
+    display: block;
+    width: 1.25rem;
+
+    &.editar{
+        background-image: url('../../icons/edit.svg');
+    }
+
+    &.excluir{
+        background-image: url('../../icons/delete.svg');
+    }
+}

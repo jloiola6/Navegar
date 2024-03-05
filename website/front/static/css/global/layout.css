@@ -18,6 +18,10 @@ body .hidden{
 .flex{
     display: flex;
     gap: 1rem;
+
+    &.justify-content-between{
+        justify-content: space-between;
+    }
 }
 
 .grid{

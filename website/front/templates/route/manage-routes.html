@@ -4,24 +4,36 @@
 
 {% block title %}Controle de rotas{% endblock %}
 
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/route/manage-routes.css' %}">
+{% endblock %}
 
 {% block content %}
     <h1>Rotas</h1>
 
-    <a href="{% url 'route:add-route' %}">
-        <button class="button">Adicionar rota</button>
-    </a>
+    <div class="flex justify-content-between">
+        <a href="{% url 'route:add-route' %}">
+            <button class="button">Adicionar rota</button>
+        </a>
 
-    <form method="post">
-        {% csrf_token %}
-        <input type="checkbox" name="discount" id="discount"> <!-- Inserir o valor caso ja tenha desconto ativado -->
-        <button class="button" type="submit">Salvar</button>
-    </form>
+        <form method="post">
+            {% csrf_token %}
+
+            {% if discount %}
+                <button class="button" type="submit" name="discount" value="deactivate">Desativar desconto</button>
+            {% else %}
+                <button class="button secondary" type="submit" name="discount" value="activate">Ativar desconto</button>
+            {% endif %}
+        </form>
+    </div>
     
     <table class="table">
         <thead>
             <tr>
-                <th>Nome</th>
+                <th>Rota</th>
+                <th>Horário</th>
+                <th>Valor</th>
+                <th>Valor exibido</th>
                 <th>Ação</th>
             </tr>
         </thead>
@@ -30,10 +42,24 @@
             {% for route in routes %}
                 <tr>
                     <td>{{ route }}</td>
+
+                    <td>{{ route.departure_time }} - {{ route.arrival_time }} {% if route.after_midnight %} (Dia seguinte) {% endif %}</td>
+
+                    <td class="price-label">{{ route.value }}</td>
                     
                     <td>
+                        {% if discount %}
+                            <span class="price-badge">{{ route.discounted_value }}</span>
+                        {% else %}
+                            <span class="price-badge">{{ route.value }}</span>
+                        {% endif %}
+                    </td>
+                    <td class="col-acao">
                         <a href="{% url 'route:add-route' route.id %}">
-                            <button class="button">Editar</button>
+                            <span 
+                                class="acao editar"
+                                title="Editar"
+                            ></span>
                         </a>
                     </td>
                 </tr>
