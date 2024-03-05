@@ -155,4 +155,4 @@ if not DEBUG:
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
-LOGIN_URL = 'usuario/login/'
+LOGIN_URL = '/usuario/login/'
