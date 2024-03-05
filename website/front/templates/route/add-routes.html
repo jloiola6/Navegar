@@ -46,11 +46,11 @@
             {% endfor %}
         </div>
     
-        <div id="formset-container">
+        <div id="formset-container" data-formset-container>
             {{ formset.management_form }}
 
             {% for form in formset.forms %}
-                <div class="route-weekday-form">
+                <div class="route-weekday-form" data-weekday-form>
                     {% for f in form %}
                         <div class="group">
                             {{ f.label_tag }}
@@ -62,33 +62,11 @@
         </div>
 
         <div class="button-container">
-            <button class="button secondary" type="button" id="add-route-weekday">Adicionar dia da semana</button>
+            <button class="button secondary" type="button" id="add-route-weekday" data-add-form-button>Adicionar dia da semana</button>
             <button class="button" type="submit">Salvar</button>
         </div>
     </form>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(document).ready(function() {
-            $('#add-route-weekday').click(function() {
-                var formsetContainer = $('#formset-container');
-                var totalForms = $('#id_routeweekday_set-TOTAL_FORMS').val();
-                var newFormIndex = parseInt(totalForms); // Obter o índice do próximo formulário
-
-                // Clonar o último formulário e atualizar seus campos
-                var lastForm = formsetContainer.find('.route-weekday-form:last');
-                var newForm = lastForm.clone(true);
-                newForm.find(':input').each(function() {
-                    var name = $(this).attr('name').replace('-' + (newFormIndex - 1) + '-', '-' + newFormIndex + '-');
-                    var id = 'id_' + name;
-                    $(this).attr({'name': name, 'id': id}).val('').removeAttr('checked');
-                });
-                newForm.insertAfter(lastForm).removeClass('has_original');
-
-                // Atualizar o TOTAL_FORMS
-                $('#id_routeweekday_set-TOTAL_FORMS').val(newFormIndex + 1);
-            });
-        });
-    </script>
+    <script src="{% static 'js/templates/route/form.js' %}"></script>
 {% endblock %}
