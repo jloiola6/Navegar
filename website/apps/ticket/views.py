@@ -11,15 +11,24 @@ from apps.core.models import Utils
 
 @login_required
 def index(request):
-    tickets = Ticket.objects.all().order_by('status', '-date')
+    tickets = Ticket.objects.all().order_by('status', 'date')
 
     return render(request, 'ticket/index.html', {'tickets': tickets})
 
 @login_required
 def add(request, id, date):
+    if Utils.objects.all().exists():
+        utils = Utils.objects.first()
+    else:
+        utils = Utils.objects.create()
+
     routeweek = RouteWeekday.objects.get(id=id)
 
-    return render(request, 'ticket/add.html', {'routeweek': routeweek, 'date': date})
+    return render(request, 'ticket/add.html', {
+        'date': date,
+        'routeweek': routeweek,
+        'utils': utils 
+    })
 
 @login_required
 def create_ticket(request, id, date):

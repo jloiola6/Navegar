@@ -51,15 +51,13 @@ b{
 
 .status-badge{
     align-items: center;
-    border-style: solid;
     border-radius: 100vw;
-    border-width: 1px;
     display: flex;
     font-size: .75rem;
     font-weight: 600;
     gap: .5rem;
-    padding-block: .25rem;
-    padding-inline: .5rem;
+    padding-block: .5rem;
+    padding-inline: 1rem;
     width: fit-content;
 
     &::before{
@@ -67,13 +65,11 @@ b{
         border-radius: 100vw;
         content: '';
         display: block;
-        background-color: hsl(50, 82%, 50%);
         width: .5rem;
     }
 
     &.Disponível{
         background-color: var(--clr-success-light);
-        border-color: var(--clr-success);
 
         &::before{
             background-color: var(--clr-success);
@@ -82,7 +78,6 @@ b{
 
     &.Pendente{
         background-color: var(--clr-warning-light);
-        border-color: var(--clr-warning);
 
         &::before{
             background-color: var(--clr-warning);

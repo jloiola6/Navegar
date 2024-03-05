@@ -12,9 +12,9 @@
 
     --clr-success: hsl(140, 82%, 51%);
     --clr-success-dark: hsl(140, 82%, 30%);
-    --clr-success-light: hsl(140, 82%, 95%);
+    --clr-success-light: hsl(140, 82%, 90%);
 
     --clr-warning: hsl(50, 82%, 51%);
     --clr-warning-dark: hsl(50, 82%, 30%);
-    --clr-warning-light: hsl(50, 82%, 95%);
+    --clr-warning-light: hsl(50, 82%, 90%);
 }

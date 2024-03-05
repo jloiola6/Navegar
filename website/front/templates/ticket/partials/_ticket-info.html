@@ -28,7 +28,11 @@
         {% if ticket %}
             R$ {{ ticket.value }}
         {% else %}
-            R$ {{ routeweek.route.value }}
+            {% if utils.discount %}
+                R$ {{ routeweek.route.discounted_value }}
+            {% else %}
+                R$ {{ routeweek.route.value }}
+            {% endif %}
         {% endif %}
     </span>
 </div>

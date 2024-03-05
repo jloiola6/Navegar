@@ -30,6 +30,10 @@
                 font-weight: 600;
             }
 
+            .status-badge{
+                margin-bottom: .5rem;
+            }
+
             .card-route,
             .card-date{
                 color: hsl(0, 0%, 40%);
