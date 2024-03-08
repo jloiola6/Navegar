@@ -26,6 +26,7 @@ def manage_locations(request):
 
     return render(request, 'route/manage-locations.html', {'form': form, 'locations': locations})
 
+@login_required
 def manage_boats(request):
     suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F')
     boats = Boat.objects.all().order_by(Lower('name'))
@@ -41,6 +42,7 @@ def manage_boats(request):
         
     return render(request, 'route/manage-boats.html', {'suppliers': suppliers, "boats": boats})
 
+@login_required
 def manage_routes(request):
     routes = Route.objects.all()
     
@@ -58,6 +60,7 @@ def manage_routes(request):
             return redirect(reverse('route:manage-routes'))
     return render(request, 'route/manage-routes.html', {'routes': routes, 'discount': discount})
 
+@login_required
 def add_route(request, route_id=None):
     if route_id:
         route = Route.objects.get(id=route_id)

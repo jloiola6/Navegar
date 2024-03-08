@@ -9,7 +9,6 @@ from apps.user.forms import *
 from apps.user.models import CustomUser, TYPE_CHOICES
 
 @login_required
-@user_type_required('A')
 def index(request):
     users = CustomUser.objects.filter(is_superuser= False).order_by('full_name')
     all_types = TYPE_CHOICES
