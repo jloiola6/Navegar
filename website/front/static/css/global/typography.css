@@ -68,11 +68,20 @@ b{
         width: .5rem;
     }
 
+    &.Ativo,
     &.Disponível{
         background-color: var(--clr-success-light);
 
         &::before{
             background-color: var(--clr-success);
+        }
+    }
+
+    &.Inativo{
+        background-color: hsl(0, 0%, 90%);
+
+        &::before{
+            background-color: hsl(0, 0%, 60%);
         }
     }
 
