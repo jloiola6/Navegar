@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n_q9k1$-qv=s1hr0=c1pmvmneh&y=_dcfw(occz7g!x3ychw=p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -94,8 +94,19 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        },
     }
+    # DATABASES = {
+        # configure um banco postgres
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #     'NAME': 'navegar',
+        #     'USER': 'navegar',
+        #     'PASSWORD': 'navegar',
+        #     'HOST': 'localhost',
+        #     'PORT': '5432',
+        # }
+    # }
 
 
 # Password validation
