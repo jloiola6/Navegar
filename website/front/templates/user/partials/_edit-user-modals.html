@@ -8,7 +8,12 @@
             
             <div class="group">
                 <label for="name-field-{{ user.id }}">Nome</label>
-                <input type="text" name="name" id="name-field-{{ user.id }}" value="{{ user.full_name|default:"" }}">
+                <input type="text" name="name" id="name-field-{{ user.id }}" value="{{ user.full_name|default:'' }}">
+            </div>
+            
+            <div class="group">
+                <label for="phone-field-{{ user.id }}">Telefone</label>
+                <input type="text" name="phone" id="phone-field-{{ user.id }}" value="{{ user.phone|default:'' }}">
             </div>
             
             <div class="group">

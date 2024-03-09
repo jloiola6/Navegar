@@ -17,6 +17,7 @@ def index(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
         name = request.POST.get('name')
+        phone = request.POST.get('phone')
         password = request.POST.get('password') if request.POST.get('password') else None
         type = request.POST.get('type')
         status = request.POST.get('status')
@@ -30,6 +31,7 @@ def index(request):
 
         user = CustomUser.objects.get(id=user_id)
         user.full_name = name
+        user.phone = phone
         user.type = type
         user.is_active = status
         if password:

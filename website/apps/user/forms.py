@@ -5,15 +5,16 @@ from .models import CustomUser
 class CustomUserCreationForm(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(CustomUserCreationForm, self).__init__(*args, **kwargs)
-        print(self.fields)
         self.fields['full_name'].widget.attrs['placeholder'] = "Nome completo"
         self.fields['email'].widget.attrs['placeholder'] = "E-mail"
+        self.fields['phone'].widget.attrs['placeholder'] = "Telefone"
+        self.fields['phone'].widget.attrs['required'] = "true"
         self.fields['password1'].widget.attrs['placeholder'] = "Senha"
         self.fields['password2'].widget.attrs['placeholder'] = "Confirmação da senha"
 
     class Meta:
         model = CustomUser
-        fields = ['full_name', 'email', 'password1', 'password2']
+        fields = ['full_name', 'email', 'phone','password1', 'password2']
 
 class CustomUserChangeForm(UserChangeForm):
     password = forms.CharField(widget=forms.PasswordInput(), required=False)
