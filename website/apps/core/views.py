@@ -35,7 +35,10 @@ def index(request):
         weekday = date.strftime('%A')  # Convert date to weekday
 
         # Método novo + simples (RouteWeekday)
-        routes_list = RouteWeekday.objects.filter(route__origin__id=origin, route__destination__id=destination, weekday=weekday, route__arrival_time__gte=datetime.now().time())
+        if date == today:
+            routes_list = RouteWeekday.objects.filter(route__origin__id=origin, route__destination__id=destination, weekday=weekday, route__departure_time__gt=datetime.now().time()).order_by('route__departure_time')
+        else:
+            routes_list = RouteWeekday.objects.filter(route__origin__id=origin, route__destination__id=destination, weekday=weekday).order_by('route__departure_time')
 
         # Método antigo + complexo (Waypoints)
         # found_routes = find_routes_with_weekday(origin, destination, weekday)
