@@ -16,6 +16,7 @@
             <tr>
                 <th>Nome</th>
                 <th>E-mail</th>
+                <th>Telefone</th>
                 <th>Perfil</th>
                 <th class="header-status">Status</th>
                 <th class="header-acao">Ações</th>
@@ -25,8 +26,9 @@
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td>{{ user.full_name|default:"N/A" }}</td>
+                    <td>{{ user.full_name }}</td>
                     <td>{{ user.email }}</td>
+                    <td>{{ user.phone|default:'' }}</td>
                     <td>{{ user.profile }}</td>
 
                     <td>
