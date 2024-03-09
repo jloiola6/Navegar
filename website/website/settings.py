@@ -133,11 +133,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'front/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'front/static')
 
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'front/static')
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-else:
+if  DEBUG:
     STATICFILES_DIRS = [
         os.path.join(BASE_DIR, 'front/static')
     ]
