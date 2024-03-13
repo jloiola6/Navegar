@@ -12,7 +12,7 @@ from apps.user.models import CustomUser, TYPE_CHOICES
 def index(request):
     users = CustomUser.objects.filter(is_superuser= False).order_by('full_name')
     all_types = TYPE_CHOICES
-    all_status = ('Ativo', 'Inativo', 'Pendente')
+    all_status = ('Ativo', 'Inativo')
 
     if request.method == 'POST':
         user_id = request.POST.get('user_id')
@@ -21,6 +21,7 @@ def index(request):
         password = request.POST.get('password') if request.POST.get('password') else None
         type = request.POST.get('type')
         status = request.POST.get('status')
+        issuance_type = request.POST.get('issuance_type')
 
         if status == 'Ativo':
             status = True
@@ -34,13 +35,20 @@ def index(request):
         user.phone = phone
         user.type = type
         user.is_active = status
+
+        user.upload_ticket = type == 'F' and issuance_type == 'bilhete' 
+
         if password:
             user.set_password(password)
         user.save()
 
         return redirect(reverse('user:index'))
     
-    return render(request, 'user/index.html', {'users': users, 'all_types': all_types, 'all_status': all_status})
+    return render(request, 'user/index.html', {
+        'users': users, 
+        'all_types': all_types, 
+        'all_status': all_status,
+    })
 
 
 @redirect_authenticated_user
