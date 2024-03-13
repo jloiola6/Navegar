@@ -3,11 +3,8 @@
 }
 
 .col-acao{
-    align-items: center;
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-
+    text-align: center;
+    
     & .acao{
         aspect-ratio: 1;
         background-size: cover;
