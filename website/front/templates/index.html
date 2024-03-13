@@ -1,15 +1,15 @@
-{% extends "../partials/_base.html" %}
+{% extends "./partials/_base.html" %}
 
 {% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block css_template %}
-    <link rel="stylesheet" href="{% static 'css/templates/route/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>Rotas</h1>
+    <h1>Consulta de rotas</h1>
 
     <form method="POST" class="row">
         {% csrf_token %}
