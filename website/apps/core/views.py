@@ -15,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def index(request):      
-    template_name = 'route/index.html'
+    template_name = 'index.html'
     today = datetime.now().date()
 
     locations = Location.objects.all().distinct().order_by('name')
