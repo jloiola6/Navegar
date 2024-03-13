@@ -26,7 +26,12 @@
                 
                 <div>
                     {% for type in all_types %}
-                        <input id="tipo-{{ type.0 }}-{{ user.id }}" type="radio" {% if type.0 == user.type %}checked{% endif %} name="type" value="{{ type.0 }}">
+                        {% if type.0 == user.type %}
+                            <input id="tipo-{{ type.0 }}-{{ user.id }}" type="radio" name="type" value="{{ type.0 }}" data-radio-type="{{ user.id }}" checked>
+                        {% else %}
+                            <input id="tipo-{{ type.0 }}-{{ user.id }}" type="radio" name="type" value="{{ type.0 }}" data-radio-type="{{ user.id }}">
+                        {% endif %}
+
                         <label for="tipo-{{ type.0 }}-{{ user.id }}">{{ type.1 }}</label>
                     {% endfor %}
                 </div>
@@ -37,9 +42,36 @@
                 
                 <div>
                     {% for status in all_status %}
-                        <input id="status-{{ status }}-{{ user.id }}" type="radio" {% if status == user.status %}checked{% endif %} name="status" value="{{ status }}">
+                        {% if status == user.status %}
+                            <input id="status-{{ status }}-{{ user.id }}" type="radio" name="status" value="{{ status }}" checked>
+                        {% else %}
+                            <input id="status-{{ status }}-{{ user.id }}" type="radio" name="status" value="{{ status }}">
+                        {% endif %}
+
                         <label for="status-{{ status }}-{{ user.id }}">{{ status }}</label>
                     {% endfor %}
+                </div>
+            </div>
+
+            <div class="group" data-issuance-group="{{ user.id }}">
+                <label>Tipo de emissão</label>
+
+                <div>
+                    {% if not user.upload_ticket %}
+                        <input id="issuance-type-voucher-{{ user.id }}" type="radio" name="issuance_type" value="voucher" checked>
+                    {% else %}
+                        <input id="issuance-type-voucher-{{ user.id }}" type="radio" name="issuance_type" value="voucher">
+                    {% endif %}
+
+                    <label for="issuance-type-voucher-{{ user.id }}">Voucher</label>
+
+                    {% if user.upload_ticket %}
+                        <input id="issuance-type-bilhete-{{ user.id }}" type="radio" name="issuance_type" value="bilhete" checked>
+                    {% else %}
+                        <input id="issuance-type-bilhete-{{ user.id }}" type="radio" name="issuance_type" value="bilhete">
+                    {% endif %}
+
+                    <label for="issuance-type-bilhete-{{ user.id }}">Bilhete</label>
                 </div>
             </div>
 
