@@ -19,7 +19,11 @@
 
     <div class="grid col-2">
         <div class="group">
-            <label>CPF</label>
+            {% if ticket.document_type == 'rg' %}
+                <label>RG</label>
+            {% else %}
+                <label>CPF</label>
+            {% endif %}
 
             <input type="text" value="{{ ticket.docuemnt_client }}" disabled>
         </div>

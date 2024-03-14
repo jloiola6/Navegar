@@ -23,6 +23,7 @@ class Ticket(models.Model):
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     name_client = models.CharField(max_length=100, null=True, blank=True)
     docuemnt_client = models.CharField(max_length=11, null=True, blank=True)
+    document_type = models.CharField(max_length=3, null=True)
     birth_date_client = models.DateField(null=True, blank=True)
     document = models.FileField("Anexar bilhete",upload_to='documents/', max_length=100, blank=True, null=True)
 

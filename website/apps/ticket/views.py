@@ -42,6 +42,7 @@ def create_ticket(request, id, date):
 
         client = request.POST['client']
         document = request.POST['document']
+        document_type = request.POST['document_type']
         birth_date = request.POST['birth-date']
 
         ticket = Ticket.objects.create(
@@ -50,6 +51,7 @@ def create_ticket(request, id, date):
             date = date,
             name_client = client,
             docuemnt_client = document,
+            document_type = document_type,
             birth_date_client = birth_date,
             value = routeweek.route.discounted_value if utils.discount else routeweek.route.value,
             origin = routeweek.route.origin.name,
