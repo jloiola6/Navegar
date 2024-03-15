@@ -7,6 +7,8 @@
 <form class="file-form" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
 
+    <input type="hidden" name="ticket_id" id="ticket_id-field" value="{{ ticket.id }}">
+
     <div class="group">
         <input 
             accept="image/*"

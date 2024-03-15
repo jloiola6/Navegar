@@ -1,7 +1,7 @@
 .ticket-list{
     display: grid;
     gap: .5rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
 
     .card{
         border: 1px solid var(--clr-border);
@@ -16,11 +16,6 @@
         padding-inline: 1.25rem;
         transition: .5s;
 
-        &:is(:hover, :focus){
-            background-color: var(--clr-primary-light);
-            border-color: var(--clr-primary-light);
-        }
-
         > div{
             display: flex;
             flex-direction: column;
@@ -34,12 +29,14 @@
                 margin-bottom: .5rem;
             }
 
-            .card-route,
-            .card-date{
+            .card-date,
+            .card-time{
                 color: hsl(0, 0%, 40%);
                 font-size: .75rem;
             }
 
+            .card-client-info,
+            .card-route,
             .card-value{
                 font-size: .75rem;
             }
@@ -48,12 +45,6 @@
 }
 
 /* RESPONSIVE */
-
-@media screen and (width <= 768px) {
-    .ticket-list{
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 @media screen and (width <= 500px) {
     .ticket-list{

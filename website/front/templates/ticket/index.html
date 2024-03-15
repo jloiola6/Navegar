@@ -2,32 +2,67 @@
 
 {% load static %}
 
-{% block title %}Tickets{% endblock %}
+{% block title %}Passagens{% endblock %}
 
 {% block css_template %}
     <link rel="stylesheet" href="{% static 'css/templates/ticket/index.css' %}">
 {% endblock %}
 
 {% block content %}
-    <h1>Tickets</h1>
+    <h1>Passagens</h1>
 
     <ul class="ticket-list">
-        {% for ticket in tickets %}
-            <li>
-                <a class="card" href="{% url 'ticket:view' ticket.id %}">
+        {% for ticket in pending_tickets %}
+            <li class="card">
+                <div>
+                    <span class="status-badge {{ ticket.get_status }}">{{ ticket.get_status }}</span>
+                    <span class="boat-label">{{ ticket.boat }}</span>
+                    <span class="card-route">{{ ticket.origin }} - {{ ticket.destination }}</span>
+                    <span class="card-date">{{ ticket.date }}</span>
+                    <span class="card-time">{{ ticket.route_weekday.get_departure_time }} - {{ ticket.route_weekday.get_arrival_time }}</span>
+                </div>
+                
+                <div>
+                    <span class="card-client">{{ ticket.name_client }}</span>
+                    <span class="card-client-info">{{ ticket.document_type | upper }}: {{ ticket.document_client }}</span>
+                    <span class="card-client-info">Nascimento: {{ ticket.birth_date_client }}</span>
+                    <span class="card-value price-label">R$ {{ ticket.value }}</span>
+                </div>
+                
+                {% if ticket.is_upload %}
+                    {% include './partials/_ticket-file-form.html' %}
+                {% else %}
+                    {% include './partials/_ticket-status-form.html' %}
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% if available_tickets %}
+        <div class="group">
+            <h2>Disponíveis</h2>
+            <hr>
+        </div>
+
+        <ul class="ticket-list">
+            {% for ticket in available_tickets %}
+                <li class="card">
                     <div>
                         <span class="status-badge {{ ticket.get_status }}">{{ ticket.get_status }}</span>
                         <span class="boat-label">{{ ticket.boat }}</span>
                         <span class="card-route">{{ ticket.origin }} - {{ ticket.destination }}</span>
                         <span class="card-date">{{ ticket.date }}</span>
+                        <span class="card-time">{{ ticket.route_weekday.get_departure_time }} - {{ ticket.route_weekday.get_arrival_time }}</span>
                     </div>
                     
                     <div>
                         <span class="card-client">{{ ticket.name_client }}</span>
-                        <span class="card-value price-label">R$  {{ ticket.value }}</span>
+                        <!-- <span class="card-client-info">{{ ticket.document_type | upper }}: {{ ticket.document_client }}</span>
+                        <span class="card-client-info">Nascimento: {{ ticket.birth_date_client }}</span> -->
+                        <span class="card-value price-label">R$ {{ ticket.value }}</span>
                     </div>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
