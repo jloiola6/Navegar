@@ -8,12 +8,34 @@ from apps.ticket.forms import TicketForm
 from apps.route.models import RouteWeekday
 from apps.core.models import Utils
 
-
 @login_required
 def index(request):
-    tickets = Ticket.objects.all().order_by('status', 'date')
+    pending_tickets = Ticket.objects.filter(status= 1).order_by('date')
+    available_tickets = Ticket.objects.filter(status= 2).order_by('-date')
 
-    return render(request, 'ticket/index.html', {'tickets': tickets})
+    if request.method == 'POST':
+        ticket_id = request.POST['ticket_id']
+        ticket = Ticket.objects.get(id= ticket_id)
+
+        if request.POST.get('voucher'):
+            ticket.update_status(2)
+            messages.success(request, 'Voucher emitido com sucesso!')
+
+            return redirect(reverse('ticket:index'))
+        
+        form = TicketForm(request.POST, request.FILES, instance=ticket)
+        
+        if form.is_valid():
+            form.save()
+            ticket.update_status(2)
+            messages.success(request, 'Bilhete enviado com sucesso')
+            
+            return redirect(reverse('ticket:index'))
+
+    return render(request, 'ticket/index.html', {
+        'pending_tickets': pending_tickets,
+        'available_tickets': available_tickets
+    })
 
 @login_required
 def add(request, id, date):
@@ -50,7 +72,7 @@ def create_ticket(request, id, date):
             route_weekday = routeweek,
             date = date,
             name_client = client,
-            docuemnt_client = document,
+            document_client = document,
             document_type = document_type,
             birth_date_client = birth_date,
             value = routeweek.route.discounted_value if utils.discount else routeweek.route.value,
