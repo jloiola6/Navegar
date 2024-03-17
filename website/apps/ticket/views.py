@@ -11,14 +11,14 @@ from apps.core.models import Utils
 @login_required
 def index(request):
     pending_tickets = Ticket.objects.filter(status= 1).order_by('date')
-    available_tickets = Ticket.objects.filter(status= 2).order_by('-date')
+    available_tickets = Ticket.objects.filter().order_by('-id')
 
     if request.method == 'POST':
         ticket_id = request.POST['ticket_id']
         ticket = Ticket.objects.get(id= ticket_id)
 
         if request.POST.get('voucher'):
-            ticket.update_status(2)
+            ticket.update_status(4)
             messages.success(request, 'Voucher emitido com sucesso!')
 
             return redirect(reverse('ticket:index'))
@@ -27,7 +27,7 @@ def index(request):
         
         if form.is_valid():
             form.save()
-            ticket.update_status(2)
+            ticket.update_status(4)
             messages.success(request, 'Bilhete enviado com sucesso')
             
             return redirect(reverse('ticket:index'))
@@ -96,20 +96,47 @@ def view(request, pk):
     form = TicketForm(instance=ticket)
 
     if request.method == 'POST':
-        if request.POST.get('voucher'):
+        if request.POST.__contains__('cancelled'):
+            ticket.update_status(5)
+
+            if ticket.is_upload:
+                messages.info(request, 'Bilhete cancelado')
+            else:
+                messages.info(request, 'Voucher cancelado')
+
+        if request.POST.__contains__('refused'):
+            ticket.update_status(3)
+            messages.info(request, 'Solicitação recusada')
+
+            return redirect(reverse('ticket:view', args=[ticket.id]))
+        
+        if request.POST.__contains__('no_show'):
+            ticket.update_status(7)
+            messages.info(request, 'Não comaprecimento informado')
+
+            return redirect(reverse('ticket:view', args=[ticket.id]))
+
+        if request.POST.__contains__('order_cancellation'):
             ticket.update_status(2)
+            messages.info(request, 'Solicitação cancelada')
+
+            return redirect(reverse('ticket:view', args=[ticket.id]))
+
+        if request.POST.__contains__('voucher'):
+            ticket.update_status(4)
             messages.success(request, 'Voucher emitido com sucesso')
         
             return redirect(reverse('ticket:view', args=[ticket.id]))
-
-        form = TicketForm(request.POST, request.FILES, instance=ticket)
         
-        if form.is_valid():
-            form.save()
-            ticket.update_status(2)
-            messages.success(request, 'Bilhete enviado com sucesso')
+        if request.FILES.get('document'):
+            form = TicketForm(request.POST, request.FILES, instance=ticket)
             
-            return redirect(reverse('ticket:view', args=[ticket.id]))
+            if form.is_valid():
+                form.save()
+                ticket.update_status(4)
+                messages.success(request, 'Bilhete enviado com sucesso')
+                
+                return redirect(reverse('ticket:view', args=[ticket.id]))
 
     return render(request, 'ticket/view.html', {'ticket': ticket, 'routeweek': routeweek, 'form': form})
 

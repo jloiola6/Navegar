@@ -9,13 +9,13 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Passagens</h1>
+    <h1>Passagens </h1>
 
     <ul class="ticket-list">
         {% for ticket in pending_tickets %}
             <li class="card">
                 <div>
-                    <span class="status-badge {{ ticket.get_status }}">{{ ticket.get_status }}</span>
+                    <span class="status-badge {{ ticket.get_status_class }}">{{ ticket.get_status }}</span>
                     <span class="boat-label">{{ ticket.boat }}</span>
                     <span class="card-route">{{ ticket.origin }} - {{ ticket.destination }}</span>
                     <span class="card-date">{{ ticket.date }}</span>
@@ -34,6 +34,8 @@
                 {% else %}
                     {% include './partials/_ticket-status-form.html' %}
                 {% endif %}
+
+                <a class="link" href="{% url 'ticket:view' ticket.id %}">Ver mais</a>
             </li>
         {% endfor %}
     </ul>
@@ -48,7 +50,7 @@
             {% for ticket in available_tickets %}
                 <li class="card">
                     <div>
-                        <span class="status-badge {{ ticket.get_status }}">{{ ticket.get_status }}</span>
+                        <span class="status-badge {{ ticket.get_status_class }}">{{ ticket.get_status }}</span>
                         <span class="boat-label">{{ ticket.boat }}</span>
                         <span class="card-route">{{ ticket.origin }} - {{ ticket.destination }}</span>
                         <span class="card-date">{{ ticket.date }}</span>
@@ -57,10 +59,10 @@
                     
                     <div>
                         <span class="card-client">{{ ticket.name_client }}</span>
-                        <!-- <span class="card-client-info">{{ ticket.document_type | upper }}: {{ ticket.document_client }}</span>
-                        <span class="card-client-info">Nascimento: {{ ticket.birth_date_client }}</span> -->
                         <span class="card-value price-label">R$ {{ ticket.value }}</span>
                     </div>
+
+                    <a class="link" href="{% url 'ticket:view' ticket.id %}">Ver mais</a>
                 </li>
             {% endfor %}
         </ul>

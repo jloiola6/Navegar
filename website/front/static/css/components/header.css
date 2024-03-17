@@ -23,9 +23,11 @@
                 align-items: center;
                 border: 1px solid var(--clr-border);
                 border-radius: .5rem;
+                color: hsl(0, 0%, 20%);
                 cursor: pointer;
                 display: flex;
                 font-size: .875rem;
+                font-weight: 400;
                 gap: .5rem;
                 padding-block: .5rem;
                 padding-inline: 1rem;
@@ -59,11 +61,11 @@
         display: none;
         font-weight: 500;
         gap: 1rem;
-        justify-content: center;
         margin: auto;
         overflow-x: auto;
 
-        a{
+        .link{
+            color: hsl(0, 0%, 20%);
             padding-block: 1rem;
         }
     }

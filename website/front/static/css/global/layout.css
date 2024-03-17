@@ -57,6 +57,7 @@ hr{
 
 @media screen and (width <= 500px) {
     .container{
+        padding-block: 1.5rem;
         padding-inline: 1rem;
     }
 

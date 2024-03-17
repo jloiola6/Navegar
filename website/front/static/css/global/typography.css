@@ -18,6 +18,11 @@ b{
     font-weight: 600;
 }
 
+.link{
+    color: var(--clr-primary);
+    font-weight: 500;
+}
+
 .boat-label{
     color: var(--clr-primary);
     display: flex;
@@ -69,7 +74,7 @@ b{
     }
 
     &.Ativo,
-    &.Disponível{
+    &.available{
         background-color: var(--clr-success-light);
 
         &::before{
@@ -77,7 +82,12 @@ b{
         }
     }
 
-    &.Inativo{
+    &.canceled,
+    &.Inativo,
+    &.no_show,
+    &.order_cancellation,
+    &.pending,
+    &.refused{
         background-color: hsl(0, 0%, 90%);
 
         &::before{
@@ -85,7 +95,7 @@ b{
         }
     }
 
-    &.Pendente{
+    &.pending{
         background-color: var(--clr-warning-light);
 
         &::before{
