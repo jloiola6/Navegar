@@ -21,20 +21,27 @@
     width: fit-content;
 
     &:hover{
-        --button-color: var(--clr-primary-dark);
+        background-color: var(--clr-primary-dark);
+    }
+
+    &.red{
+        --button-color: var(--clr-error);
+
+        &:hover{
+            background-color: var(--clr-error-dark);
+        }
     }
 
     &.secondary{
-        --button-color: transparent;
-
-        border: 1px solid var(--clr-primary);
-        color: var(--clr-primary);
+        background-color: transparent;
+        border: 1px solid var(--button-color);
+        color: var(--button-color);
         font-weight: 500;
         padding-block: calc(1rem - 1px);
         padding-inline: calc(2rem - 1px);
 
         &:hover{
-            --button-color: var(--clr-primary);
+            background-color: var(--button-color);
             color: #FFF;
         }
     }

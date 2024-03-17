@@ -7,8 +7,22 @@ from apps.route.models import RouteWeekday
 
 STATUS_CHOICES = (
     (1, 'Pendente'),
-    (2, 'Disponível'),
-    (3, 'Cancelado'),
+    (2, 'Cancelado pelo solicitante'),
+    (3, 'Recusado pelo fornecedor'),
+    (4, 'Disponível'),
+    (5, 'Cancelado pelo fornecedor'),
+    (6, 'Finalizado'),
+    (7, 'Não comparecimento'),
+)
+
+STATUS_CLASSES = (
+    (1, 'pending'),
+    (2, 'order_cancellation'),
+    (3, 'refused'),
+    (4, 'available'),
+    (5, 'canceled'),
+    (6, 'finished'),
+    (7, 'no_show'),
 )
 
 class Ticket(models.Model):
@@ -41,6 +55,12 @@ class Ticket(models.Model):
         for choise in STATUS_CHOICES:
             if self.status == choise[0]:
                 return choise[1]
+    
+    @property
+    def get_status_class(self):
+        for css_class in STATUS_CLASSES:
+            if self.status == css_class[0]:
+                return css_class[1]
             
     @property
     def is_upload(self):
