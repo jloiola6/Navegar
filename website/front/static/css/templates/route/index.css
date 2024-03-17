@@ -1,0 +1,15 @@
+.table{
+    .header-action{
+        text-align: center;
+    }
+    
+    td{
+        padding-block: 1rem;
+    }
+
+    .col-action{
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+}

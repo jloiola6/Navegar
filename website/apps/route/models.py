@@ -3,7 +3,6 @@ from django.utils import timezone
 from datetime import datetime, timedelta, time
 
 from apps.user.models import CustomUser as User
-from apps.core.models import Utils
 
 WEEKDAYS = (
     ('Sunday', 'Domingo'),
@@ -42,6 +41,7 @@ class Route(models.Model):
     arrival_time = models.TimeField(blank=True, null=True, verbose_name='Horário de Horário')
     total_trip_time = models.CharField(max_length=10, blank=True, null=True, editable=False, verbose_name='Tempo total da viagem')
     after_midnight = models.BooleanField(default=False, verbose_name='Dia seguinte')
+    discount = models.BooleanField(default= False) 
 
     def __str__(self):
         return f'{self.origin} - {self.destination}'
@@ -69,16 +69,21 @@ class Route(models.Model):
             self.total_trip_time = self.calculate_total_trip_time()
         super(Route, self).save(*args, **kwargs)
 
+    def switch_discount(self):
+        self.discount = not self.discount
+        self.save()
+
     @property
     def get_value(self):
-        if Utils.objects.all().exists():
-            utils = Utils.objects.first()
-        else:
-            utils = Utils.objects.create()
-
-        if utils.discount:
+        if self.discount:
             return self.discounted_value
         return self.value
+    
+    @property
+    def get_cost(self):
+        if self.discount:
+            return self.discounted_cost
+        return self.cost
     
     class Meta:
         ordering = ['id']
