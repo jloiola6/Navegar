@@ -1,11 +1,11 @@
-.header-acao{
+.header-action{
     text-align: center;
 }
 
-.col-acao{
+.col-action{
     text-align: center;
     
-    .acao{
+    .action{
         margin: auto;
     }
 }

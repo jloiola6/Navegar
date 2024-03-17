@@ -5,27 +5,15 @@
 {% block title %}Controle de rotas{% endblock %}
 
 {% block css_template %}
-    <link rel="stylesheet" href="{% static 'css/templates/route/manage-routes.css' %}">
+    <link rel="stylesheet" href="{% static 'css/templates/route/index.css' %}">
 {% endblock %}
 
 {% block content %}
     <h1>Rotas</h1>
 
-    <div class="flex justify-content-between">
-        <a href="{% url 'route:add-route' %}">
-            <button class="button">Adicionar rota</button>
-        </a>
-
-        <form method="post">
-            {% csrf_token %}
-
-            {% if discount %}
-                <button class="button" type="submit" name="discount" value="deactivate">Desativar desconto</button>
-            {% else %}
-                <button class="button secondary" type="submit" name="discount" value="activate">Ativar desconto</button>
-            {% endif %}
-        </form>
-    </div>
+    <a href="{% url 'route:add-route' %}">
+        <button class="button">Adicionar rota</button>
+    </a>
     
     <table class="table">
         <thead>
@@ -34,7 +22,7 @@
                 <th>Horário</th>
                 <th>Valor</th>
                 <th>Valor exibido</th>
-                <th>Ação</th>
+                <th class="header-action">Ações</th>
             </tr>
         </thead>
 
@@ -48,16 +36,27 @@
                     <td class="price-label">{{ route.value }}</td>
                     
                     <td>
-                        {% if discount %}
+                        {% if route.discount %}
                             <span class="price-badge">{{ route.discounted_value }}</span>
                         {% else %}
                             <span class="price-badge">{{ route.value }}</span>
                         {% endif %}
                     </td>
-                    <td class="col-acao">
+
+                    <td class="col-action">
+                        <form method="POST">
+                            {% csrf_token %}
+
+                            {% if route.discount %}
+                                <button class="action discount-off" type="submit" name="switch_discount" value="{{ route.id }}" title="Desativar desconto"></button>
+                            {% else %}
+                                <button class="action discount-on" type="submit" name="switch_discount" value="{{ route.id }}" title="Ativar desconto"></button>
+                            {% endif %}
+                        </form>
+
                         <a href="{% url 'route:add-route' route.id %}">
                             <span 
-                                class="acao editar"
+                                class="action edit"
                                 title="Editar"
                             ></span>
                         </a>

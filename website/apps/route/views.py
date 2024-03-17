@@ -7,9 +7,21 @@ from django.db.models.functions import Lower
 from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
 from .models import Location, Boat, Route
 from apps.user.models import CustomUser
-from apps.core.models import Utils
 
 # Create your views here.
+
+@login_required
+def index(request):
+    routes = Route.objects.all()
+
+    if request.method == 'POST':
+        if request.POST.get('switch_discount'):
+            route_id = request.POST.get('switch_discount')
+            route = Route.objects.get(id= route_id)
+            route.switch_discount()
+
+    return render(request, 'route/index.html', {'routes': routes})
+
 @login_required
 def manage_locations(request):
     locations = Location.objects.all().values_list('name', flat=True).order_by(Lower('name'))
@@ -41,24 +53,6 @@ def manage_boats(request):
         messages.success(request, 'Embarcação cadastrada com sucesso')
         
     return render(request, 'route/manage-boats.html', {'suppliers': suppliers, "boats": boats})
-
-@login_required
-def manage_routes(request):
-    routes = Route.objects.all()
-    
-    if Utils.objects.all().exists():
-        utils = Utils.objects.first()
-    else:
-        utils = Utils.objects.create()
-    discount = utils.discount
-
-    if request.method == 'POST':
-        if request.POST.get('discount'):
-            value = discount
-            utils.discount = not value
-            utils.save()
-            return redirect(reverse('route:manage-routes'))
-    return render(request, 'route/manage-routes.html', {'routes': routes, 'discount': discount})
 
 @login_required
 def add_route(request, route_id=None):

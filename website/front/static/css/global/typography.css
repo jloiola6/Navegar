@@ -51,7 +51,8 @@ b{
     border-radius: .5rem;
     color: hsl(141, 81%, 30%);
     font-weight: 600;
-    padding: 1rem;
+    padding-block: .5rem;
+    padding-inline: 1rem;
 }
 
 .status-badge{

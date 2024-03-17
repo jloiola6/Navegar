@@ -1,12 +1,22 @@
-.acao{
+.action{
     aspect-ratio: 1;
+    background-color: transparent;
     background-size: cover;
+    border: none;
     cursor: pointer;
     display: block;
     width: 1.25rem;
 
-    &.editar{
+    &.edit{
         background-image: url('../../icons/edit.svg');
+    }
+
+    &.discount-on{
+        background-image: url('../../icons/discount_on.svg');
+    }
+
+    &.discount-off{
+        background-image: url('../../icons/discount_off.svg');
     }
 
     &.excluir{

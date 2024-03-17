@@ -6,7 +6,6 @@ from django.contrib import messages
 from apps.ticket.models import *
 from apps.ticket.forms import TicketForm
 from apps.route.models import RouteWeekday
-from apps.core.models import Utils
 
 @login_required
 def index(request):
@@ -39,28 +38,17 @@ def index(request):
 
 @login_required
 def add(request, id, date):
-    if Utils.objects.all().exists():
-        utils = Utils.objects.first()
-    else:
-        utils = Utils.objects.create()
-
     routeweek = RouteWeekday.objects.get(id=id)
 
     return render(request, 'ticket/add.html', {
         'date': date,
         'routeweek': routeweek,
-        'utils': utils 
     })
 
 @login_required
 def create_ticket(request, id, date):
     if request.method == 'POST':
         routeweek = RouteWeekday.objects.get(id=id)
-
-        if Utils.objects.all().exists():
-            utils = Utils.objects.first()
-        else:
-            utils = Utils.objects.create()
 
         client = request.POST['client']
         document = request.POST['document']
@@ -75,7 +63,7 @@ def create_ticket(request, id, date):
             document_client = document,
             document_type = document_type,
             birth_date_client = birth_date,
-            value = routeweek.route.discounted_value if utils.discount else routeweek.route.value,
+            value = routeweek.route.get_value,
             origin = routeweek.route.origin.name,
             destination = routeweek.route.destination.name,
             boat = routeweek.boat.name
