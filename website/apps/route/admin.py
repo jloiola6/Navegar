@@ -10,9 +10,9 @@ class RouteAdmin(admin.ModelAdmin):
 
 
 class BoatAdmin(admin.ModelAdmin):
-    list_display = ('name', 'user')
-    list_filter = ('name', 'user')
-    search_fields = ('name', 'user')
+    list_display = ('name', 'supplier')
+    list_filter = ('name', 'supplier')
+    search_fields = ('name', 'supplier')
 
 class LocationAdmin(admin.ModelAdmin):
     list_display = ('name',)

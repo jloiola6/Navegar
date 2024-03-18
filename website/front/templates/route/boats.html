@@ -28,6 +28,7 @@
             <tr>
                 <th>Nome</th>
                 <th>Fornecedor</th>
+                <th>Ação</th>
             </tr>
         </thead>
 
@@ -35,9 +36,20 @@
             {% for boat in boats %}
                 <tr>
                     <td>{{ boat.name }}</td>
-                    <td>{{ boat.user }}</td>
+                    <td>{{ boat.supplier }}</td>
+                    <td>
+                        <span 
+                            class="action edit"
+                            data-modal-open="{{ boat.id }}"
+                            title="Editar"
+                        ></span>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    {% for boat in boats %}
+        {% include './partials/_edit-boat-modal.html' %}
+    {% endfor %}
 {% endblock %}

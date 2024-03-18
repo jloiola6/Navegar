@@ -1,0 +1,18 @@
+{% load static %}
+
+<dialog class="modal" data-modal="{{ location.id }}">
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="location_id" value="{{ location.id }}">
+
+            <div class="group">
+                <label for="name-field-{{ location.id }}">Nome</label>
+                <input type="text" name="name" id="name-field-{{ location.id }}" value="{{ location.name }}" required>
+            </div>
+
+            <button class="button" type="submit">Salvar</button>
+        </form>
+    </div>
+</dialog>
