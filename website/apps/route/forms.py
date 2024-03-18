@@ -38,6 +38,7 @@ class RouteForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RouteForm, self).__init__(*args, **kwargs)
+
         self.fields['discounted_value'].widget.attrs['readonly'] = True
         self.fields['discounted_cost'].widget.attrs['readonly'] = True
 

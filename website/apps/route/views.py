@@ -82,10 +82,13 @@ def boats(request):
 
 @login_required
 def add_route(request, route_id=None):
+    template_name = 'route/add-route.html'
+
     if route_id:
         route = Route.objects.get(id=route_id)
         route_form = RouteForm(instance=route, label_suffix="")
         formset = RouteWeekdayFormSet(instance=route)
+        template_name = 'route/edit-route.html'
     else:
         route_form = RouteForm(label_suffix="")
         formset = RouteWeekdayFormSet()
@@ -104,6 +107,6 @@ def add_route(request, route_id=None):
             for instance in instances:
                 instance.route = route
                 instance.save()
-            return redirect(reverse('route:manage-routes'))
+            return redirect(reverse('route:index'))
           
-    return render(request, 'route/add-routes.html', {'route_form': route_form, 'formset': formset})
+    return render(request, template_name, {'route_form': route_form, 'formset': formset})

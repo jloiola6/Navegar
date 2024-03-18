@@ -1,0 +1,36 @@
+label:has(+ .next-day-check){
+    border: 1px solid var(--clr-border);padding: 1rem;
+    border-radius: 100vw;
+    cursor: pointer;
+    transition: .5s;
+
+    &:hover,
+    &:has(+ input:checked){
+        background-color: var(--clr-primary);
+        border-color: var(--clr-primary);
+        color: white;
+    }
+}
+
+.next-day-check{
+    display: none;
+}
+
+#formset-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    & .group{
+        flex-grow: 1;
+    }
+}
+
+.route-weekday-form {
+    display: flex;
+    gap: .5rem;
+
+    & > :last-child{
+        display: none;
+    }
+}

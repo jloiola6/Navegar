@@ -82,8 +82,8 @@
                         </td>
 
                         <td class="col-route">
-                            <span>{{ route.get_total_trip_time }} horas</span>
                             <span>{{ route.route }}</span>
+                            <span>{{ route.get_total_trip_time }} horas de viagem</span>
                         </td>
 
                         <td class="col-price">R$ {{ route.route.get_value }}</td>
@@ -105,7 +105,7 @@
                         <div class="card-body">
                             <span class="card-time">{{ route.get_departure_time }} - {{ route.get_arrival_time }}</span>
                             <span class="card-route">{{ route.route }}</span>
-                            <span class="card-total-trip">{{ route.get_total_trip_time }} horas</span>
+                            <span class="card-total-trip">{{ route.get_total_trip_time }} horas de viagem</span>
                         </div>
                     </a>
                 </li>

@@ -21,6 +21,9 @@ class Boat(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ['name']
 
 
 class Location(models.Model):
@@ -28,6 +31,9 @@ class Location(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        ordering = ['name']
 
 
 class Route(models.Model):
@@ -82,7 +88,7 @@ class Route(models.Model):
         return self.discounted_cost if self.discount else self.cost
     
     class Meta:
-        ordering = ['id']
+        ordering = ['origin__name', 'destination__name']
 
 
 class RouteWeekday(models.Model):
