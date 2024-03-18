@@ -7,7 +7,7 @@
         {% if ticket.status %}
             <span class="status-badge {{ ticket.get_status_class }}">{{ ticket.get_status }}</span>
         {% endif %}
-        
+
         <div class="route">
             <span>{{ routeweek.route.origin }}</span>
 
@@ -15,6 +15,10 @@
 
             <span>{{ routeweek.route.destination }}</span>
         </div>
+
+        {% if ticket.markdown %}
+            <span>Remarcação</span>
+        {% endif %}
 
         <div class="date">
             <span>{{ ticket.date }}{{ date }}</span>

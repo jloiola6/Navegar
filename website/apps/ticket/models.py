@@ -44,6 +44,7 @@ class Ticket(models.Model):
     document_type = models.CharField(max_length=3, null=True)
     birth_date_client = models.DateField(null=True, blank=True)
     document = models.FileField("Anexar bilhete",upload_to='documents/', max_length=100, blank=True, null=True)
+    markdown = models.BooleanField(default= False)
 
     def __str__(self):
         return f'{self.name_client} | ({self.origin} - {self.destination})'
