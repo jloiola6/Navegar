@@ -8,7 +8,7 @@ __pycache__/
 
 # Workspace
 website/apps/*/migrations/
-website/documents/
+documents/
 
 # Distribution / packaging
 .Python
