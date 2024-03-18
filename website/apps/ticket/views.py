@@ -54,6 +54,7 @@ def create_ticket(request, id, date):
         document = request.POST['document']
         document_type = request.POST['document_type']
         birth_date = request.POST['birth-date']
+        markdown = request.POST['markdown'] == 'on'
 
         ticket = Ticket.objects.create(
             user_create = request.user,
@@ -67,7 +68,8 @@ def create_ticket(request, id, date):
             cost = routeweek.route.get_cost,
             origin = routeweek.route.origin.name,
             destination = routeweek.route.destination.name,
-            boat = routeweek.boat.name
+            boat = routeweek.boat.name,
+            markdown = markdown
         )
         ticket.save()
         
