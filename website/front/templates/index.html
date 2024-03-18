@@ -62,8 +62,8 @@
         <button class="button search" type="submit">Pesquisar</button>
     </form>
 
-    {% if pagina_erro %}
-        <span>Nenhuma embarcação disponível para esta rota</span>
+    {% if empty_message %}
+        <span>{{ empty_message }}</span>
     {% endif %}
     
     {% if routes_list %}
