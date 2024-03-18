@@ -5,7 +5,7 @@ valueField.addEventListener('input', () => {
     discountedValueField.value = Number.parseFloat(valueField.value) - Number.parseFloat(valueField.value) * 0.025
 })
 
-const costValueField = document.getElementById('id_cost_value')
+const costValueField = document.getElementById('id_cost')
 const discountedCostField = document.getElementById('id_discounted_cost')
 
 costValueField.addEventListener('input', () => {

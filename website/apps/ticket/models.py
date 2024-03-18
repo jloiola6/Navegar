@@ -1,5 +1,6 @@
 from django.db import models
 import uuid
+from django.utils import timezone
 
 from apps.user.models import CustomUser
 from apps.route.models import RouteWeekday
@@ -29,11 +30,14 @@ class Ticket(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4, unique=True)
     user_create = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT)
+    
+    created_at = models.DateTimeField(auto_now_add= True)
     origin = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     date = models.DateField()
     boat = models.CharField(max_length=100)
     value = models.DecimalField(max_digits=10, decimal_places=2)
+    cost = models.DecimalField(max_digits= 10, decimal_places= 2)
     status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     name_client = models.CharField(max_length=100, null=True, blank=True)
     document_client = models.CharField(max_length=11, null=True, blank=True)
