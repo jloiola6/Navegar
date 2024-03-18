@@ -17,7 +17,7 @@ WEEKDAYS = (
 class Boat(models.Model):
     name = models.CharField(verbose_name="Nome", max_length=100)
     capacity = models.IntegerField(verbose_name="Capacidade", null=True, blank=True)
-    user = models.ForeignKey(User, verbose_name="Fornecedor", on_delete=models.PROTECT)
+    supplier = models.ForeignKey(User, verbose_name="Fornecedor", on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name

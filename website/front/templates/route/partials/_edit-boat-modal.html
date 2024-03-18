@@ -1,0 +1,37 @@
+{% load static %}
+
+<dialog class="modal" data-modal="{{ boat.id }}">
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" name="boat_id" value="{{ boat.id }}">
+
+            <div class="group">
+                <label for="name-field-{{ boat.id }}">Nome</label>
+                <input type="text" name="name" id="name-field-{{ boat.id }}" value="{{ boat.name }}" required>
+            </div>
+
+            <div class="group">
+                <label for="supplier-field-{{ boat.id }}">Fornecedor</label>
+            
+                <select 
+                    id="supplier-field-{{ boat.id }}"
+                    name="supplier" 
+                    required
+                >
+                    {% for supplier in suppliers %}
+
+                        {% if supplier.id == boat.supplier.id %}
+                            <option value="{{ supplier.id }}" selected>{{ supplier }}</option>
+                        {% else %}
+                            <option value="{{ supplier.id }}">{{ supplier }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+
+            <button class="button" type="submit">Salvar</button>
+        </form>
+    </div>
+</dialog>

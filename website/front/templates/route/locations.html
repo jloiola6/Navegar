@@ -19,15 +19,28 @@
         <thead>
             <tr>
                 <th>Nome</th>
+                <th>Ação</th>
             </tr>
         </thead>
 
         <tbody>
-            {% for local in locations %}
+            {% for location in locations %}
                 <tr>
-                    <td>{{ local }}</td>
+                    <td>{{ location }}</td>
+
+                    <td>
+                        <span 
+                            class="action edit"
+                            data-modal-open="{{ location.id }}"
+                            title="Editar"
+                        ></span>
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    {% for location in locations %}
+        {% include './partials/_edit-location-modal.html' %}
+    {% endfor %}
 {% endblock %}
