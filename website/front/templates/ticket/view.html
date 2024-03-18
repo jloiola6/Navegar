@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Visualizar Ticket{% endblock %}
+{% block title %}{{ ticket.origin }} - {{ ticket.destination }}{% endblock %}
 
 {% block css_template %}
     <link rel="stylesheet" href="{% static 'css/templates/ticket/view.css' %}">

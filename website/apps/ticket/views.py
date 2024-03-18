@@ -54,7 +54,7 @@ def create_ticket(request, id, date):
         document = request.POST['document']
         document_type = request.POST['document_type']
         birth_date = request.POST['birth-date']
-        markdown = request.POST['markdown'] == 'on'
+        markdown = request.POST.get('markdown') == 'on'
 
         ticket = Ticket.objects.create(
             user_create = request.user,
