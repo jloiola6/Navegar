@@ -11,7 +11,11 @@
         </a>
 
         <nav class="navigation-menu">
-            <a class="link" href="{% url 'core:index' %}">
+            <a 
+                class="link"
+                data-header-link="/" 
+                href="{% url 'core:index' %}"
+            >
                 <img 
                     alt="Consultar"
                     src="{% static 'icons/apps/search.svg' %}"
@@ -20,7 +24,11 @@
                 <span>Consulta</span>
             </a>
 
-            <a class="link" href="{% url 'ticket:index' %}">
+            <a 
+                class="link"
+                data-header-link="passagens" 
+                href="{% url 'ticket:index' %}"
+            >
                 <img 
                     alt="Passagens"
                     src="{% static 'icons/apps/tickets.svg' %}" 
@@ -29,7 +37,11 @@
                 <span>Passagens</span>
             </a>
 
-            <a class="link" href="#">
+            <a 
+                class="link" 
+                data-header-link="financeiro" 
+                href="#"
+            >
                 <img 
                     alt="Financeiro"
                     src="{% static 'icons/apps/financeiro.svg' %}" 
@@ -38,7 +50,11 @@
                 <span>Fincaneiro</span>
             </a>
 
-            <span class="link" data-modal-open="admin">
+            <span 
+                class="link"
+                data-header-link="usuario rotas" 
+                data-modal-open="admin"
+            >
                 <img 
                     alt="Administrativo"
                     src="{% static 'icons/apps/administrativo.svg' %}" 
@@ -61,13 +77,38 @@
     </div>
 
     <nav class="navigation-menu--mobile">
-        <a class="link" href="{% url 'core:index' %}">Rotas</a>
+        <a 
+            class="link" 
+            data-header-link="/"
+            href="{% url 'core:index' %}"
+        >
+            Rotas
+        </a>
 
-        <a class="link" href="{% url 'ticket:index' %}">Passagens</a>
+        <a 
+            class="link"
+            data-header-link="passagens" 
+            href="{% url 'ticket:index' %}"
+        >
+            Passagens
+        </a>
 
-        <a class="link" href="#">Fincaneiro</a>
+        <a 
+            class="link" 
+            data-header-link="financeiro"
+            href="#"
+        >
+            Fincaneiro
+        </a>
 
-        <a class="link" href="#" data-modal-open="admin">Administrativo</a>
+        <a 
+            class="link" 
+            data-modal-open="admin"
+            data-header-link="usuario rotas"
+            href="#" 
+        >
+            Administrativo
+        </a>
     </nav>
 </header>
 

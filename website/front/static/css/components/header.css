@@ -33,7 +33,9 @@
                 padding-inline: 1rem;
                 transition: background-color .5s;
 
-                &:hover{
+                &:hover,
+                &:focus-visible,
+                &.active{
                     background-color: var(--clr-primary-light);
                     border-color: var(--clr-primary-light);
                     color: var(--clr-primary);
@@ -65,8 +67,14 @@
         overflow-x: auto;
 
         .link{
+            box-sizing: border-box;
             color: hsl(0, 0%, 20%);
             padding-block: 1rem;
+
+            &.active{
+                color: var(--clr-primary);
+                border-bottom: 4px solid var(--clr-primary);
+            }
         }
     }
 }
