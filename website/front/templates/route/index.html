@@ -22,6 +22,8 @@
                 <th>Horário</th>
                 <th>Valor</th>
                 <th>Valor exibido</th>
+                <th>Custo</th>
+                <th>Custo exibido</th>
                 <th class="header-action">Ações</th>
             </tr>
         </thead>
@@ -36,13 +38,15 @@
                     <td class="price-label">{{ route.value }}</td>
                     
                     <td>
-                        {% if route.discount %}
-                            <span class="price-badge">{{ route.discounted_value }}</span>
-                        {% else %}
-                            <span class="price-badge">{{ route.value }}</span>
-                        {% endif %}
+                        <span class="price-badge">{{ route.get_value }}</span>
                     </td>
 
+                    <td class="price-label">{{ route.cost }}</td>
+
+                    <td class="price-label">
+                        <span class="price-badge">{{ route.get_cost }}</span>
+                    </td>
+                    
                     <td class="col-action">
                         <form method="POST">
                             {% csrf_token %}

@@ -38,11 +38,6 @@ class RouteForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RouteForm, self).__init__(*args, **kwargs)
-
-        # if user and user.discount:
-        #     # Fazer verificação de desconto
-        #     pass
-
         self.fields['discounted_value'].widget.attrs['readonly'] = True
         self.fields['discounted_cost'].widget.attrs['readonly'] = True
 
@@ -50,4 +45,4 @@ class RouteForm(forms.ModelForm):
 
     class Meta:
         model = Route
-        fields = ['origin', 'destination', 'value', 'discounted_value', 'cost_value', 'discounted_cost', 'departure_time', 'arrival_time', 'after_midnight']
+        fields = ['origin', 'destination', 'value', 'discounted_value', 'cost', 'discounted_cost', 'departure_time', 'arrival_time', 'after_midnight']

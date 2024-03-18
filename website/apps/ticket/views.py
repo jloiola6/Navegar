@@ -9,8 +9,8 @@ from apps.route.models import RouteWeekday
 
 @login_required
 def index(request):
-    pending_tickets = Ticket.objects.filter(status= 1).order_by('date')
-    available_tickets = Ticket.objects.filter().order_by('-id')
+    pending_tickets = Ticket.objects.filter(status= 1).order_by('created_at')
+    available_tickets = Ticket.objects.filter(status= 4).order_by('-created_at')
 
     if request.method == 'POST':
         ticket_id = request.POST['ticket_id']
@@ -64,6 +64,7 @@ def create_ticket(request, id, date):
             document_type = document_type,
             birth_date_client = birth_date,
             value = routeweek.route.get_value,
+            cost = routeweek.route.get_cost,
             origin = routeweek.route.origin.name,
             destination = routeweek.route.destination.name,
             boat = routeweek.boat.name

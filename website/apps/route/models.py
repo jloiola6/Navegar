@@ -35,7 +35,7 @@ class Route(models.Model):
     destination = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='destination', verbose_name='Destino')
     value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor')
     discounted_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor com desconto (2,5%)', blank=True, null=True)
-    cost_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Custo')
+    cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Custo')
     discounted_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Custo com desconto (R$ 20,00)', blank=True, null=True)
     departure_time = models.TimeField(blank=True, null=True, verbose_name='Horário de partida')
     arrival_time = models.TimeField(blank=True, null=True, verbose_name='Horário de Horário')
@@ -75,15 +75,11 @@ class Route(models.Model):
 
     @property
     def get_value(self):
-        if self.discount:
-            return self.discounted_value
-        return self.value
+        return self.discounted_value if self.discount else self.value
     
     @property
     def get_cost(self):
-        if self.discount:
-            return self.discounted_cost
-        return self.cost
+        return self.discounted_cost if self.discount else self.cost
     
     class Meta:
         ordering = ['id']
