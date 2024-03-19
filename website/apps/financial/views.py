@@ -14,9 +14,12 @@ def index(request):
         searched_date = request.POST.get('date')
         tickets = Ticket.objects.filter(created_at__date= searched_date)
 
-    total_cost = tickets.aggregate(Sum('cost'))['cost__sum']
-    total_value = tickets.aggregate(Sum('value'))['value__sum']
+    if tickets.count() > 0:
+        total_cost = tickets.aggregate(Sum('cost'))['cost__sum']
+        total_value = tickets.aggregate(Sum('value'))['value__sum']
 
-    total_profit = total_value - total_cost
+        total_profit = total_value - total_cost
+    else:
+        empty_message = 'Nenhuma movimentação encontrada nesta data'
 
     return TemplateResponse(request, 'financial/index.html', locals())

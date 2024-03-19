@@ -77,7 +77,7 @@
         </form>
     {% endif %}
 
-    {% if ticket.status == 6 %}
+    {% if ticket.status == 4 %}
         <form method="POST">
             {% csrf_token %}
             <button class="button" type="submit" name="no_show">Informar não comparecimento</button>
