@@ -24,7 +24,7 @@ urlpatterns = [
     path('usuario/', include('apps.user.urls')),
     path('passagens/', include('apps.ticket.urls')),
     path('rotas/', include('apps.route.urls')),
-    path('financial/', include('apps.financial.urls')),
+    path('financeiro/', include('apps.financial.urls')),
     path('', include('apps.core.urls')),
 ]
 
