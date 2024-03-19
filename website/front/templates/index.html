@@ -47,9 +47,9 @@
 
         <input 
             id="date" 
+            min="{{ today|date:'Y-m-d' }}"
             name="date" 
             type="date"
-            min="{{ today|date:'Y-m-d' }}"
             required
 
             {% if date %}

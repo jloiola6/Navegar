@@ -72,6 +72,10 @@ class Ticket(models.Model):
         return self.route_weekday.boat.supplier.upload_ticket
     
     @property
+    def profit(self):
+        return self.value - self.cost
+    
+    @property
     def supplier(self):
         return self.route_weekday.boat.supplier
 

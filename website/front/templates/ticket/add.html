@@ -2,10 +2,10 @@
 
 {% load static %}
 
-{% block title %}Solicitação de ticket{% endblock %}
+{% block title %}{{ routeweek.route.origin }} - {{ routeweek.route.destination }}{% endblock %}
 
 {% block content %}
-    <h1>Solicitação de ticket</h1>
+    <h1>Solicitar passagem</h1>
 
     {% include './partials/_ticket-form.html' %}
 {% endblock %}

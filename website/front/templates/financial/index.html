@@ -1,0 +1,78 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}Financeiro{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/financial/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Financeiro {{ searched_date|date:'Y-m-d' }}</h1>
+
+    <form method="POST" class="row">
+        {% csrf_token %}
+
+        <input 
+            id="data-field"
+            max="{{ current_date|date:'Y-m-d' }}" 
+            name="date" 
+            required
+            type="date" 
+
+            {% if searched_date %}
+                value="{{ searched_date }}"
+            {% else %}
+                value="{{ current_date|date:'Y-m-d' }}"
+            {% endif %}
+        >
+
+        <button class="button search" type="submit">Pesquisar</button>
+    </form>
+
+    <table class="table totals_table">
+        <tr>
+            <th>Vendas</th>
+            <td>R$ {{ total_value }}</td>
+        </tr>
+
+        <tr>
+            <th>Custo</th>
+            <td>R$ {{ total_cost }}</td>
+        </tr>
+
+        <tr>
+            <th>Lucro</th>
+            <td class="price-label">R$ {{ total_profit }}</td>
+        </tr>
+    </table>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Passageiro</th>
+                <th>Rota</th>
+                <th>Embarcação</th>
+                <th>Valor</th>
+                <th>Fornecedor</th>
+                <th>Custo</th>
+                <th>Lucro</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td>{{ ticket.name_client }}</td>
+                    <td>{{ ticket.origin }} - {{ ticket.destination }}</td>
+                    <td>{{ ticket.boat }}</td>
+                    <td>{{ ticket.value }}</td>
+                    <td>{{ ticket.supplier }}</td>
+                    <td>{{ ticket.cost }}</td>
+                    <td>{{ ticket.profit }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
