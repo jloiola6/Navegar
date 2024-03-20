@@ -46,6 +46,8 @@ def locations(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Local cadastrado')
+        else:
+            messages.error(request, 'Este local já existe, tente novamente')
 
             return redirect(reverse('route:locations'))
 
