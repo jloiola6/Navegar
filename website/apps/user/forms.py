@@ -27,6 +27,10 @@ class UserAuthenticationForm(AuthenticationForm):
         super(UserAuthenticationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = "email-input"
         self.fields['username'].widget.attrs['placeholder'] = "E-mail"
+        self.fields['username'].required = False
+
+        self.fields['phone'].widget.attrs['placeholder'] = "Telefone"
+        self.fields['phone'].required = False
 
         self.fields['password'].widget.attrs['class'] = "password-input"
         self.fields['password'].widget.attrs['placeholder'] = "Senha"
@@ -34,5 +38,5 @@ class UserAuthenticationForm(AuthenticationForm):
 
     class Meta:
         model = CustomUser
-        fields = ['email', 'password']
+        fields = ['email', 'phone', 'password']
 

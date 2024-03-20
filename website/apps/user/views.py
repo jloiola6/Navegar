@@ -77,7 +77,11 @@ def user_login(request):
 
         if form.is_valid():
             username = form.cleaned_data['username']
+            phone = form.cleaned_data['phone']
             password = form.cleaned_data['password']
+
+            if phone:
+                username = phone
 
             # Use authenticate para verificar as credenciais
             user = authenticate(request, username=username, password=password)
