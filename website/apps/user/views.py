@@ -75,25 +75,24 @@ def user_login(request):
     if request.method == 'POST':
         form = UserAuthenticationForm(data=request.POST)
 
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            phone = form.cleaned_data['phone']
-            password = form.cleaned_data['password']
+        username = request.POST.get('username')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password')
 
-            if phone:
-                username = phone
+        if phone:
+            username = phone
 
-            # Use authenticate para verificar as credenciais
-            user = authenticate(request, username=username, password=password)
+        # Use authenticate para verificar as credenciais
+        user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                # Use login para autenticar o usuário na sessão
-                login(request, user)
+        if user is not None:
+            # Use login para autenticar o usuário na sessão
+            login(request, user)
 
-                return redirect(reverse('core:index'))
-            else:
-                # Adicione uma mensagem de erro para indicar credenciais inválidas
-                form.add_error(None, 'Credenciais inválidas. Por favor, tente novamente.')
+            return redirect(reverse('core:index'))
+        else:
+            # Adicione uma mensagem de erro para indicar credenciais inválidas
+            form.add_error(None, 'Credenciais inválidas. Por favor, tente novamente.')
 
     return render(request, 'user/auth.html', {'form': form, 'auth': 'login'})
 
