@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'apps.user',
     "apps.route",
     "apps.ticket",
+    "apps.financial",
 ]
 
 MIDDLEWARE = [
