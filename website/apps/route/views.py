@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.db.models.functions import Lower
 
 from .forms import LocationForm, RouteForm, RouteWeekdayFormSet
-from .models import Location, Boat, Route
+from .models import Location, Boat, Route, RouteWeekday
 from apps.user.models import CustomUser
 
 # Create your views here.
@@ -103,10 +103,14 @@ def add_route(request, route_id=None):
 
         if route_form.is_valid() and formset.is_valid():
             route = route_form.save()
-            instances = formset.save(commit=False)
-            for instance in instances:
+            RouteWeekday.objects.filter(route=route).delete()
+            for instance in formset:
                 instance.route = route
-                instance.save()
+                try:
+                    instance.save()
+                except:
+                    pass
+                
             return redirect(reverse('route:index'))
           
     return render(request, template_name, {'route_form': route_form, 'formset': formset})
