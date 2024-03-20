@@ -23,6 +23,11 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ['full_name', 'email', 'cpf', 'phone']
 
 class UserAuthenticationForm(AuthenticationForm):
+    phone = forms.CharField(
+        label=("Telefone"),
+        required=False,
+    )
+
     def __init__(self, *args, **kwargs):
         super(UserAuthenticationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = "email-input"
