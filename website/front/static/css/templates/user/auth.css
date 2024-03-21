@@ -47,10 +47,47 @@ body{
             }
         }
 
+        .auth-type-group{
+            display: flex;
+            justify-content: center;
+            
+            label{
+                border: 2px solid var(--clr-primary);
+                cursor: pointer;
+                padding-block: .5rem;
+                padding-inline: 1rem;
+                transition: .25s;
+
+                &:is(:first-of-type){
+                    border-radius: .5rem 0 0 .5rem;
+                }
+
+                &:is(:last-of-type){
+                    border-radius: 0 .5rem .5rem 0;
+                }
+
+                &:hover{
+                    background-color: var(--clr-primary-light);
+                }
+            }
+
+            input[type="radio"]{
+                display: none;
+            }
+
+            input:checked + label{
+                background-color: var(--clr-primary);
+                color: #FFF;
+            }
+        }
+
         form{
             gap: 1.5rem;
 
+            
+
             .email-input,
+            .phone-input,
             .password-input{
                 --background-size: 1.5rem;
                 --padding-left: .75rem;
@@ -68,6 +105,10 @@ body{
 
             .email-input{
                 background-image: url('../../../icons/mail.svg');
+            }
+
+            .phone-input{
+                background-image: url('../../../icons/phone.svg');
             }
 
             .password-input{

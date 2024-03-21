@@ -1,11 +1,22 @@
+{% load static %}
+
 <div class="title-group">
     <h1 class="title">Bem vindo</h1>
     <p>Entre com as suas credenciais</p>
 </div>
 
+<fieldset class="auth-type-group">
+    <input id="radio-auth-type-phone" name="radio-auth-type" type="radio" data-radio-auth-type="phone" checked>
+    <label for="radio-auth-type-phone">Telefone</label>
+
+    <input id="radio-auth-type-email" name="radio-auth-type" type="radio" data-radio-auth-type="email">
+    <label for="radio-auth-type-email">E-mail</label>
+</fieldset>
+
 <form method="POST">
     {% csrf_token %}
 
+    
     {% for f in form %}
         {{ f }}
     {% endfor %}
@@ -18,3 +29,5 @@
         <button type="submit" class="button">Entrar</button>
     </div>
 </form>
+
+<script src="{% static 'js/templates/user/auth/loginAuthType.js' %}"></script>

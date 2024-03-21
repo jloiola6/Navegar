@@ -27,21 +27,26 @@ class UserAuthenticationForm(AuthenticationForm):
         label=("Telefone"),
         required=False,
     )
-
     def __init__(self, *args, **kwargs):
         super(UserAuthenticationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = "email-input"
         self.fields['username'].widget.attrs['placeholder'] = "E-mail"
+        self.fields['username'].widget.attrs['data-input-auth-type'] = "email"
         self.fields['username'].required = False
 
+
+        self.fields['phone'].widget.attrs['class'] = "phone-input"
+        self.fields['phone'].widget.attrs['class'] = "phone-input"
         self.fields['phone'].widget.attrs['placeholder'] = "Telefone"
+        self.fields['phone'].widget.attrs['data-input-auth-type'] = "phone"
         self.fields['phone'].required = False
 
         self.fields['password'].widget.attrs['class'] = "password-input"
         self.fields['password'].widget.attrs['placeholder'] = "Senha"
         self.fields['password'].widget.attrs['maxlength'] = "128"
 
+        self.order_fields(field_order= ['username', 'phone', 'password'])
+
     class Meta:
         model = CustomUser
         fields = ['email', 'phone', 'password']
-
