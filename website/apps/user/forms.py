@@ -31,14 +31,15 @@ class UserAuthenticationForm(AuthenticationForm):
         super(UserAuthenticationForm, self).__init__(*args, **kwargs)
         self.fields['username'].widget.attrs['class'] = "email-input"
         self.fields['username'].widget.attrs['placeholder'] = "E-mail"
-        self.fields['username'].widget.attrs['data-input-auth-type'] = "email"
+        self.fields['username'].widget.attrs['data-radio-control-target'] = "email"
         self.fields['username'].required = False
 
 
         self.fields['phone'].widget.attrs['class'] = "phone-input"
         self.fields['phone'].widget.attrs['class'] = "phone-input"
         self.fields['phone'].widget.attrs['placeholder'] = "Telefone"
-        self.fields['phone'].widget.attrs['data-input-auth-type'] = "phone"
+        self.fields['phone'].widget.attrs['data-radio-control-target'] = "phone"
+        self.fields['phone'].widget.attrs['maxlength'] = '15'
         self.fields['phone'].required = False
 
         self.fields['password'].widget.attrs['class'] = "password-input"
