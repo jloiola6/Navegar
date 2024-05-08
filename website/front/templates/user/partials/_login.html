@@ -5,18 +5,17 @@
     <p>Entre com as suas credenciais</p>
 </div>
 
-<fieldset class="auth-type-group">
-    <input id="radio-auth-type-phone" name="radio-auth-type" type="radio" data-radio-auth-type="phone" checked>
+<fieldset class="radio-control">
+    <input id="radio-auth-type-phone" name="radio-auth-type" type="radio" data-radio-control="phone" checked>
     <label for="radio-auth-type-phone">Telefone</label>
 
-    <input id="radio-auth-type-email" name="radio-auth-type" type="radio" data-radio-auth-type="email">
+    <input id="radio-auth-type-email" name="radio-auth-type" type="radio" data-radio-control="email">
     <label for="radio-auth-type-email">E-mail</label>
 </fieldset>
 
 <form method="POST">
     {% csrf_token %}
 
-    
     {% for f in form %}
         {{ f }}
     {% endfor %}
@@ -29,5 +28,3 @@
         <button type="submit" class="button">Entrar</button>
     </div>
 </form>
-
-<script src="{% static 'js/templates/user/auth/loginAuthType.js' %}"></script>

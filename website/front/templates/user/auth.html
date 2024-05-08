@@ -23,8 +23,10 @@
       {% endif %}
     </div>
 
-    {% if auth == 'login' %}
-      <a class="forgot-password-link" href="#">Esqueci minha senha</a>
-    {% endif %}
+    {% comment %}
+      {% if auth == 'login' %}
+        <a class="forgot-password-link" href="#">Esqueci minha senha</a>
+      {% endif %}
+    {% endcomment %}
   </main>
 {% endblock %}
