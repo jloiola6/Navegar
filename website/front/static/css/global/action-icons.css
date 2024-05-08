@@ -1,11 +1,19 @@
 .action{
     aspect-ratio: 1;
-    background-color: transparent;
-    background-size: cover;
+    background-color: hsl(0, 0%, 90%);
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    background-position: center;
     border: none;
+    border-radius: 100vw;
     cursor: pointer;
     display: block;
-    width: 1.25rem;
+    transition: .5s;
+    width: 2rem;
+
+    &:is(:hover, :focus-visible){
+        background-color: hsl(0, 0%, 75%);
+    }
 
     &.edit{
         background-image: url('../../icons/edit.svg');
@@ -19,7 +27,7 @@
         background-image: url('../../icons/discount_off.svg');
     }
 
-    &.excluir{
+    &.delete{
         background-image: url('../../icons/delete.svg');
     }
 }

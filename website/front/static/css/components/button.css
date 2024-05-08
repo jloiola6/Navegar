@@ -14,20 +14,21 @@
     color: #FFF;
     cursor: pointer;
     font-size: 1em;
+    outline: none;
     padding-block: 1rem;
     padding-inline: 2rem;
     text-align: center;
     transition: background-color .5s;
     width: fit-content;
 
-    &:hover{
+    &:is(:hover, :focus-visible){
         background-color: var(--clr-primary-dark);
     }
 
     &.red{
         --button-color: var(--clr-error);
 
-        &:hover{
+        &:is(:hover, :focus-visible){
             background-color: var(--clr-error-dark);
         }
     }
@@ -40,7 +41,7 @@
         padding-block: calc(1rem - 1px);
         padding-inline: calc(2rem - 1px);
 
-        &:hover{
+        &:is(:hover, :focus-visible){
             background-color: var(--button-color);
             color: #FFF;
         }

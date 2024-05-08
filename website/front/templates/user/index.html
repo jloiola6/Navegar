@@ -15,11 +15,11 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>E-mail</th>
-                <th>Telefone</th>
-                <th>Perfil</th>
                 <th class="header-status">Status</th>
-                <th class="header-action">Ações</th>
+                <th>Perfil</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th class="header-action"></th>
             </tr>
         </thead>
 
@@ -27,20 +27,32 @@
             {% for user in users %}
                 <tr>
                     <td>{{ user.full_name }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone|default:'' }}</td>
-                    <td>{{ user.profile }}</td>
 
                     <td>
                         <span class="status-badge {{ user.status }}">{{ user.status }}</span>
                     </td>
 
+                    <td>
+                        {{ user.profile }}
+
+                        {% if user.type == 'F' %}
+                            {% if user.upload_ticket %}
+                                - Ticket
+                            {% else %}
+                                - Voucher
+                            {% endif %}
+                        {% endif %}
+                    </td>
+
+                    <td>{{ user.phone|default:'' }}</td>
+                    <td>{{ user.email }}</td>
+
                     <td class="col-action">
-                        <span 
+                        <button 
                             class="action edit"
                             data-modal-open="{{ user.id }}" 
                             title="Editar"
-                        ></span>
+                        ></button>
                     </td>
                 </tr>
             {% endfor %}
