@@ -87,6 +87,7 @@ b{
     &.Inativo,
     &.no_show,
     &.order_cancellation,
+    &.Pendente,
     &.pending,
     &.refused{
         background-color: hsl(0, 0%, 90%);
