@@ -1,0 +1,11 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}{{ routeweek.route.origin }} - {{ routeweek.route.destination }}{% endblock %}
+
+{% block content %}
+    <h1>Solicitar passagem</h1>
+
+    {% include './partials/_ticket-form.html' %}
+{% endblock %}

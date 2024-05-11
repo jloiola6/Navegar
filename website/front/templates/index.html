@@ -1,3 +1,115 @@
-<h1>Home</h1>
+{% extends "./partials/_base.html" %}
 
-<a href="{% url 'user:logout' %}"><button>Sair</button></a>
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Consulta de rotas</h1>
+
+    <form method="POST" class="row">
+        {% csrf_token %}
+        <select 
+            id="origin"
+            name="origin" 
+            required
+        >   
+            <option value="" disabled selected>Origem</option>
+
+            {% for location in locations %}
+                {% if location.id == origin %}
+                    <option value="{{ location.id }}" selected>{{ location }}</option>
+                {% else %}
+                    <option value="{{ location.id }}">{{ location }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <select 
+            id="destination"
+            name="destination" 
+            required
+        >
+            <option value="" disabled selected>Destino</option>
+            
+            {% for location in locations %}
+                {% if location.id == destination %}
+                    <option value="{{ location.id }}" selected>{{ location }}</option>
+                {% else %}
+                    <option value="{{ location.id }}">{{ location }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <input 
+            id="date" 
+            min="{{ today|date:'Y-m-d' }}"
+            name="date" 
+            type="date"
+            required
+
+            {% if date %}
+                value="{{ searched_date }}"
+            {% else %}
+                value="{{ today|date:'Y-m-d' }}"
+            {% endif %}
+        />
+
+        <button class="button search" type="submit">Pesquisar</button>
+    </form>
+
+    {% if empty_message %}
+        <span>{{ empty_message }}</span>
+    {% endif %}
+    
+    {% if routes_list %}
+        <h2>Resultado</h2>
+
+        <table class="table routes-table">
+            <tbody>
+                {% for route in routes_list %}
+                    <tr data-link="{% url 'ticket:add' route.id date %}">
+                        <td class="col-boat">
+                            <span>{{ route.boat }}</span>
+                        </td>
+
+                        <td class="col-time">
+                            <span>{{ route.get_departure_time }} - {{ route.get_arrival_time }}</span>
+                        </td>
+
+                        <td class="col-route">
+                            <span>{{ route.route }}</span>
+                            <span>{{ route.get_total_trip_time }} horas de viagem</span>
+                        </td>
+
+                        <td class="col-price">R$ {{ route.route.get_value }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <ul class="mobile-routes-list">
+            {% for route in routes_list %}
+                <li>
+                    <a class="card" href="{% url 'ticket:add' route.id date %}">
+                        <div class="card-header">
+                            <span class="card-boat">{{ route.boat }}</span>
+                            
+                            <span class="card-price">R$ {{ route.route.get_value }}</span>
+                        </div>
+                        
+                        <div class="card-body">
+                            <span class="card-time">{{ route.get_departure_time }} - {{ route.get_arrival_time }}</span>
+                            <span class="card-route">{{ route.route }}</span>
+                            <span class="card-total-trip">{{ route.get_total_trip_time }} horas de viagem</span>
+                        </div>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

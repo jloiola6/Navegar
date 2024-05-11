@@ -1,0 +1,11 @@
+.header-action{
+    text-align: center;
+}
+
+.col-action{
+    text-align: center;
+    
+    .action{
+        margin: auto;
+    }
+}

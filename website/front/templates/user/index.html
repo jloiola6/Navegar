@@ -1,0 +1,67 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}Usuários{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/user/index.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Usuários</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th class="header-status">Status</th>
+                <th>Perfil</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th class="header-action"></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.full_name }}</td>
+
+                    <td>
+                        <span class="status-badge {{ user.status }}">{{ user.status }}</span>
+                    </td>
+
+                    <td>
+                        {{ user.profile }}
+
+                        {% if user.type == 'F' %}
+                            {% if user.upload_ticket %}
+                                - Ticket
+                            {% else %}
+                                - Voucher
+                            {% endif %}
+                        {% endif %}
+                    </td>
+
+                    <td>{{ user.phone|default:'' }}</td>
+                    <td>{{ user.email }}</td>
+
+                    <td class="col-action">
+                        <button 
+                            class="action edit"
+                            data-modal-open="{{ user.id }}" 
+                            title="Editar"
+                        ></button>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% for user in users %}
+        {% include './partials/_edit-user-modal.html' %}
+    {% endfor %}
+
+    <script src="{% static 'js/templates/user/index/editUser.js' %}"></script>
+{% endblock %}

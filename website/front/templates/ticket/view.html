@@ -1,0 +1,86 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}{{ ticket.origin }} - {{ ticket.destination }}{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/view.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% include './partials/_ticket-info.html' %}
+
+    <div class="group">
+        <label>Nome do passageiro</label>
+        <input type="text" value="{{ ticket.name_client }}" disabled>
+    </div>
+
+
+    <div class="grid col-2">
+        <div class="group">
+            {% if ticket.document_type == 'rg' %}
+                <label>RG</label>
+            {% else %}
+                <label>CPF</label>
+            {% endif %}
+
+            <input type="text" value="{{ ticket.document_client }}" disabled>
+        </div>
+        
+        <div class="group">
+            <label>Data de Nascimento</label>
+            <input type="date" value="{{ ticket.birth_date_client|date:'Y-m-d' }}" disabled>
+        </div>
+    </div>
+
+    {% if ticket.status == 1 %}
+        <form method="POST">
+            {% csrf_token %}
+            <button class="button red" type="submit" name="order_cancellation">Cancelar solicitação</button>
+        </form>
+
+        <form method="POST">
+            {% csrf_token %}
+            <button class="button red" type="submit" name="refused">Recusar solicitação</button>
+        </form>
+
+        <div class="ticket-validation">
+            <h2>Validar ticket</h2>
+            
+            {% if ticket.is_upload %}
+                {% include './partials/_ticket-file-form.html' %}
+            {% else %}
+                {% include './partials/_ticket-status-form.html' %}
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if ticket.status >= 4 %}
+        {% if ticket.is_upload %}
+            <a href="{{ ticket.get_document_url }}" target="_blank" class="button">Abrir bilhete</a>
+        {% else %}
+            <a href="{% url 'ticket:print' ticket.id %}" target="_blank" class="button">Abrir voucher</a>
+        {% endif %}
+    {% endif %}
+
+    {% if ticket.status == 4 %}
+        <form method="POST">
+            {% csrf_token %}
+            <button class="button red" type="submit" name="cancelled">
+                {% if ticket.is_upload %}
+                    Cancelar bilhete
+                {% else %}
+                    Cancelar voucher
+                {% endif %}
+            </button>
+        </form>
+    {% endif %}
+
+    {% if ticket.status == 4 %}
+        <form method="POST">
+            {% csrf_token %}
+            <button class="button" type="submit" name="no_show">Informar não comparecimento</button>
+        </form>
+    {% endif %}
+{% endblock %}

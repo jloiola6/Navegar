@@ -1,0 +1,53 @@
+.ticket-list{
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: repeat(2, 1fr);
+
+    .card{
+        border: 1px solid var(--clr-border);
+        border-radius: 0.5rem;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        height: 100%;
+        justify-content: space-between;
+        padding-block: 1.5rem;
+        padding-inline: 1.25rem;
+        transition: .5s;
+
+        > div{
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+
+            span{
+                font-weight: 600;
+            }
+
+            .status-badge{
+                margin-bottom: .5rem;
+            }
+
+            .card-date,
+            .card-time{
+                color: hsl(0, 0%, 40%);
+                font-size: .75rem;
+            }
+
+            .card-client-info,
+            .card-route,
+            .card-value{
+                font-size: .75rem;
+            }
+        }
+    }
+}
+
+/* RESPONSIVE */
+
+@media screen and (width <= 500px) {
+    .ticket-list{
+        grid-template-columns: 1fr;
+    }
+}

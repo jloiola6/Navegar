@@ -26,14 +26,10 @@ SECRET_KEY = 'django-insecure-n_q9k1$-qv=s1hr0=c1pmvmneh&y=_dcfw(occz7g!x3ychw=p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-if DEBUG:
-    ALLOWED_HOSTS = ["*"]
-else:
-    ALLOWED_HOSTS = ['dominio.com.br', 'www.dominio.com.br']
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +40,9 @@ INSTALLED_APPS = [
 
     # Apps
     'apps.core',
-    'apps.user'
+    'apps.user',
+    "apps.route",
+    "apps.ticket",
 ]
 
 MIDDLEWARE = [
@@ -55,6 +53,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'apps.core.middleware.AddTrailingSlashMiddleware',
 ]
 
 ROOT_URLCONF = 'website.urls'
@@ -86,15 +87,26 @@ if DEBUG:
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        },
     }
 else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        },
     }
+    # DATABASES = {
+        # configure um banco postgres
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #     'NAME': 'navegar',
+        #     'USER': 'navegar',
+        #     'PASSWORD': 'navegar',
+        #     'HOST': 'localhost',
+        #     'PORT': '5432',
+        # }
+    # }
 
 
 # Password validation
@@ -119,9 +131,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Rio_Branco'
 
 USE_I18N = True
 
@@ -133,10 +145,21 @@ USE_TZ = True
 
 STATIC_URL = 'front/static/'
 
-if not DEBUG:
+
+if DEBUG:
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'front/static')
+    ]
+else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'front/static')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'user.CustomUser'
+
+LOGIN_URL = '/usuario/login/'
+
+AUTHENTICATION_BACKENDS = ['apps.user.backends.EmailPhoneBackend']

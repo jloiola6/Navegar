@@ -1,0 +1,40 @@
+.header{
+    display: none;
+}
+
+.print-ticket-table{
+    border: 1px solid var(--clr-border);
+
+    thead{
+        border-bottom: 1px solid var(--clr-border);
+        font-weight: 600;
+        text-align: center;
+    }
+
+    tbody,
+    tfoot{
+        font-size: .75rem;
+
+        td{
+            padding-block: .5rem
+        }
+    }
+
+    tfoot{
+        border-top: 1px solid var(--clr-border);
+    }
+
+    tr{
+        border: none;
+    }
+
+    .ticket-supplier{
+        font-size: 1.5rem;
+    }
+}
+
+@media print {
+    .button{
+        display: none;
+    }
+}

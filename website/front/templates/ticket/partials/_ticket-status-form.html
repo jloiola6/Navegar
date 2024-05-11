@@ -1,0 +1,7 @@
+<form class="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="hidden" name="ticket_id" id="ticket_id-field" value="{{ ticket.id }}">
+
+    <button class="button" type="submit" name="voucher" value="voucher">Emitir voucher</button>
+</form>

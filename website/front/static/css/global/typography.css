@@ -1,0 +1,116 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+body, body * {
+    color: hsl(0, 0%, 20%);
+    font-family: 'Montserrat', system-ui, sans-serif;
+}
+
+h1{
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+h2{
+    font-size: 1rem;
+}
+
+b{
+    font-weight: 600;
+}
+
+.link{
+    color: var(--clr-primary);
+    font-weight: 500;
+}
+
+.boat-label{
+    color: var(--clr-primary);
+    display: flex;
+    font-weight: 600;
+    gap: .5rem;
+
+    &::before{
+        aspect-ratio: 1;
+        background-image: url('../../icons/rotas.svg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        content: '';
+        display: block;
+        width: 1rem;
+    }
+}
+
+.price-label{
+    color: hsl(141, 81%, 30%);
+    font-weight: 600;
+}
+
+.price-badge{
+    background-color: var(--clr-success-light);
+    border-radius: .5rem;
+    color: hsl(141, 81%, 30%);
+    font-weight: 600;
+    padding-block: .5rem;
+    padding-inline: 1rem;
+}
+
+.status-badge{
+    align-items: center;
+    border-radius: 100vw;
+    display: flex;
+    font-size: .75rem;
+    font-weight: 600;
+    gap: .5rem;
+    padding-block: .5rem;
+    padding-inline: 1rem;
+    width: fit-content;
+
+    &::before{
+        aspect-ratio: 1;
+        border-radius: 100vw;
+        content: '';
+        display: block;
+        width: .5rem;
+    }
+
+    &.Ativo,
+    &.available{
+        background-color: var(--clr-success-light);
+
+        &::before{
+            background-color: var(--clr-success);
+        }
+    }
+
+    &.canceled,
+    &.Inativo,
+    &.no_show,
+    &.order_cancellation,
+    &.Pendente,
+    &.pending,
+    &.refused{
+        background-color: hsl(0, 0%, 90%);
+
+        &::before{
+            background-color: hsl(0, 0%, 60%);
+        }
+    }
+
+    &.pending{
+        background-color: var(--clr-warning-light);
+
+        &::before{
+            background-color: var(--clr-warning);
+        }
+    }
+}
+
+/* RESPONSIVE */
+
+@media screen and (width <= 500px) {
+    h1, h2{
+        font-weight: 500;
+        text-align: left;
+    }
+}

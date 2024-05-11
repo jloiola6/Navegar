@@ -1,0 +1,115 @@
+{% load static %}
+
+<header class="header">
+    <div class="header__container">
+        <a href="{% url 'core:index' %}">
+            <img 
+                alt="Navegar"
+                class="logo"
+                src="{% static 'images/logo.svg' %}" 
+            >
+        </a>
+
+        <nav class="navigation-menu">
+            <a 
+                class="link"
+                data-header-link="/" 
+                href="{% url 'core:index' %}"
+            >
+                <img 
+                    alt="Consultar"
+                    src="{% static 'icons/apps/search.svg' %}"
+                >
+                
+                <span>Consulta</span>
+            </a>
+
+            <a 
+                class="link"
+                data-header-link="passagens" 
+                href="{% url 'ticket:index' %}"
+            >
+                <img 
+                    alt="Passagens"
+                    src="{% static 'icons/apps/tickets.svg' %}" 
+                >
+                
+                <span>Passagens</span>
+            </a>
+
+            <a 
+                class="link" 
+                data-header-link="financeiro" 
+                href="{% url 'financial:index' %}"
+            >
+                <img 
+                    alt="Financeiro"
+                    src="{% static 'icons/apps/financeiro.svg' %}" 
+                >
+                
+                <span>Fincaneiro</span>
+            </a>
+
+            <span 
+                class="link"
+                data-header-link="usuario rotas" 
+                data-modal-open="admin"
+            >
+                <img 
+                    alt="Administrativo"
+                    src="{% static 'icons/apps/administrativo.svg' %}" 
+                >
+                
+                <span>Administrativo</span>
+            </span>
+        </nav>
+
+        <div class="user-container">
+            <img 
+                alt="Avatar do usuário"
+                data-user-avatar
+                class="avatar" 
+                src="{% static 'icons/avatar.svg' %}" 
+            >
+            
+            {% include './_user-menu.html' %}
+        </div>
+    </div>
+
+    <nav class="navigation-menu--mobile">
+        <a 
+            class="link" 
+            data-header-link="/"
+            href="{% url 'core:index' %}"
+        >
+            Rotas
+        </a>
+
+        <a 
+            class="link"
+            data-header-link="passagens" 
+            href="{% url 'ticket:index' %}"
+        >
+            Passagens
+        </a>
+
+        <a 
+            class="link" 
+            data-header-link="financeiro"
+            href="{% url 'financial:index' %}"
+        >
+            Fincaneiro
+        </a>
+
+        <a 
+            class="link" 
+            data-modal-open="admin"
+            data-header-link="usuario rotas"
+            href="#" 
+        >
+            Administrativo
+        </a>
+    </nav>
+</header>
+
+{% include './_admin-modal.html' with id="admin" %}

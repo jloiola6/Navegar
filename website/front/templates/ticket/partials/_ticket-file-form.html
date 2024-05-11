@@ -1,0 +1,26 @@
+{% load static %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/partials/_ticket-file-form.css' %}">
+{% endblock %}
+
+<form class="file-form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <input type="hidden" name="ticket_id" id="ticket_id-field" value="{{ ticket.id }}">
+
+    <div class="group">
+        <input 
+            accept="image/*"
+            capture="user"
+            id="id_document"
+            name="document"
+            required
+            type="file"
+        />
+
+        <label for="id_document">Anexar bilhete</label>
+    </div>
+
+    <button class="button" type="submit">Enviar</button>
+</form>

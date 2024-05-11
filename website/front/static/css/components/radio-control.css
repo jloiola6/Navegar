@@ -1,0 +1,26 @@
+.radio-control{
+    border: 2px solid var(--clr-primary);
+    border-radius: .5rem;
+    display: flex;
+    width: fit-content;
+
+    label{
+        cursor: pointer;
+        padding-block: .5rem;
+        padding-inline: 1rem;
+        transition: .5s;
+
+        &:not([for]){
+            display: none;
+        }
+    }
+
+    input{
+        display: none;
+    }
+
+    input:checked + label{
+        background-color: var(--clr-primary);
+        color: #FFF;
+    }
+}

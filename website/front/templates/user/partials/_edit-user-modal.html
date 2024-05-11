@@ -1,0 +1,81 @@
+{% load static %}
+
+<dialog class="modal" data-modal="{{ user.id }}">
+    <div class="content">
+        <form method="POST">
+            {% csrf_token %}
+            <input style="display:none;" type="text" name="user_id" id="input_user" value="{{ user.id }}">
+            
+            <div class="group">
+                <label for="name-field-{{ user.id }}">Nome</label>
+                <input type="text" name="name" id="name-field-{{ user.id }}" value="{{ user.full_name|default:'' }}">
+            </div>
+            
+            <div class="group">
+                <label for="phone-field-{{ user.id }}">Telefone</label>
+                <input type="text" name="phone" id="phone-field-{{ user.id }}" value="{{ user.phone|default:'' }}">
+            </div>
+            
+            <div class="group">
+                <label for="password-field-{{ user.id }}">Senha</label>
+                <input type="text" name="password" id="password-field-{{ user.id }}">
+            </div>
+
+            <div class="group">
+                <label>Perfil</label>
+                
+                <div>
+                    {% for type in all_types %}
+                        {% if type.0 == user.type %}
+                            <input id="tipo-{{ type.0 }}-{{ user.id }}" type="radio" name="type" value="{{ type.0 }}" data-radio-type="{{ user.id }}" checked>
+                        {% else %}
+                            <input id="tipo-{{ type.0 }}-{{ user.id }}" type="radio" name="type" value="{{ type.0 }}" data-radio-type="{{ user.id }}">
+                        {% endif %}
+
+                        <label for="tipo-{{ type.0 }}-{{ user.id }}">{{ type.1 }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="group">
+                <label>Status</label>
+                
+                <div>
+                    {% for status in all_status %}
+                        {% if status == user.status %}
+                            <input id="status-{{ status }}-{{ user.id }}" type="radio" name="status" value="{{ status }}" checked>
+                        {% else %}
+                            <input id="status-{{ status }}-{{ user.id }}" type="radio" name="status" value="{{ status }}">
+                        {% endif %}
+
+                        <label for="status-{{ status }}-{{ user.id }}">{{ status }}</label>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="group" data-issuance-group="{{ user.id }}">
+                <label>Tipo de emissão</label>
+
+                <div>
+                    {% if not user.upload_ticket %}
+                        <input id="issuance-type-voucher-{{ user.id }}" type="radio" name="issuance_type" value="voucher" checked>
+                    {% else %}
+                        <input id="issuance-type-voucher-{{ user.id }}" type="radio" name="issuance_type" value="voucher">
+                    {% endif %}
+
+                    <label for="issuance-type-voucher-{{ user.id }}">Voucher</label>
+
+                    {% if user.upload_ticket %}
+                        <input id="issuance-type-bilhete-{{ user.id }}" type="radio" name="issuance_type" value="bilhete" checked>
+                    {% else %}
+                        <input id="issuance-type-bilhete-{{ user.id }}" type="radio" name="issuance_type" value="bilhete">
+                    {% endif %}
+
+                    <label for="issuance-type-bilhete-{{ user.id }}">Bilhete</label>
+                </div>
+            </div>
+
+            <button class="button">Salvar</button>
+        </form>
+    </div>
+</dialog>

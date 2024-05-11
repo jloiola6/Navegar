@@ -1,0 +1,32 @@
+{% extends './partials/_base.html' %}
+
+{% load static %}
+
+{% block title %} 
+    {% if auth == 'login' %}
+        Login
+    {% elif auth == 'signup' %}
+        Cadastro
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+  <main class="auth-layout">
+    <img class="logo" src="{% static '/images/logo.svg' %}" alt="Navegar">
+    <img class="mobile-logo" src="{% static '/images/mobile-logo.svg' %}" alt="Navegar">
+
+    <div class="auth-container">
+      {% if auth == 'login' %}
+        {% include './partials/_login.html' %}
+      {% elif auth == 'signup' %}
+        {% include './partials/_signup.html' %}
+      {% endif %}
+    </div>
+
+    {% comment %}
+      {% if auth == 'login' %}
+        <a class="forgot-password-link" href="#">Esqueci minha senha</a>
+      {% endif %}
+    {% endcomment %}
+  </main>
+{% endblock %}

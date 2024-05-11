@@ -1,0 +1,31 @@
+input:is(
+    [type="date"], 
+    [type="email"], 
+    [type="password"], 
+    [type="text"],
+    [type="time"],
+    [type="number"]
+), 
+select{
+    border: 1px solid var(--clr-border);
+    border-radius: .25rem;
+    box-sizing: border-box;
+    font-size: 1rem;
+    height: 3.5rem;
+    outline: none;
+    padding-inline: .75rem;
+    transition: .25s;
+    width: 100%;
+
+    &:is(:hover, :focus-visible){
+        border-color: var(--clr-primary);
+    }
+
+    &:invalid.touched{
+        border-color: var(--clr-error);
+    }
+}
+
+select option:first-child:disabled{
+    display: none;
+}

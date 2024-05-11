@@ -1,0 +1,20 @@
+:root{
+    --clr-background: #FFF;
+    --clr-border: hsl(0, 0%, 80%);
+
+    --clr-error: hsl(0, 82%, 51%);
+    --clr-error-dark: hsl(0, 82%, 30%);
+    --clr-error-light: hsl(0, 82%, 95%);
+    
+    --clr-primary: hsl(214, 82%, 51%);
+    --clr-primary-dark: hsl(214, 82%, 31%);
+    --clr-primary-light: hsl(214, 82%, 95%);
+
+    --clr-success: hsl(140, 82%, 51%);
+    --clr-success-dark: hsl(140, 82%, 30%);
+    --clr-success-light: hsl(140, 82%, 90%);
+
+    --clr-warning: hsl(50, 82%, 51%);
+    --clr-warning-dark: hsl(50, 82%, 30%);
+    --clr-warning-light: hsl(50, 82%, 90%);
+}

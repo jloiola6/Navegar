@@ -7,15 +7,48 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="icon" conten>
 
-        <title>{% block titulo %}{% endblock %} | site</title>
+        <title>Navegar • {% block title %}{% endblock %}</title>
 
+        <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" type="image/x-icon">
+
+        <link rel="stylesheet" href="{% static 'css/global/reset.css' %}">
+        <link rel="stylesheet" href="{% static 'css/global/typography.css' %}">
+        <link rel="stylesheet" href="{% static 'css/global/colors.css' %}">
+        <link rel="stylesheet" href="{% static 'css/global/layout.css' %}">
+        <link rel="stylesheet" href="{% static 'css/global/action-icons.css' %}">
+
+        <link rel="stylesheet" href="{% static 'css/components/button.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components/form.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components/header.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components/input.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components/messages.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components/modal.css' %}">
+        <link rel="stylesheet" href="{% static 'css/components/table.css' %}">
+
+        {% block css_template %}{% endblock %}
     </head>
 
     <body>
-        {% block content %}
-        {% endblock %}
+        {% if messages %}
+            <ul class="messages" data-messages>
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
+        {% include './_header.html' %}
+
+        <main class="container">
+            {% block content %}{% endblock %}
+        </main>
+
+        <script src="{% static 'js/components/header.js' %}"></script>
+        <script src="{% static 'js/components/input.js' %}"></script>
+        <script src="{% static 'js/components/messages.js' %}"></script>
+        <script src="{% static 'js/components/modal.js' %}"></script>
+        <script src="{% static 'js/components/tableLink.js' %}"></script>
+        <script src="{% static 'js/components/userMenu.js' %}"></script>
     </body>
 </html>

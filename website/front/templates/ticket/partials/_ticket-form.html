@@ -1,0 +1,45 @@
+{% load static %}
+
+{% include './_ticket-info.html' %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/ticket/partials/_ticket-form.css' %}">
+{% endblock %}
+
+<form method="POST" action="{% url 'ticket:create_ticket' routeweek.id date %}" class="ticket-form">
+    {% csrf_token %}
+
+    <div class="group">
+        <label>Nome do passageiro</label>
+        <input type="text" name="client" required>
+    </div>
+
+    <div class="group">
+        <label for="birth-date-field">Data de nascimento</label>
+        <input id="birth-date-field" type="date" name="birth-date" required>
+    </div>
+
+    <div class="group">
+        <label>Documento</label>
+
+        <fieldset>
+            <input type="radio" name="document_type" id="document-type-radio-cpf" value="cpf" checked>
+            <label for="document-type-radio-cpf">CPF</label>
+
+            <input type="radio" name="document_type" id="document-type-radio-rg" value="rg">
+            <label for="document-type-radio-rg">RG</label>
+        </fieldset>
+    </div>
+
+    <div class="group document-group">
+        <label for="document-field">Número de identificação</label>
+        <input id="document-field" type="text" name="document" required>
+    </div>
+
+    <div>
+        <input type="checkbox" name="markdown" id="markdown-check">
+        <label for="markdown-check">Remarcação</label>
+    </div>
+
+    <button class="button" type="submit">Enviar solicitação</button>
+</form>

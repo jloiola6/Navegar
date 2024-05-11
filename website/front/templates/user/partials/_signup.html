@@ -1,0 +1,24 @@
+{% load i18n %}
+
+<div class="title-group">
+  <h1 class="title">Cadastro</h1>
+  <p>Insira seus dados para solicitar acesso</p>
+</div>
+
+<form method="POST">
+  {% csrf_token %}
+
+  {% for f in form %}
+      {{ f }}
+
+      {{ f.errors }}
+  {% endfor %}
+
+  <div class="button-container">
+    <a href="{% url 'user:login' %}">
+      <button class="button secondary" type="button">Voltar</button>
+    </a>
+
+    <button type="submit" class="button">Salvar</button>
+  </div>
+</form>

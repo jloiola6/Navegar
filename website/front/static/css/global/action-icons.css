@@ -1,0 +1,33 @@
+.action{
+    aspect-ratio: 1;
+    background-color: hsl(0, 0%, 90%);
+    background-repeat: no-repeat;
+    background-size: 1rem;
+    background-position: center;
+    border: none;
+    border-radius: 100vw;
+    cursor: pointer;
+    display: block;
+    transition: .5s;
+    width: 2rem;
+
+    &:is(:hover, :focus-visible){
+        background-color: hsl(0, 0%, 75%);
+    }
+
+    &.edit{
+        background-image: url('../../icons/edit.svg');
+    }
+
+    &.discount-on{
+        background-image: url('../../icons/discount_on.svg');
+    }
+
+    &.discount-off{
+        background-image: url('../../icons/discount_off.svg');
+    }
+
+    &.delete{
+        background-image: url('../../icons/delete.svg');
+    }
+}

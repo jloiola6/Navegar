@@ -1,0 +1,10 @@
+{% load static %}
+
+<dialog class="modal" data-modal="{{ id }}">
+    <div class="content">
+        <a href="{% url 'user:index' %}">Usuários</a>
+        <a href="{% url 'route:index' %}">Rotas</a>
+        <a href="{% url 'route:locations' %}">Locais</a>
+        <a href="{% url 'route:boats' %}">Embarcações</a>
+    </div>
+</dialog>
