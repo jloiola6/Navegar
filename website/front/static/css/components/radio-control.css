@@ -1,7 +1,9 @@
 .radio-control{
-    border: 2px solid var(--clr-primary);
+    border: 1px solid var(--clr-border);
     border-radius: .5rem;
     display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
     width: fit-content;
 
     label{
@@ -12,6 +14,10 @@
 
         &:not([for]){
             display: none;
+        }
+
+        &:is(:hover, :focus-visible){
+            background-color: var(--clr-primary-light);
         }
     }
 

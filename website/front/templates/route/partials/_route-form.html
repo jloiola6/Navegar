@@ -4,6 +4,14 @@
     <link rel="stylesheet" href="{% static 'css/templates/route/partials/_route-form.css' %}">
 {% endblock %}
 
+{% for boat in boats %}
+    <input type="hidden" value="{{ boat.name }}" data-boat="{{ boat.id }}" disabled>
+{% endfor %}
+
+{% for weekday in WEEKDAYS %}
+    <input type="hidden" value="{{ weekday.1 }}" data-weekday="{{ weekday.0 }}">
+{% endfor %}
+
 <form method="post" id="route_form">
     {% csrf_token %}
 
@@ -16,26 +24,55 @@
         {% endfor %}
     </div>
 
-    <div id="formset-container" data-formset-container>
-        {{ formset.management_form }}
-
-        {% for form in formset.forms %}
-            <div class="route-weekday-form" data-weekday-form>
-                {% for f in form %}
-                    <div class="group">
-                        {{ f.label_tag }}
-                        {{ f }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
+    <div class="flex justify-content-between">
+        <h2>Embarcações</h2>
+        <button class="action add lg" type="button" data-add-selection-button></button>
     </div>
+    
+    <hr>
+
+    {% for boat in route_boats %}
+        <div class="boat-selection">
+            <div class="flex justify-content-between">
+                <div class="radio-control">
+                    {% for weekday in WEEKDAYS %}
+                        <input 
+                            id="boat-{{ boat.boat }}-weekday-{{ forloop.counter }}"
+                            name="boat-{{ boat.boat }}-weekday-{{ forloop.counter }}" 
+                            type="checkbox" 
+                            value="{{ weekday.0 }}"
+    
+                            {% if weekday.0 in boat.weekdays %}
+                                checked
+                            {% endif %}
+                        />
+    
+                        <label for="boat-{{ boat.boat }}-weekday-{{ forloop.counter }}">{{ weekday.1 }}</label>
+                    {% endfor %}
+                </div>
+    
+                <button class="action delete lg" title="Remover embarcação" type="button" data-remove-selection></button>
+            </div>
+
+            <select name="boat-{{ boat.boat }}" id="boat-{{ boat.boat }}">
+                {% for opt_boat in boats %}
+                    <option 
+                        {% if opt_boat.id == boat.boat %}
+                            selected
+                        {% endif %}
+
+                        value="{{ opt_boat.id }}"
+                    >
+                        {{ opt_boat }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+    {% endfor %}
 
     <div class="button-container">
-        <button class="button secondary" type="button" id="add-route-weekday" data-add-form-button>Adicionar dia da semana</button>
         <button class="button" type="submit">Salvar</button>
     </div>
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="{% static 'js/templates/route/form.js' %}"></script>
+<script src="{% static 'js/templates/route/partials/_route-form.js' %}"></script>

@@ -5,13 +5,13 @@
     <p>Entre com as suas credenciais</p>
 </div>
 
-<fieldset class="radio-control">
+<div class="radio-control">
     <input id="radio-auth-type-phone" name="radio-auth-type" type="radio" data-radio-control="phone" checked>
     <label for="radio-auth-type-phone">Telefone</label>
 
     <input id="radio-auth-type-email" name="radio-auth-type" type="radio" data-radio-control="email">
     <label for="radio-auth-type-email">E-mail</label>
-</fieldset>
+</div>
 
 <form method="POST">
     {% csrf_token %}
