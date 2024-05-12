@@ -42,15 +42,20 @@ b{
     }
 }
 
+.cost-label{
+    color: var(--clr-error-dark);
+    font-weight: 600;
+}
+
 .price-label{
-    color: hsl(141, 81%, 30%);
+    color: var(--clr-success-dark);
     font-weight: 600;
 }
 
 .price-badge{
     background-color: var(--clr-success-light);
     border-radius: .5rem;
-    color: hsl(141, 81%, 30%);
+    color: var(--clr-success-dark);
     font-weight: 600;
     padding-block: .5rem;
     padding-inline: 1rem;
