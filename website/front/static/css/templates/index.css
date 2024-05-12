@@ -26,6 +26,10 @@
             font-size: .75rem;
         }
     }    
+
+    .col-price{
+        text-align: right;
+    }
 }
 
 .mobile-routes-list{
@@ -38,7 +42,7 @@
         display: flex;
         flex-direction: column;
         font-weight: 600;
-        height: 9rem;
+        height: 10rem;
         justify-content: space-between;
         padding-block: 1.5rem;
         padding-inline: 1.25rem;
@@ -50,9 +54,18 @@
         }
 
         .card-header{
-            align-items: center;
+            align-items: flex-start;
             display: flex;
             justify-content: space-between;
+
+            .group{
+                align-items: center;
+                gap: .25rem;
+
+                .cost-label{
+                    font-size: .75rem;
+                }
+            }
         }
 
         .card-body{
@@ -85,10 +98,9 @@
     font-size: .75rem;
 }
 
-.col-price, 
-.card-price{
-    color: hsl(141, 81%, 30%);
-    text-align: right;
+.col-price .group{
+    align-items: flex-end;
+    gap: .25rem;
 }
 
 /* RESPONSIVE */
