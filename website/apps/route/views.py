@@ -60,7 +60,7 @@ def locations(request):
 
 @login_required
 def boats(request):
-    suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F')
+    suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F').order_by('full_name')
     boats = Boat.objects.all().order_by(Lower('name'))
 
     if request.method == 'POST':
