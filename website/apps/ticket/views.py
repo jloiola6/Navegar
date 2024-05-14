@@ -47,6 +47,8 @@ def add(request, id, date):
 
 @login_required
 def create_ticket(request, id, date):
+    from django.conf import settings 
+
     if request.method == 'POST':
         routeweek = RouteWeekday.objects.get(id=id)
 
@@ -71,7 +73,9 @@ def create_ticket(request, id, date):
             boat = routeweek.boat.name,
             markdown = markdown
         )
-        ticket.save()
+
+        message = settings.TICKET_MESSAGE.replace('<fornecedor>', ticket.supplier.full_name)
+        ticket.send_message(ticket.supplier.phone, message)
         
         return redirect(reverse('ticket:index'))
 

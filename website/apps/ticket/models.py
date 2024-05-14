@@ -80,14 +80,50 @@ class Ticket(models.Model):
         return self.route_weekday.boat.supplier
 
     def update_status(self, status):
+        from django.conf import settings
+
         self.status = status
         self.save()
 
+        message = settings.TICKET_STATUS_MESSAGE.replace('<passagem>', self.route_weekday).replace('<status>', self.get_status)
+        self.send_message(self.user_create.phone, message)
+
+
+    def send_message(self, number, message):
+        from requests import post
+        from requests.auth import HTTPBasicAuth
+
+        from django.conf import settings
+
+        try:
+            host = settings.HOST_IP
+            port = settings.PORT
+            session = settings.SESSION_NAME
+
+            url = f'http://{host}:{port}/client/sendMessage/{session}'
+            headers = {
+                "Authorization": f"Bearer {session}",
+            }
+            data = {
+                "chatId": f"{number}@c.us",
+                "contentType": "string",
+                "content": message
+            }
+
+            response = post(url, json=data, timeout=10, headers=headers)
+            
+            return response.json()
+        except:
+            pass
+
+
     def save(self, *args, **kwargs):
-        if not self.pk and self.document:
+        from django.conf import settings
+
+        if self.document:
             if Ticket.objects.filter(document__isnull=False).count() > 1000:
                 Ticket.objects.filter(document__isnull=False).first().delete()
-                
+        
         super(Ticket, self).save(*args, **kwargs)
 
     class Meta:
