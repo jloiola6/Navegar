@@ -30,24 +30,48 @@ class Ticket(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4, unique=True)
     user_create = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT)
+    type = models.CharField(max_length=10, default='passenger')
     
+    # ROUTE DATA
     created_at = models.DateTimeField(auto_now_add= True)
     origin = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     date = models.DateField()
     boat = models.CharField(max_length=100)
+
+    # FINANCIAL DATA
     value = models.DecimalField(max_digits=10, decimal_places=2)
     cost = models.DecimalField(max_digits= 10, decimal_places= 2)
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1)
+
+    # CLIENT DATA
     name_client = models.CharField(max_length=100, null=True, blank=True)
     document_client = models.CharField(max_length=11, null=True, blank=True)
     document_type = models.CharField(max_length=3, null=True)
     birth_date_client = models.DateField(null=True, blank=True)
+
+    # CARGO DATA
+    cargo_description = models.CharField(max_length=100, null= True)
+    cargo_weight = models.CharField(max_length=10, null= True)
+
+    # STATUS DATA
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     document = models.FileField("Anexar bilhete",upload_to='documents/', max_length=100, blank=True, null=True)
     markdown = models.BooleanField(default= False)
 
     def __str__(self):
         return f'{self.name_client} | ({self.origin} - {self.destination})'
+    
+    @property
+    def get_document_client(self):
+        return self.document_client or 'N/A'
+    
+    @property
+    def get_birth_date_client(self):
+        return self.birth_date_client or 'N/A'
+    
+    @property
+    def get_cargo_weight(self):
+        return self.cargo_weight or 'N/A'
 
     @property
     def get_document_url(self):
