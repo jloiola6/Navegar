@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block title %}Passagem{% endblock %}
+{% block title %}{{ ticket.date|date:'d-m-Y' }} • {{ ticket.name_client }} • {{ routeweek.route.origin }} • {{ routeweek.route.destination }}{% endblock %}
 
 {% block css_template %}
     <link rel="stylesheet" href="{% static 'css/templates/ticket/print.css' %}">
