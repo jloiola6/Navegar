@@ -34,6 +34,14 @@
             }
         }
     }
+
+    > .group{
+        align-items: flex-end;
+
+        .cost-label{
+            font-size: .875rem;
+        }
+    }
 }
 
 /* RESPONSIVE */

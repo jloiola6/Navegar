@@ -19,6 +19,7 @@ body .hidden{
     align-items: center;
     display: flex;
     gap: 1rem;
+    width: 100%;
 
     &.justify-content-between{
         justify-content: space-between;
