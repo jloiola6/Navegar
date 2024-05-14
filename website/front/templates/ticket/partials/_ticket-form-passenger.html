@@ -1,0 +1,67 @@
+{% load static %}
+
+<div class="group">
+    <label for="name-field" >Nome do passageiro</label>
+    <input id="name-field" type="text">
+</div>
+
+<div class="flex passenger-data">
+    <div class="group">
+        <label for="birth-date-field">Data de nascimento</label>
+        <input id="birth-date-field" type="date">
+    </div>
+    
+    <div class="group">
+        <label for="document-field">Número de identificação</label>
+
+        <div class="flex document-container">
+            <div class="radio-control">
+                <input type="radio" name="temp-document-type" id="temp-document-type-cpf" value="cpf" checked>
+                <label for="temp-document-type-cpf">CPF</label>
+
+                <input type="radio" name="temp-document-type" id="temp-document-type-rg" value="rg">
+                <label for="temp-document-type-rg">RG</label>
+            </div>
+
+            <input id="document-field" type="text" maxlength="14">
+        </div>
+    </div>
+</div>
+
+<button type="button" class="button secondary" data-add-passenger>Adicionar passageiro</button>
+
+<h2>Passageiros</h2>
+
+<span class="empty-message">Insira os dados dos passageiros</span>
+
+<table class="table passenger-table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Data de Nascimento</th>
+            <th>Identificação</th>
+        </tr>
+    </thead>
+
+    <tbody data-passenger-table>
+        <!-- <tr>
+            <td>
+                <input type="text" value="Érick Fernandes do Nascimento" readonly>
+            </td>
+            
+            <td>
+                <input type="date" name="" value="1999-03-30" id="" readonly>
+            </td>
+            
+            <td>
+                <input type="text" value="99884097291" readonly>
+            </td>
+
+            <td>
+                <button data-remove-passenger type="button" class="action delete"></button>
+            </td>
+        </tr> -->
+    </tbody>
+</table>
+
+<script src="{% static 'js/templates/ticket/partials/_ticket-form-passenger.js' %}"></script>

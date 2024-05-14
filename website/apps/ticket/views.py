@@ -16,7 +16,7 @@ def index(request):
         ticket_id = request.POST['ticket_id']
         ticket = Ticket.objects.get(id= ticket_id)
 
-        if request.POST.get('voucher'):
+        if request.POST.__contains__('voucher'):
             ticket.update_status(4)
             messages.success(request, 'Voucher emitido com sucesso!')
 
@@ -38,50 +38,105 @@ def index(request):
 
 @login_required
 def add(request, id, date):
-    routeweek = RouteWeekday.objects.get(id=id)
+    ticket_type = request.GET.get('tipo')
+    choose_type = ticket_type == None
 
-    return render(request, 'ticket/add.html', {
-        'date': date,
-        'routeweek': routeweek,
-    })
+    route_weekday = RouteWeekday.objects.get(id=id)
 
 @login_required
-def create_ticket(request, id, date):
+def add(request, id, date):
     from django.conf import settings 
 
+    ticket_type = request.GET.get('tipo')
+    choose_type = ticket_type == None
+
+    route_weekday = RouteWeekday.objects.get(id=id)
+
     if request.method == 'POST':
-        routeweek = RouteWeekday.objects.get(id=id)
+        if ticket_type == 'passageiro':
+            error_message = True
 
-        client = request.POST['client']
-        document = request.POST['document']
-        document_type = request.POST['document_type']
-        birth_date = request.POST['birth-date']
-        markdown = request.POST.get('markdown') == 'on'
+            for item in request.POST.items():
+                if 'client' in item[0]:
+                    error_message = False
 
-        ticket = Ticket.objects.create(
-            user_create = request.user,
-            route_weekday = routeweek,
-            date = date,
-            name_client = client,
-            document_client = document,
-            document_type = document_type,
-            birth_date_client = birth_date,
-            value = routeweek.route.get_value,
-            cost = routeweek.route.get_cost,
-            origin = routeweek.route.origin.name,
-            destination = routeweek.route.destination.name,
-            boat = routeweek.boat.name,
-            markdown = markdown
-        )
+                    client_index = item[0].split('_')[1]
+                    client_name = item[1]
 
-        message = settings.TICKET_MESSAGE.replace('<fornecedor>', ticket.supplier.full_name)
-        ticket.send_message(ticket.supplier.phone, message)
+                    birth_date = request.POST[f'birth_date_{ client_index }'] or None
+                    document_type = request.POST[f'document_type_{ client_index }']
+                    document = request.POST[f'document_{ client_index }']
+
+                    ticket = Ticket.objects.create(
+                        user_create = request.user,
+                        route_weekday = route_weekday,
+                        type = ticket_type,
+
+                        origin = route_weekday.route.origin.name,
+                        destination = route_weekday.route.destination.name,
+                        date = date,
+                        boat = route_weekday.boat.name,
+
+                        value = route_weekday.route.get_value,
+                        cost = route_weekday.route.get_cost,
+
+                        name_client = client_name,
+                        document_client = document,
+                        document_type = document_type,
+                        birth_date_client = birth_date
+                    )
+
+                    message = f'''NOVA PASSAGEM
+{ticket.origin} - {ticket.destination}
+{ticket.date}
+Embarcação: {ticket.boat}
+
+Passageiro: {client_name}
+Identificação ({document_type}): {document}
+Nascimento: {birth_date}'''
+                    ticket.send_message(ticket.supplier.phone, message)
+
+            if error_message:
+                messages.error(request, 'Adicione pelo menos um passageiro')
+                return redirect(f'/passagens/adicionar/{id}/{date}?tipo={ticket_type}')
         
+        else:
+            cargo_description = request.POST['cargo_description']
+            cargo_weight = request.POST['cargo_weight'] or None
+
+            ticket = Ticket.objects.create(
+                user_create = request.user,
+                route_weekday = route_weekday,
+                type = ticket_type,
+
+                origin = route_weekday.route.origin.name,
+                destination = route_weekday.route.destination.name,
+                date = date,
+                boat = route_weekday.boat.name,
+
+                value = route_weekday.route.get_value,
+                cost = route_weekday.route.get_cost,
+
+                cargo_description = cargo_description,
+                cargo_weight = cargo_weight
+            )
+            message = f'''NOVA PASSAGEM
+{ticket.origin} - {ticket.destination}
+{ticket.date}
+Embarcação: {ticket.boat}
+
+Descrição: {ticket.cargo_description}
+Peso:{ticket.cargo_weight}'''
+            ticket.send_message(ticket.supplier.phone, message)
+
         return redirect(reverse('ticket:index'))
 
-@login_required
-def edit(request):
-    return render(request, 'ticket/edit.html')
+    return render(request, 'ticket/add.html', {
+        'choose_type': choose_type,
+        'date': date,
+        'routeweek': route_weekday,
+        'ticket_type': ticket_type,
+    })
 
 @login_required
 def view(request, pk):

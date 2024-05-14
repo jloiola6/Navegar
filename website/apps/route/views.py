@@ -17,7 +17,7 @@ def index(request):
     routes = Route.objects.all()
 
     if request.method == 'POST':
-        if request.POST.get('switch_discount'):
+        if request.POST.__contains__('switch_discount'):
             route_id = request.POST.get('switch_discount')
             route = Route.objects.get(id= route_id)
             route.switch_discount()
@@ -30,7 +30,7 @@ def locations(request):
 
     form = LocationForm()
     if request.method == 'POST':
-        if request.POST.get('location_id'):
+        if request.POST.__contains__('location_id'):
             location_id = request.POST.get('location_id')
             name = request.POST.get('name')
 
@@ -60,14 +60,14 @@ def locations(request):
 
 @login_required
 def boats(request):
-    suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F')
+    suppliers = CustomUser.objects.filter(is_superuser= False, type= 'F').order_by('full_name')
     boats = Boat.objects.all().order_by(Lower('name'))
 
     if request.method == 'POST':
         name = request.POST.get('name')
         supplier = request.POST.get('supplier')
 
-        if request.POST.get('boat_id'):
+        if request.POST.__contains__('boat_id'):
             boat = Boat.objects.get(id= request.POST.get('boat_id'))
             boat.name = name
             boat.supplier = CustomUser.objects.get(id= supplier)

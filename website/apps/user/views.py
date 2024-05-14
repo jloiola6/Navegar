@@ -18,7 +18,7 @@ def index(request):
         user_id = request.POST.get('user_id')
         name = request.POST.get('name')
         phone = request.POST.get('phone')
-        password = request.POST.get('password') if request.POST.get('password') else None
+        password = request.POST.get('password') if request.POST.__contains__('password') else None
         type = request.POST.get('type')
         status = request.POST.get('status')
         issuance_type = request.POST.get('issuance_type')
