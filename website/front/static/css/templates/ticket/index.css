@@ -47,6 +47,7 @@
         }
 
         .button, label{
+            padding-block: .75rem;
             width: 100%;
         }
     }

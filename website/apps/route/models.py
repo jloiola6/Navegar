@@ -14,6 +14,7 @@ WEEKDAYS = (
     ('Saturday', 'Sábado'),
 )
 
+
 class Boat(models.Model):
     name = models.CharField(verbose_name="Nome", max_length=100)
     capacity = models.IntegerField(verbose_name="Capacidade", null=True, blank=True)
@@ -111,4 +112,29 @@ class RouteWeekday(models.Model):
     @property
     def get_total_trip_time(self):
         return self.route.total_trip_time
+    
+    @property
+    def get_value(self):
+        try:
+            route_discount = RouteDiscount.objects.get(supplier= self.boat.supplier, route= self.route)
 
+            return route_discount.discounted_value if route_discount.is_active else self.route.value
+        except:
+            return self.route.value
+    
+    @property
+    def get_cost(self):
+        try:
+            route_discount = RouteDiscount.objects.get(supplier= self.boat.supplier, route= self.route)
+
+            return route_discount.discounted_cost if route_discount.is_active else self.route.value
+        except:
+            return self.route.cost
+
+
+class RouteDiscount(models.Model):
+    supplier = models.ForeignKey(User, on_delete= models.PROTECT)
+    route = models.ForeignKey(Route, on_delete= models.PROTECT)
+    discounted_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    discounted_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    is_active = models.BooleanField(default= False)

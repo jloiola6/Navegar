@@ -19,14 +19,15 @@
                 <th>Perfil</th>
                 <th>Telefone</th>
                 <th>E-mail</th>
-                <th class="header-action"></th>
             </tr>
         </thead>
 
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td>{{ user.full_name }}</td>
+                    <td>
+                        <a class="user-link" href="{% url 'user:view' user.id %}">{{ user.full_name }}</a>
+                    </td>
 
                     <td>
                         <span class="status-badge {{ user.status }}">{{ user.status }}</span>
@@ -47,21 +48,8 @@
                     <td>{{ user.phone|default:'' }}</td>
                     <td>{{ user.email }}</td>
 
-                    <td class="col-action">
-                        <button 
-                            class="action edit"
-                            data-modal-open="{{ user.id }}" 
-                            title="Editar"
-                        ></button>
-                    </td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    {% for user in users %}
-        {% include './partials/_edit-user-modal.html' %}
-    {% endfor %}
-
-    <script src="{% static 'js/templates/user/index/editUser.js' %}"></script>
 {% endblock %}

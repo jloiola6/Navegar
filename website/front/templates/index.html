@@ -88,8 +88,8 @@
 
                         <td class="col-price">
                             <div class="group">
-                                <span class="price-label">R$ {{ route.route.get_value }}</span>
-                                <span class="cost-label">R$ -{{ route.route.get_cost }}</span>
+                                <span class="price-label">R$ {{ route.get_value }}</span>
+                                <span class="cost-label">R$ -{{ route.get_cost }}</span>
                             </div>
                         </td>
                     </tr>
@@ -105,8 +105,8 @@
                             <span class="card-boat">{{ route.boat }}</span>
                             
                             <div class="group">
-                                <span class="price-label">R$ {{ route.route.get_value }}</span>
-                                <span class="cost-label">R$ -{{ route.route.get_cost }}</span>
+                                <span class="price-label">R$ {{ route.get_value }}</span>
+                                <span class="cost-label">R$ -{{ route.get_cost }}</span>
                             </div>
                         </div>
                         

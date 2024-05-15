@@ -1,11 +1,8 @@
-.header-action{
-    text-align: center;
-}
+.user-link{
+    color: var(--clr-primary);
+    font-weight: 500;
 
-.col-action{
-    text-align: center;
-    
-    .action{
-        margin: auto;
+    &:hover{
+        text-decoration: underline;
     }
 }

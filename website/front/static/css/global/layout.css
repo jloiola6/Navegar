@@ -33,6 +33,10 @@ body .hidden{
     &.col-2{
         grid-template-columns: repeat(2, 1fr);
     }
+
+    &.col-3{
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .group{
