@@ -2,7 +2,13 @@
 
 {% load static %}
 
-{% block title %}{{ ticket.date|date:'d-m-Y' }} • {{ ticket.name_client }} • {{ routeweek.route.origin }} • {{ routeweek.route.destination }}{% endblock %}
+{% block title %}
+    {% if ticket.type == 'passageiro' %}
+        {{ ticket.date|date:'d-m-Y' }} • {{ ticket.name_client }} • {{ routeweek.route.origin }} • {{ routeweek.route.destination }}
+    {% else %}
+        {{ ticket.date|date:'d-m-Y' }} • CARGA
+    {% endif %}
+{% endblock %}
 
 {% block css_template %}
     <link rel="stylesheet" href="{% static 'css/templates/ticket/print.css' %}">
@@ -102,7 +108,7 @@
 
     <button class="button" onclick="window.print()">Baixar voucher</button>
 
-    <!-- <script>
+    <script>
         window.print()
-    </script> -->
+    </script>
 {% endblock %}
