@@ -1,7 +1,3 @@
-.passenger-data .group{
-    width: 100%;
-}
-
 .document-container{
     border: 1px solid var(--clr-border);
     gap: 0;
@@ -32,6 +28,7 @@
     }
 
     tbody[data-passenger-table] input{
+        background-color: transparent;
         border: none;
         height: auto;
         padding: 0;

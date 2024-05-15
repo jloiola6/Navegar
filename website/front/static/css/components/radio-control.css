@@ -16,17 +16,27 @@
             display: none;
         }
 
+        &:is(input:checked + label){
+            background-color: var(--clr-primary);
+            color: #FFF;
+        }
+
         &:is(:hover, :focus-visible):not(input:disabled + label){
             background-color: var(--clr-primary-light);
+        }
+
+        &:is(input:disabled + label){
+            background-color: hsl(0, 0%, 90%);
+            cursor: default;
+        }
+
+        &:is(input:checked:disabled + label){
+            background-color: var(--clr-border);
+            color: #333;
         }
     }
 
     input{
         display: none;
-    }
-
-    input:checked + label{
-        background-color: var(--clr-primary);
-        color: #FFF;
     }
 }

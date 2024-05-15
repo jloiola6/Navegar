@@ -77,8 +77,8 @@ def add(request, id, date):
                         date = date,
                         boat = route_weekday.boat.name,
 
-                        value = route_weekday.route.get_value,
-                        cost = route_weekday.route.get_cost,
+                        value = route_weekday.get_value,
+                        cost = route_weekday.get_cost,
 
                         name_client = client_name,
                         document_client = document,
@@ -114,8 +114,8 @@ Nascimento: {birth_date}'''
                 date = date,
                 boat = route_weekday.boat.name,
 
-                value = route_weekday.route.get_value,
-                cost = route_weekday.route.get_cost,
+                value = route_weekday.get_value,
+                cost = route_weekday.get_cost,
 
                 cargo_description = cargo_description,
                 cargo_weight = cargo_weight
