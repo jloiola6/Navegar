@@ -11,28 +11,40 @@
 {% block content %}
     {% include './partials/_ticket-info.html' %}
 
-    <div class="group">
-        <label>Nome do passageiro</label>
-        <input type="text" value="{{ ticket.name_client }}" disabled>
-    </div>
-
-
-    <div class="grid col-2">
+    {% if ticket.type == 'passageiro' %}
         <div class="group">
-            {% if ticket.document_type == 'rg' %}
-                <label>RG</label>
-            {% else %}
-                <label>CPF</label>
-            {% endif %}
+            <label>Nome do passageiro</label>
+            <input type="text" value="{{ ticket.name_client }}" disabled>
+        </div>
 
-            <input type="text" value="{{ ticket.document_client }}" disabled>
+
+        <div class="grid col-2">
+            <div class="group">
+                {% if ticket.document_type == 'rg' %}
+                    <label>RG</label>
+                {% else %}
+                    <label>CPF</label>
+                {% endif %}
+
+                <input type="text" value="{{ ticket.document_client }}" disabled>
+            </div>
+            
+            <div class="group">
+                <label>Data de Nascimento</label>
+                <input type="date" value="{{ ticket.birth_date_client|date:'Y-m-d' }}" disabled>
+            </div>
         </div>
-        
+    {% else %}
         <div class="group">
-            <label>Data de Nascimento</label>
-            <input type="date" value="{{ ticket.birth_date_client|date:'Y-m-d' }}" disabled>
+            <label>Descrição da carga</label>
+            <input type="text" value="{{ ticket.cargo_description }}" disabled>
         </div>
-    </div>
+
+        <div class="group">
+            <label>Peso</label>
+            <input type="text" value="{{ ticket.cargo_weight }}" disabled>
+        </div>
+    {% endif %}
 
     
     {% if ticket.status == 1 %}
