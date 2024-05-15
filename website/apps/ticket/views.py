@@ -38,13 +38,6 @@ def index(request):
 
 @login_required
 def add(request, id, date):
-    ticket_type = request.GET.get('tipo')
-    choose_type = ticket_type == None
-
-    route_weekday = RouteWeekday.objects.get(id=id)
-
-@login_required
-def add(request, id, date):
     from django.conf import settings 
 
     ticket_type = request.GET.get('tipo')

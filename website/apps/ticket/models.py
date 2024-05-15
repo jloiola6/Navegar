@@ -5,6 +5,10 @@ from django.utils import timezone
 from apps.user.models import CustomUser
 from apps.route.models import RouteWeekday
 
+from requests import post
+from requests.auth import HTTPBasicAuth
+
+from django.conf import settings
 
 STATUS_CHOICES = (
     (1, 'Pendente'),
@@ -114,11 +118,6 @@ class Ticket(models.Model):
 
 
     def send_message(self, number, message):
-        from requests import post
-        from requests.auth import HTTPBasicAuth
-
-        from django.conf import settings
-
         try:
             host = settings.HOST_IP
             port = settings.PORT
@@ -143,8 +142,6 @@ class Ticket(models.Model):
 
 
     def save(self, *args, **kwargs):
-        from django.conf import settings
-
         if self.document:
             if Ticket.objects.filter(document__isnull=False).count() > 1000:
                 Ticket.objects.filter(document__isnull=False).first().delete()
