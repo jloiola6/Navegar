@@ -113,9 +113,11 @@ class Ticket(models.Model):
         self.status = status
         self.save()
 
-        message = settings.TICKET_STATUS_MESSAGE.replace('<passagem>', self.route_weekday).replace('<status>', self.get_status)
-        self.send_message(self.user_create.phone, message)
-
+        try:
+            message = settings.TICKET_STATUS_MESSAGE.replace('<passagem>', self.route_weekday).replace('<status>', self.get_status)
+            self.send_message(self.user_create.phone, message)
+        except:
+            pass
 
     def send_message(self, number, message):
         try:
