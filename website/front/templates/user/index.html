@@ -15,7 +15,7 @@
         <thead>
             <tr>
                 <th>Nome</th>
-                <th class="header-status">Status</th>
+                <th>Status</th>
                 <th>Perfil</th>
                 <th>Telefone</th>
                 <th>E-mail</th>
@@ -26,7 +26,7 @@
             {% for user in users %}
                 <tr>
                     <td>
-                        <a class="user-link" href="{% url 'user:view' user.id %}">{{ user.full_name }}</a>
+                        <a class="link" href="{% url 'user:view' user.id %}">{{ user.full_name }}</a>
                     </td>
 
                     <td>

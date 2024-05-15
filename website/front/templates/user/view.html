@@ -110,7 +110,7 @@
 
             {% for route in user_routes %}
                 <div class="route-container">
-                    <p class="title">{{ route }}</p>
+                    <p class="title">{{ route.route }}</p>
 
                     <div class="grid col-2">
                         <div class="group">
@@ -130,14 +130,16 @@
                                 id="discounted-value-route-{{ route.id }}"
                                 type="text" 
                                 
-                                {% for discount in user_route_discounts %}
-                                    {% if discount.route.id == route.id %}
-                                        name="discounted_value_{{ discount.id }}_route_{{ route.id }}"
-                                        value="{{ discount.discounted_value }}"
-                                    {% endif %}
-                                {% empty %}
+                                {% if route.has_route_discount_instance %}
+                                    {% for discount in user_route_discounts %}
+                                        {% if discount.route.id == route.id %}
+                                            name="discounted_value_{{ discount.id }}_route_{{ route.id }}"
+                                            value="{{ discount.discounted_value }}"
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
                                     name="new_discounted_value_route_{{ route.id }}"
-                                {% endfor %}
+                                {% endif %}
                             >
                         </div>
                     </div>
@@ -160,14 +162,16 @@
                                 id="discounted-cost-route-{{ route.id }}"
                                 type="text" 
                                 
-                                {% for discount in user_route_discounts %}
-                                    {% if discount.route.id == route.id %}
-                                        name="discounted_cost_{{ discount.id }}_route_{{ route.id }}"
-                                        value="{{ discount.discounted_cost }}"
-                                    {% endif %}
-                                {% empty %}
+                                {% if route.has_route_discount_instance %}
+                                    {% for discount in user_route_discounts %}
+                                        {% if discount.route.id == route.id %}
+                                            name="discounted_cost_{{ discount.id }}_route_{{ route.id }}"
+                                            value="{{ discount.discounted_cost }}"
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
                                     name="new_discounted_cost_route_{{ route.id }}"
-                                {% endfor %}
+                                {% endif %}
                             >
                         </div>
                     </div>

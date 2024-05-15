@@ -21,50 +21,22 @@
                 <th>Rota</th>
                 <th>Horário</th>
                 <th>Valor</th>
-                <th>Valor exibido</th>
                 <th>Custo</th>
-                <th>Custo exibido</th>
-                <th class="header-action">Ações</th>
             </tr>
         </thead>
 
         <tbody>
             {% for route in routes %}
                 <tr>
-                    <td>{{ route }}</td>
+                    <td>
+                        <a class="link" href="{% url 'route:edit-route' route.id %}">{{ route }}</a>
+                    </td>
 
                     <td>{{ route.departure_time }} - {{ route.arrival_time }} {% if route.after_midnight %} (Dia seguinte) {% endif %}</td>
 
                     <td class="price-label">{{ route.value }}</td>
-                    
-                    <td>
-                        <span class="price-badge">{{ route.get_value }}</span>
-                    </td>
 
-                    <td class="price-label">{{ route.cost }}</td>
-
-                    <td class="price-label">
-                        <span class="price-badge">{{ route.get_cost }}</span>
-                    </td>
-                    
-                    <td class="col-action">
-                        <form method="POST">
-                            {% csrf_token %}
-
-                            {% if route.discount %}
-                                <button class="action discount-off" type="submit" name="switch_discount" value="{{ route.id }}" title="Desativar desconto"></button>
-                            {% else %}
-                                <button class="action discount-on" type="submit" name="switch_discount" value="{{ route.id }}" title="Ativar desconto"></button>
-                            {% endif %}
-                        </form>
-
-                        <a href="{% url 'route:edit-route' route.id %}">
-                            <span 
-                                class="action edit"
-                                title="Editar"
-                            ></span>
-                        </a>
-                    </td>
+                    <td class="cost-label">{{ route.cost }}</td>
                 </tr>
             {% endfor %}
         </tbody>

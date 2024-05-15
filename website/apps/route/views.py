@@ -16,12 +16,6 @@ import re
 def index(request):
     routes = Route.objects.all()
 
-    if request.method == 'POST':
-        if request.POST.__contains__('switch_discount'):
-            route_id = request.POST.get('switch_discount')
-            route = Route.objects.get(id= route_id)
-            route.switch_discount()
-
     return render(request, 'route/index.html', {'routes': routes})
 
 @login_required

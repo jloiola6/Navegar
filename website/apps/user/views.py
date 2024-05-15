@@ -8,7 +8,7 @@ from .decorators import user_type_required, redirect_authenticated_user
 
 from apps.user.forms import *
 from apps.user.models import CustomUser, TYPE_CHOICES
-from apps.route.models import RouteWeekday, Route, RouteDiscount
+from apps.route.models import RouteWeekday, Route, RouteDiscount, Location
 
 @login_required
 def index(request):
@@ -132,7 +132,14 @@ def view(request, id):
 
     routes_ids = RouteWeekday.objects.filter(boat__supplier= user).values_list('route', flat= True).distinct()
 
-    user_routes = Route.objects.filter(id__in= routes_ids)
+    user_routes = Route.objects.filter(id__in= routes_ids).values()
+
+    for route in user_routes:
+        route['has_route_discount_instance'] = RouteDiscount.objects.filter(supplier= user, route__id= route['id']).exists()
+
+        origin = Location.objects.get(id= route['origin_id'])
+        desination = Location.objects.get(id= route['destination_id'])
+        route['route'] = f'{ origin } - { desination }'
 
     user_route_discounts = RouteDiscount.objects.filter(supplier= user)
 
@@ -167,15 +174,19 @@ def view(request, id):
                 route_id = item[0].split('_')[4]
                 route = Route.objects.get(id = route_id)
 
-                new_discouted_cost = request.POST[f'new_discounted_cost_route_{ route_id }']
+                new_discounted_value = item[1] or '0'
+                new_discounted_value = float(new_discounted_value.replace(',', '.'))
+
+                new_discounted_cost = request.POST[f'new_discounted_cost_route_{ route_id }'] or '0'
+                new_discounted_cost = float(new_discounted_cost.replace(',', '.'))
 
                 active = request.POST.__contains__(f'discount-{ route_id }')
 
                 RouteDiscount.objects.create(
                     supplier = user,
                     route = route,
-                    discounted_value = item[1],
-                    discounted_cost = new_discouted_cost,
+                    discounted_value = new_discounted_value,
+                    discounted_cost = new_discounted_cost,
                     is_active= active
                 )
 
@@ -183,19 +194,25 @@ def view(request, id):
                 route_discount_id = item[0].split('_')[2]
                 route_id = item[0].split('_')[4]
 
-                dicounted_cost = request.POST[f'discounted_cost_{ route_discount_id }_route_{ route_id }']
+                discounted_value = item[1] or '0'
+                discounted_value = float(discounted_value.replace(',', '.'))
+
+                discounted_cost = request.POST[f'discounted_cost_{ route_discount_id }_route_{ route_id }'] or '0'
+                discounted_cost = float(discounted_cost.replace(',', '.'))
 
                 active = request.POST.__contains__(f'discount-{ route_id }')
 
 
                 route_discount = RouteDiscount.objects.get(id= route_discount_id)
                 
-                route_discount.discounted_value = item[1].replace(',', '.')
-                route_discount.discounted_cost = dicounted_cost.replace(',', '.')
+                route_discount.discounted_value = discounted_value
+                route_discount.discounted_cost = discounted_cost
                 route_discount.is_active = active
                 route_discount.save()
                 
         messages.success(request, 'Dados alterados com sucesso!')
+
+        return redirect(f'/usuario/{ user.id }')
 
     return render(request, 'user/view.html', {
         'user': user,

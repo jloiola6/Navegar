@@ -24,12 +24,14 @@
         {% endfor %}
     </div>
 
-    <div class="flex justify-content-between">
-        <h2>Embarcações</h2>
-        <button class="action add lg" type="button" data-add-selection-button></button>
+    <div class="group">
+        <div class="flex justify-content-between">
+            <h2>Embarcações</h2>
+            <button class="action add lg" type="button" data-add-selection-button></button>
+        </div>
+        
+        <hr>
     </div>
-    
-    <hr>
 
     {% for boat in route_boats %}
         <div class="boat-selection">
