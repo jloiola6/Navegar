@@ -18,6 +18,7 @@
     padding-block: 1rem;
     padding-inline: 2rem;
     text-align: center;
+    text-wrap: nowrap;
     transition: background-color .5s;
     width: fit-content;
 

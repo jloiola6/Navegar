@@ -14,6 +14,7 @@ WEEKDAYS = (
     ('Saturday', 'Sábado'),
 )
 
+
 class Boat(models.Model):
     name = models.CharField(verbose_name="Nome", max_length=100)
     capacity = models.IntegerField(verbose_name="Capacidade", null=True, blank=True)
@@ -40,14 +41,11 @@ class Route(models.Model):
     origin = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='origin', verbose_name='Origem')
     destination = models.ForeignKey(Location, on_delete=models.PROTECT, related_name='destination', verbose_name='Destino')
     value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor')
-    discounted_value = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Valor com desconto (2,5%)', blank=True, null=True)
     cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Custo')
-    discounted_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Custo com desconto (R$ 20,00)', blank=True, null=True)
     departure_time = models.TimeField(blank=True, null=True, verbose_name='Horário de partida')
     arrival_time = models.TimeField(blank=True, null=True, verbose_name='Horário de Horário')
     total_trip_time = models.CharField(max_length=10, blank=True, null=True, editable=False, verbose_name='Tempo total da viagem')
     after_midnight = models.BooleanField(default=False, verbose_name='Dia seguinte')
-    discount = models.BooleanField(default= False) 
 
     def __str__(self):
         return f'{self.origin} - {self.destination}'
@@ -75,18 +73,6 @@ class Route(models.Model):
             self.total_trip_time = self.calculate_total_trip_time()
         super(Route, self).save(*args, **kwargs)
 
-    def switch_discount(self):
-        self.discount = not self.discount
-        self.save()
-
-    @property
-    def get_value(self):
-        return self.discounted_value if self.discount else self.value
-    
-    @property
-    def get_cost(self):
-        return self.discounted_cost if self.discount else self.cost
-    
     class Meta:
         ordering = ['origin__name', 'destination__name']
 
@@ -111,4 +97,29 @@ class RouteWeekday(models.Model):
     @property
     def get_total_trip_time(self):
         return self.route.total_trip_time
+    
+    @property
+    def get_value(self):
+        try:
+            route_discount = RouteDiscount.objects.get(supplier= self.boat.supplier, route= self.route)
 
+            return route_discount.discounted_value if route_discount.is_active else self.route.value
+        except:
+            return self.route.value
+    
+    @property
+    def get_cost(self):
+        try:
+            route_discount = RouteDiscount.objects.get(supplier= self.boat.supplier, route= self.route)
+
+            return route_discount.discounted_cost if route_discount.is_active else self.route.value
+        except:
+            return self.route.cost
+
+
+class RouteDiscount(models.Model):
+    supplier = models.ForeignKey(User, on_delete= models.PROTECT)
+    route = models.ForeignKey(Route, on_delete= models.PROTECT)
+    discounted_value = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    discounted_cost = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    is_active = models.BooleanField(default= False)

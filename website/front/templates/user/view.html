@@ -1,0 +1,202 @@
+{% extends "../partials/_base.html" %}
+
+{% load static %}
+
+{% block title %}{{ user.full_name }}{% endblock %}
+
+{% block css_template %}
+    <link rel="stylesheet" href="{% static 'css/templates/user/view.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Usuário</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="group">
+            <label for="name-field-{{ user.id }}">Nome</label>
+            <input type="text" name="name" id="name-field-{{ user.id }}" value="{{ user.full_name|default:'' }}" required>
+        </div>
+        
+        <div class="group">
+            <label for="phone-field-{{ user.id }}">Telefone</label>
+            <input type="text" name="phone" id="phone-field-{{ user.id }}" value="{{ user.phone|default:'' }}" required>
+        </div>
+        
+        <!-- <div class="group">
+            <label for="password-field">Senha</label>
+            <input type="text" name="password" id="password-field">
+        </div> -->
+
+        <div class="group">
+            <label>Perfil</label>
+
+            <div class="radio-control">
+                {% for type in user_types %}
+                    <input 
+                        id="type-{{ type.0 }}" 
+                        name="type" 
+                        type="radio" 
+                        value="{{ type.0 }}"
+
+                        {% if type.0 == user.type %}
+                            checked
+                        {% endif %}
+
+                        data-radio-type
+                    >
+
+                    <label for="type-{{ type.0 }}">{{ type.1 }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="group">
+            <label>Status</label>
+            
+            <div class="radio-control">
+                {% for status in user_status %}
+                    <input 
+                        id="status-{{ status }}" 
+                        name="status" 
+                        type="radio" 
+                        value="{{ status }}"
+
+                        {% if status == user.status %}
+                            checked
+                        {% endif %}
+                    >
+
+                    <label for="status-{{ status }}">{{ status }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="group" data-issuance-group>
+            <label>Tipo de emissão</label>
+
+            <div class="radio-control">
+                <input 
+                    id="issuance-type-voucher" 
+                    type="radio" 
+                    name="issuance_type" 
+                    value="voucher" 
+
+                    {% if not user.upload_ticket %}
+                        checked
+                    {% endif %}
+                >
+
+                <label for="issuance-type-voucher">Voucher</label>
+
+                <input 
+                    id="issuance-type-bilhete" 
+                    type="radio" 
+                    name="issuance_type" 
+                    value="bilhete" 
+
+                    {% if user.upload_ticket %}
+                        checked
+                    {% endif %}
+                >
+
+                <label for="issuance-type-bilhete">Bilhete</label>
+            </div>
+        </div>
+
+        {% if user_routes %}
+            <h2>Rotas</h2>
+
+            {% for route in user_routes %}
+                <div class="route-container">
+                    <p class="title">{{ route.route }}</p>
+
+                    <div class="grid col-2">
+                        <div class="group">
+                            <label for="value-route-{{ route.id }}">Valor</label>
+                            <input id="value-route-{{ route.id }}" type="text" value="{{ route.value }}" disabled required>
+                        </div>
+
+                        <!-- <div class="group">
+                            <label for="discount-value-route-{{ route.id }}">Desconto</label>
+                            <input id="discount-value-route-{{ route.id }}" type="text">
+                        </div> -->
+
+                        <div class="group">
+                            <label for="discounted-value-route-{{ route.id }}">Valor com desconto</label>
+
+                            <input 
+                                id="discounted-value-route-{{ route.id }}"
+                                type="text" 
+                                
+                                {% if route.has_route_discount_instance %}
+                                    {% for discount in user_route_discounts %}
+                                        {% if discount.route.id == route.id %}
+                                            name="discounted_value_{{ discount.id }}_route_{{ route.id }}"
+                                            value="{{ discount.discounted_value }}"
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    name="new_discounted_value_route_{{ route.id }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+
+                    <div class="grid col-2">
+                        <div class="group">
+                            <label for="cost-route-{{ route.id }}">Custo</label>
+                            <input id="cost-route-{{ route.id }}" type="text" value="{{ route.cost }}" disabled required>
+                        </div>
+
+                        <!-- <div class="group">
+                            <label for="discount-cost-route-{{ route.id }}">Desconto</label>
+                            <input id="discount-cost-route-{{ route.id }}" type="text">
+                        </div> -->
+
+                        <div class="group">
+                            <label for="discounted-cost-route-{{ route.id }}">Custo com desconto</label>
+
+                            <input 
+                                id="discounted-cost-route-{{ route.id }}"
+                                type="text" 
+                                
+                                {% if route.has_route_discount_instance %}
+                                    {% for discount in user_route_discounts %}
+                                        {% if discount.route.id == route.id %}
+                                            name="discounted_cost_{{ discount.id }}_route_{{ route.id }}"
+                                            value="{{ discount.discounted_cost }}"
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    name="new_discounted_cost_route_{{ route.id }}"
+                                {% endif %}
+                            >
+                        </div>
+                    </div>
+
+                    <div class="radio-control">
+                        <input 
+                            id="discount-{{ route.id }}"
+                            name="discount-{{ route.id }}" 
+                            type="checkbox" 
+
+                            {% for discount in user_route_discounts %}
+                                {% if discount.route.id == route.id and discount.is_active %}
+                                    checked
+                                {% endif %}
+                            {% endfor %}
+                        >
+
+                        <label for="discount-{{ route.id }}">Ativar desconto</label>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <button class="button">Salvar alterações</button>
+    </form>
+
+    <script src="{% static 'js/templates/user/view.js' %}"></script>
+{% endblock %}

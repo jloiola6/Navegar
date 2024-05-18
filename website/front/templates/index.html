@@ -86,7 +86,12 @@
                             <span>{{ route.get_total_trip_time }} horas de viagem</span>
                         </td>
 
-                        <td class="col-price">R$ {{ route.route.get_value }}</td>
+                        <td class="col-price">
+                            <div class="group">
+                                <span class="price-label">R$ {{ route.get_value }}</span>
+                                <span class="cost-label">R$ -{{ route.get_cost }}</span>
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -99,7 +104,10 @@
                         <div class="card-header">
                             <span class="card-boat">{{ route.boat }}</span>
                             
-                            <span class="card-price">R$ {{ route.route.get_value }}</span>
+                            <div class="group">
+                                <span class="price-label">R$ {{ route.get_value }}</span>
+                                <span class="cost-label">R$ -{{ route.get_cost }}</span>
+                            </div>
                         </div>
                         
                         <div class="card-body">

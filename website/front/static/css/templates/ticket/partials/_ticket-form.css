@@ -1,0 +1,36 @@
+.document-container{
+    border: 1px solid var(--clr-border);
+    gap: 0;
+
+    .radio-control{
+        align-self: stretch;
+        border: none;
+        border-radius: 0;
+        border-right: 1px solid var(--clr-border);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        overflow: visible;
+        width: auto;
+
+        label{
+            align-content: center;
+        }
+    }
+
+    > input{
+        border: none;
+    }
+}
+
+.passenger-table{
+    &:not(:has(tbody > tr)){
+        display: none;
+    }
+
+    tbody[data-passenger-table] input{
+        background-color: transparent;
+        border: none;
+        height: auto;
+        padding: 0;
+    }
+}

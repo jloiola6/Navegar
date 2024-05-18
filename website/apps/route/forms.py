@@ -39,11 +39,8 @@ class RouteForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(RouteForm, self).__init__(*args, **kwargs)
 
-        self.fields['discounted_value'].widget.attrs['readonly'] = True
-        self.fields['discounted_cost'].widget.attrs['readonly'] = True
-
         self.fields['after_midnight'].widget.attrs['class'] = 'next-day-check'
 
     class Meta:
         model = Route
-        fields = ['origin', 'destination', 'value', 'discounted_value', 'cost', 'discounted_cost', 'departure_time', 'arrival_time', 'after_midnight']
+        fields = ['origin', 'destination', 'value', 'cost', 'departure_time', 'arrival_time', 'after_midnight']

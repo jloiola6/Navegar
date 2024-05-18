@@ -163,3 +163,10 @@ AUTH_USER_MODEL = 'user.CustomUser'
 LOGIN_URL = '/usuario/login/'
 
 AUTHENTICATION_BACKENDS = ['apps.user.backends.EmailPhoneBackend']
+
+# Configurações do WhatsApp API
+HOST_IP = 'localhost'
+PORT = 3000
+SESSION_NAME = 'Navegarwpp'
+TICKET_MESSAGE = "Olá <fornecedor>, você tem um novo bilhete para analisar. Acesse o painel administrativo para visualizar."
+TICKET_STATUS_MESSAGE = 'Olá, o status da passagem <passagem> foi alterado para <status>.'

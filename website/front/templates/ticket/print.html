@@ -2,7 +2,13 @@
 
 {% load static %}
 
-{% block title %}Passagem{% endblock %}
+{% block title %}
+    {% if ticket.type == 'passageiro' %}
+        {{ ticket.date|date:'d-m-Y' }} • {{ ticket.name_client }} • {{ routeweek.route.origin }} • {{ routeweek.route.destination }}
+    {% else %}
+        {{ ticket.date|date:'d-m-Y' }} • CARGA
+    {% endif %}
+{% endblock %}
 
 {% block css_template %}
     <link rel="stylesheet" href="{% static 'css/templates/ticket/print.css' %}">
@@ -18,15 +24,25 @@
 
         <tbody>
             <tr>
-                <th>Nome</th>
-                <th>CPF</th>
-                <th>Nascimento</th>
+                {% if ticket.type == 'passageiro' %}
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Nascimento</th>
+                {% else %}
+                    <th>Descrição da carga</th>
+                    <th>Peso</th>
+                {% endif %}
             </tr>
 
             <tr>
-                <td>{{ ticket.name_client }}</td>
-                <td>{{ ticket.document_client }}</td>
-                <td>{{ ticket.birth_date_client|date:'Y-m-d' }}</td>
+                {% if ticket.type == 'passageiro' %}
+                    <td>{{ ticket.name_client }}</td>
+                    <td>{{ ticket.document_client }}</td>
+                    <td>{{ ticket.birth_date_client|date:'d-m-Y' }}</td>
+                {% else %}
+                    <td>{{ ticket.cargo_description }}</td>
+                    <td>{{ ticket.cargo_weight }}</td>
+                {% endif %}
 
                 <td rowspan="2">
                     <img src="{% static 'images/aggreko.png' %}" alt="Aggreko">

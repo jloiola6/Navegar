@@ -5,6 +5,10 @@ from django.utils import timezone
 from apps.user.models import CustomUser
 from apps.route.models import RouteWeekday
 
+from requests import post
+from requests.auth import HTTPBasicAuth
+
+from django.conf import settings
 
 STATUS_CHOICES = (
     (1, 'Pendente'),
@@ -30,24 +34,48 @@ class Ticket(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4, unique=True)
     user_create = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT)
+    type = models.CharField(max_length=10, default='passenger')
     
+    # ROUTE DATA
     created_at = models.DateTimeField(auto_now_add= True)
     origin = models.CharField(max_length=100)
     destination = models.CharField(max_length=100)
     date = models.DateField()
     boat = models.CharField(max_length=100)
+
+    # FINANCIAL DATA
     value = models.DecimalField(max_digits=10, decimal_places=2)
     cost = models.DecimalField(max_digits= 10, decimal_places= 2)
-    status = models.IntegerField(choices=STATUS_CHOICES, default=1)
+
+    # CLIENT DATA
     name_client = models.CharField(max_length=100, null=True, blank=True)
     document_client = models.CharField(max_length=11, null=True, blank=True)
     document_type = models.CharField(max_length=3, null=True)
     birth_date_client = models.DateField(null=True, blank=True)
+
+    # CARGO DATA
+    cargo_description = models.CharField(max_length=100, null= True)
+    cargo_weight = models.CharField(max_length=10, null= True)
+
+    # STATUS DATA
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1)
     document = models.FileField("Anexar bilhete",upload_to='documents/', max_length=100, blank=True, null=True)
     markdown = models.BooleanField(default= False)
 
     def __str__(self):
         return f'{self.name_client} | ({self.origin} - {self.destination})'
+    
+    @property
+    def get_document_client(self):
+        return self.document_client or 'N/A'
+    
+    @property
+    def get_birth_date_client(self):
+        return self.birth_date_client or 'N/A'
+    
+    @property
+    def get_cargo_weight(self):
+        return self.cargo_weight or 'N/A'
 
     @property
     def get_document_url(self):
@@ -80,14 +108,46 @@ class Ticket(models.Model):
         return self.route_weekday.boat.supplier
 
     def update_status(self, status):
+        from django.conf import settings
+
         self.status = status
         self.save()
 
+        try:
+            message = settings.TICKET_STATUS_MESSAGE.replace('<passagem>', self.route_weekday).replace('<status>', self.get_status)
+            self.send_message(self.user_create.phone, message)
+        except:
+            pass
+
+    def send_message(self, number, message):
+        try:
+            host = settings.HOST_IP
+            port = settings.PORT
+            session = settings.SESSION_NAME
+
+            url = f'http://{host}:{port}/client/sendMessage/{session}'
+            headers = {
+                'x-api-key': session,
+            }
+
+            data = {
+                "chatId": f"{number}@c.us",
+                "contentType": "string",
+                "content": message
+            }
+
+            response = post(url, json=data, timeout=10, headers=headers)
+            
+            return response.json()
+        except:
+            pass
+
+
     def save(self, *args, **kwargs):
-        if not self.pk and self.document:
+        if self.document:
             if Ticket.objects.filter(document__isnull=False).count() > 1000:
                 Ticket.objects.filter(document__isnull=False).first().delete()
-                
+        
         super(Ticket, self).save(*args, **kwargs)
 
     class Meta:

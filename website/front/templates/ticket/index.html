@@ -22,12 +22,23 @@
                     <span class="card-time">{{ ticket.route_weekday.get_departure_time }} - {{ ticket.route_weekday.get_arrival_time }}</span>
                 </div>
                 
-                <div>
-                    <span class="card-client">{{ ticket.name_client }}</span>
-                    <span class="card-client-info">{{ ticket.document_type | upper }}: {{ ticket.document_client }}</span>
-                    <span class="card-client-info">Nascimento: {{ ticket.birth_date_client }}</span>
-                    <span class="card-value price-label">R$ {{ ticket.value }}</span>
-                </div>
+                {% if ticket.type == 'passageiro' %}
+                    <div>
+                        <span class="card-client">{{ ticket.name_client }}</span>
+                        <span class="card-client-info">{{ ticket.document_type | upper }}: {{ ticket.get_document_client }}</span>
+                        <span class="card-client-info">Nascimento: {{ ticket.get_birth_date_client }}</span>
+                        <span class="card-value price-label">R$ {{ ticket.value }}</span>
+                        <span class="card-value cost-label">R$ {{ ticket.cost }}</span>
+                    </div>
+                {% else %}
+                    <div>
+                        <span class="card-client card-cargo">CARGA</span>
+                        <span class="card-client-info card-cargo-description">Descrição: {{ ticket.cargo_description }}</span>
+                        <span class="card-client-info card-cargo-weight">Peso: {{ ticket.get_cargo_weight }}</span>
+                        <span class="card-value price-label">R$ {{ ticket.value }}</span>
+                        <span class="card-value cost-label">R$ {{ ticket.cost }}</span>
+                    </div>
+                {% endif %}
                 
                 {% if ticket.is_upload %}
                     {% include './partials/_ticket-file-form.html' %}
@@ -56,11 +67,21 @@
                         <span class="card-date">{{ ticket.date }}</span>
                         <span class="card-time">{{ ticket.route_weekday.get_departure_time }} - {{ ticket.route_weekday.get_arrival_time }}</span>
                     </div>
-                    
-                    <div>
-                        <span class="card-client">{{ ticket.name_client }}</span>
-                        <span class="card-value price-label">R$ {{ ticket.value }}</span>
-                    </div>
+
+                    {% if ticket.type == 'passageiro' %}
+                        <div>
+                            <span class="card-client">{{ ticket.name_client }}</span>
+                            <span class="card-value price-label">R$ {{ ticket.value }}</span>
+                            <span class="card-value cost-label">R$ {{ ticket.cost }}</span>
+                        </div>
+                    {% else %}
+                        <div>
+                            <span class="card-client card-cargo">CARGA</span>
+                            <span class="card-client-info card-cargo-description">Descrição: {{ ticket.cargo_description }}</span>
+                            <span class="card-value price-label">R$ {{ ticket.value }}</span>
+                            <span class="card-value cost-label">R$ {{ ticket.cost }}</span>
+                        </div>
+                    {% endif %}
 
                     <a class="link" href="{% url 'ticket:view' ticket.id %}">Ver mais</a>
                 </li>

@@ -11,8 +11,17 @@
     transition: .5s;
     width: 2rem;
 
+    &.lg{
+        background-size: 1.25rem;
+        width: 2.5rem;
+    }
+
     &:is(:hover, :focus-visible){
         background-color: hsl(0, 0%, 75%);
+    }
+
+    &.add{
+        background-image: url('../../icons/add.svg');
     }
 
     &.edit{

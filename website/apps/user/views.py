@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from .decorators import user_type_required, redirect_authenticated_user
 
 
 from apps.user.forms import *
 from apps.user.models import CustomUser, TYPE_CHOICES
+from apps.route.models import RouteWeekday, Route, RouteDiscount, Location
 
 @login_required
 def index(request):
@@ -18,7 +20,7 @@ def index(request):
         user_id = request.POST.get('user_id')
         name = request.POST.get('name')
         phone = request.POST.get('phone')
-        password = request.POST.get('password') if request.POST.get('password') else None
+        password = request.POST.get('password') if request.POST.__contains__('password') else None
         type = request.POST.get('type')
         status = request.POST.get('status')
         issuance_type = request.POST.get('issuance_type')
@@ -49,7 +51,6 @@ def index(request):
         'all_types': all_types, 
         'all_status': all_status,
     })
-
 
 @redirect_authenticated_user
 def signup(request):
@@ -121,3 +122,102 @@ def user_edit(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('user:login'))
+
+@login_required
+def view(request, id):
+    user = CustomUser.objects.get(id= id)
+
+    user_types = TYPE_CHOICES
+    user_status = ('Ativo', 'Inativo')
+
+    routes_ids = RouteWeekday.objects.filter(boat__supplier= user).values_list('route', flat= True).distinct()
+
+    user_routes = Route.objects.filter(id__in= routes_ids).values()
+
+    for route in user_routes:
+        route['has_route_discount_instance'] = RouteDiscount.objects.filter(supplier= user, route__id= route['id']).exists()
+
+        origin = Location.objects.get(id= route['origin_id'])
+        desination = Location.objects.get(id= route['destination_id'])
+        route['route'] = f'{ origin } - { desination }'
+
+    user_route_discounts = RouteDiscount.objects.filter(supplier= user)
+
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        phone = request.POST.get('phone')
+        password = request.POST.get('password') if request.POST.__contains__('password') else None
+        type = request.POST.get('type')
+        status = request.POST.get('status')
+        issuance_type = request.POST.get('issuance_type')
+
+        if status == 'Ativo':
+            status = True
+        elif status == 'Inativo':
+            status = False
+        else:
+            status = None
+
+        user.full_name = name
+        user.phone = phone
+        user.type = type
+        user.is_active = status
+
+        user.upload_ticket = type == 'F' and issuance_type == 'bilhete' 
+
+        if password:
+            user.set_password(password)
+        user.save()
+
+        for item in request.POST.items():
+            if 'new_discounted_value' in item[0]:
+                route_id = item[0].split('_')[4]
+                route = Route.objects.get(id = route_id)
+
+                new_discounted_value = item[1] or '0'
+                new_discounted_value = float(new_discounted_value.replace(',', '.'))
+
+                new_discounted_cost = request.POST[f'new_discounted_cost_route_{ route_id }'] or '0'
+                new_discounted_cost = float(new_discounted_cost.replace(',', '.'))
+
+                active = request.POST.__contains__(f'discount-{ route_id }')
+
+                RouteDiscount.objects.create(
+                    supplier = user,
+                    route = route,
+                    discounted_value = new_discounted_value,
+                    discounted_cost = new_discounted_cost,
+                    is_active= active
+                )
+
+            if 'discounted_value' in item[0] and not 'new' in item[0]:
+                route_discount_id = item[0].split('_')[2]
+                route_id = item[0].split('_')[4]
+
+                discounted_value = item[1] or '0'
+                discounted_value = float(discounted_value.replace(',', '.'))
+
+                discounted_cost = request.POST[f'discounted_cost_{ route_discount_id }_route_{ route_id }'] or '0'
+                discounted_cost = float(discounted_cost.replace(',', '.'))
+
+                active = request.POST.__contains__(f'discount-{ route_id }')
+
+
+                route_discount = RouteDiscount.objects.get(id= route_discount_id)
+                
+                route_discount.discounted_value = discounted_value
+                route_discount.discounted_cost = discounted_cost
+                route_discount.is_active = active
+                route_discount.save()
+                
+        messages.success(request, 'Dados alterados com sucesso!')
+
+        return redirect(f'/usuario/{ user.id }')
+
+    return render(request, 'user/view.html', {
+        'user': user,
+        'user_routes': user_routes,
+        'user_status': user_status,
+        'user_route_discounts': user_route_discounts,
+        'user_types': user_types,
+    })

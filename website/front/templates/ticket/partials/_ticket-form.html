@@ -6,40 +6,71 @@
     <link rel="stylesheet" href="{% static 'css/templates/ticket/partials/_ticket-form.css' %}">
 {% endblock %}
 
-<form method="POST" action="{% url 'ticket:create_ticket' routeweek.id date %}" class="ticket-form">
-    {% csrf_token %}
+{% if choose_type %}
+    <form>
+        <div class="group">
+            <label>Tipo de passagem</label>
 
-    <div class="group">
-        <label>Nome do passageiro</label>
-        <input type="text" name="client" required>
-    </div>
+            <div class="radio-control">
+                <input type="radio" name="tipo" id="ticket-type-passenger" value="passageiro" checked>
+                <label for="ticket-type-passenger">Passageiro</label>
+                
+                <input type="radio" name="tipo" id="ticket-type-cargo" value="carga">
+                <label for="ticket-type-cargo">Carga</label>
+            </div>
+        </div>
 
-    <div class="group">
-        <label for="birth-date-field">Data de nascimento</label>
-        <input id="birth-date-field" type="date" name="birth-date" required>
-    </div>
+        <button class="button">Iniciar solicitação</button>
+    </form>
+{% else %}
+    <form method="POST" class="ticket-form">
+        {% csrf_token %}
 
-    <div class="group">
-        <label>Documento</label>
+        <div class="group">
+            <label>Tipo de passagem</label>
 
-        <fieldset>
-            <input type="radio" name="document_type" id="document-type-radio-cpf" value="cpf" checked>
-            <label for="document-type-radio-cpf">CPF</label>
+            <div class="radio-control">
+                <input 
+                    disabled
+                    id="ticket-type-passenger" 
+                    name="ticket_type" 
+                    type="radio" 
+                    value="passenger"
 
-            <input type="radio" name="document_type" id="document-type-radio-rg" value="rg">
-            <label for="document-type-radio-rg">RG</label>
-        </fieldset>
-    </div>
+                    {% if ticket_type == 'passageiro' %}
+                        checked
+                    {% endif %}
+                >
 
-    <div class="group document-group">
-        <label for="document-field">Número de identificação</label>
-        <input id="document-field" type="text" name="document" required>
-    </div>
+                <label for="ticket-type-passenger">Passageiro</label>
+                
+                <input 
+                    disabled
+                    id="ticket-type-cargo" 
+                    name="ticket_type" 
+                    type="radio" 
+                    value="cargo"
 
-    <div>
-        <input type="checkbox" name="markdown" id="markdown-check">
-        <label for="markdown-check">Remarcação</label>
-    </div>
+                    {% if ticket_type == 'carga' %}
+                        checked
+                    {% endif %}
+                >
 
-    <button class="button" type="submit">Enviar solicitação</button>
-</form>
+                <label for="ticket-type-cargo">Carga</label>
+            </div>
+        </div>
+
+        {% if ticket_type == 'passageiro' %}
+            {% include './_ticket-form-passenger.html' %}
+        {% else %}
+            {% include './_ticket-form-cargo.html' %}
+        {% endif %}
+
+        <!-- <div class="radio-control">
+            <input type="checkbox" name="markdown" id="markdown-check">
+            <label for="markdown-check">Remarcação</label>
+        </div> -->
+
+        <button class="button" type="submit">Enviar solicitação</button>
+    </form>
+{% endif %}

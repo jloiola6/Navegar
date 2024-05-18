@@ -10,7 +10,7 @@
     <form method="POST" class="row">
         {% csrf_token %}
 
-        {{ form.name }}
+        <input type="text" name="name" maxlength="100" placeholder="Nome do local" required id="id_name">
 
         <button type="submit" class="button">Salvar</button>
     </form>

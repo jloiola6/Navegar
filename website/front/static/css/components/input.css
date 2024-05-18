@@ -24,6 +24,11 @@ select{
     &:invalid.touched{
         border-color: var(--clr-error);
     }
+
+    &:read-only:not(select),
+    &:disabled{
+        background-color: hsl(0, 0%, 90%);
+    }
 }
 
 select option:first-child:disabled{

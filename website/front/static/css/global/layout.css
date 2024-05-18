@@ -16,8 +16,10 @@ body .hidden{
 }
 
 .flex{
+    align-items: center;
     display: flex;
     gap: 1rem;
+    width: 100%;
 
     &.justify-content-between{
         justify-content: space-between;
@@ -30,6 +32,10 @@ body .hidden{
 
     &.col-2{
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.col-3{
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
