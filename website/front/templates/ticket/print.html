@@ -26,7 +26,7 @@
             <tr>
                 {% if ticket.type == 'passageiro' %}
                     <th>Nome</th>
-                    <th>CPF</th>
+                    <th>{{ ticket.document_type|upper }}</th>
                     <th>Nascimento</th>
                 {% else %}
                     <th>Descrição da carga</th>

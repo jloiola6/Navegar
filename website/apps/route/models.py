@@ -112,7 +112,7 @@ class RouteWeekday(models.Model):
         try:
             route_discount = RouteDiscount.objects.get(supplier= self.boat.supplier, route= self.route)
 
-            return route_discount.discounted_cost if route_discount.is_active else self.route.value
+            return route_discount.discounted_cost if route_discount.is_active else self.route.cost
         except:
             return self.route.cost
 
