@@ -34,7 +34,9 @@ class Ticket(models.Model):
     id = models.UUIDField(primary_key=True, editable=False, default=uuid.uuid4, unique=True)
     user_create = models.ForeignKey(CustomUser, on_delete=models.PROTECT)
     route_weekday = models.ForeignKey(RouteWeekday, on_delete=models.PROTECT)
+
     type = models.CharField(max_length=10, default='passageiro')
+
     
     # ROUTE DATA
     created_at = models.DateTimeField(auto_now_add= True)
