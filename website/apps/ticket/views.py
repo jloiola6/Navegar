@@ -188,7 +188,10 @@ def print(request, id):
     ticket = Ticket.objects.get(id= id)
     routeweek = ticket.route_weekday
 
+    hidden_title = True
+
     return render(request, 'ticket/print.html', {
-        'ticket': ticket,
-        'routeweek': routeweek
+        'hidden_title': hidden_title,
+        'routeweek': routeweek,
+        'ticket': ticket
     })
