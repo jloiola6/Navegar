@@ -7,8 +7,14 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <title>Navegar • {% block title %}{% endblock %}</title>
+        
+        <title>
+            {% if not hidden_title %}
+                Navegar •
+            {% endif %}
+            
+            {% block title %}{% endblock %}
+        </title>
 
         <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}" type="image/x-icon">
 

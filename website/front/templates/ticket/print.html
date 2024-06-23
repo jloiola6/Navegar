@@ -3,11 +3,15 @@
 {% load static %}
 
 {% block title %}
+    {{ routeweek.boat.name }}
+
     {% if ticket.type == 'passageiro' %}
-        {{ ticket.date|date:'d-m-Y' }} • {{ ticket.name_client }} • {{ routeweek.route.origin }} • {{ routeweek.route.destination }}
+        • {{ ticket.name_client }} 
     {% else %}
-        {{ ticket.date|date:'d-m-Y' }} • CARGA
+        • CARGA
     {% endif %}
+
+    • {{ ticket.date|date:'d-m-Y' }} • {{ routeweek.route.origin }} - {{ routeweek.route.destination }}
 {% endblock %}
 
 {% block css_template %}
