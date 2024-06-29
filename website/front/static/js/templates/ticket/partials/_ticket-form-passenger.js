@@ -65,10 +65,10 @@ let passengerCount = 1
 
 const addPassenger = () => {
     const name = nameField.value
-    const birthDate = birthField.value
+    const birthDate = birthField.value.split('/').reverse().join('-')
     const passengerDocument = documentField.value
 
-    if(name.length){
+    if(name.length && !new Date(birthDate).toString().includes('Invalid')){
         passengerTable.appendChild(PassengerRow(name, birthDate, passengerDocument))
         initRemovePassenger()
         passengerCount++
